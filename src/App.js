@@ -1,31 +1,21 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import { db } from "./firebase";
-import { collection, getDocs } from "firebase/firestore";
 import Header from "./components/Header";
-import Info from "./components/Info";
+import { Route, Switch } from "react-router";
+import { BrowserRouter } from "react-router-dom";
+import Login from "./components/auth/Login";
+import { firebase } from "./firebase";
 function App() {
-	const [users, setUsers] = useState([]);
-	const usersCollectionRef = collection(db, "users");
-	useEffect(() => {
-		const getUsers = async () => {
-			const data = await getDocs(usersCollectionRef);
-			setUsers(data.docs.map((user) => ({ ...user.data(), id: user.id })));
-		};
-
-		getUsers();
-	});
 	return (
 		<div className='App'>
-			{/*{users.map((user) => {
-				return (
-					<div key={user.id}>
-						{user.name}, {user.site}
-					</div>
-				);
-			})}*/}
-			<Header />
-			<Info />
+			<BrowserRouter>
+				<Header />
+				<Switch>
+					<Route path='/login'>
+						<Login />
+					</Route>
+				</Switch>
+			</BrowserRouter>
 		</div>
 	);
 }

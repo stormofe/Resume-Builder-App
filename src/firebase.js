@@ -1,5 +1,4 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "@firebase/firestore";
 const firebaseConfig = {
 	apiKey: "AIzaSyAfSq7X4CWD5shjiNyjMrisvKy3BQ1ETUs",
 	authDomain: "resume-builder-3848a.firebaseapp.com",
@@ -10,5 +9,4 @@ const firebaseConfig = {
 	appId: "1:160605172448:web:93099590f98f6fae8f9685",
 };
 
-const app = initializeApp(firebaseConfig);
-export const db = getFirestore(app);
+export const firebase = initializeApp(firebaseConfig);
