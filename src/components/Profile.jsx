@@ -1,20 +1,29 @@
 import React, { useEffect, useState } from "react";
-import { collection, doc, getDocs, query, where } from "firebase/firestore";
+import { collection, doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 function Profile() {
-	const [hard, setUsers] = useState([]);
 	const [col, setCol] = useState({});
-	const docRef = collection(db, "user");
+	const pers = doc(db, "user", "T89mL28JqDaelV3cJRia");
 
 	useEffect(() => {
 		const getData = async () => {
-			const data = await getDocs(docRef);
-			setCol(data.docs.map((doc) => ({ ...doc.data(), id: doc.data().id })));
+			const snap = await getDoc(pers);
+			setCol(snap.data());
 		};
 		getData();
+		console.log(col);
 	}, []);
 
-	return <div className='profile'></div>;
+	return (
+		<div className='profile'>
+			<h4>Name :</h4>
+			<p>{col.name}</p>
+			<h4>Position</h4>
+			<p>{col.position}</p>
+			<h4>About :</h4>
+			<p>{col.about}</p>
+		</div>
+	);
 }
 
 export default Profile;
