@@ -5,6 +5,7 @@ import { Route, Switch } from "react-router";
 import { BrowserRouter } from "react-router-dom";
 import Login from "./components/auth/Login";
 import { firebase } from "./firebase";
+import Profile from "./components/Profile";
 function App() {
 	return (
 		<div className='App'>
@@ -13,6 +14,9 @@ function App() {
 				<Switch>
 					<Route path='/login'>
 						<Login />
+					</Route>
+					<Route path='/profile'>
+						<Profile />
 					</Route>
 				</Switch>
 			</BrowserRouter>

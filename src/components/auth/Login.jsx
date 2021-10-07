@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "@firebase/auth";
+import { AuthContext } from "./Auth";
 
 function Login() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const { currentUser } = useContext(AuthContext);
 
 	const register = () => {
 		const auth = getAuth();
@@ -45,9 +47,9 @@ function Login() {
 			<div className='login__form'>
 				<input type='email' value={email} onChange={(e) => setEmail(e.target.value)} placeholder='email' />
 				<input type='password' value={password} onChange={(e) => setPassword(e.target.value)} placeholder='password' />
+				{currentUser ? <button onClick={logOut}>Logout</button> : <button onClick={login}>Login</button>}
+
 				<button onClick={register}>Register</button>
-				<button onClick={login}>Login</button>
-				<button onClick={logOut}>Logout</button>
 			</div>
 		</div>
 	);

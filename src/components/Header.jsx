@@ -4,7 +4,6 @@ import { AuthContext } from "./auth/Auth";
 
 function Header() {
 	const { currentUser } = useContext(AuthContext);
-	console.log(currentUser);
 	const currentUserEmail = currentUser ? currentUser.email : "Профиль";
 	return (
 		<div className='header'>
@@ -12,7 +11,7 @@ function Header() {
 			<nav className='header__nav'>
 				<Link to='/profile'>{currentUserEmail}</Link>
 				<Link to='/templates'>Шаблоны</Link>
-				<Link to='/login'>Login</Link>
+				<Link to='/login'>{currentUser ? "SignOut" : "SignIn"}</Link>
 			</nav>
 		</div>
 	);
