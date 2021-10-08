@@ -1,6 +1,8 @@
 import React, { useContext, useState } from "react";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "@firebase/auth";
 import { AuthContext } from "./Auth";
+import { doc, setDoc } from "@firebase/firestore";
+import { db } from "../../firebase";
 
 function Login() {
 	const [email, setEmail] = useState("");
@@ -12,11 +14,17 @@ function Login() {
 		console.log(auth);
 		createUserWithEmailAndPassword(auth, email, password)
 			.then(() => {
+				createDocInDB();
 				resetInput();
 			})
 			.catch((err) => {
 				console.log(err);
 			});
+	};
+
+	const createDocInDB = async () => {
+		console.log(email + "DB add");
+		await setDoc(doc(db, "user", `${email}`), {});
 	};
 
 	const login = () => {

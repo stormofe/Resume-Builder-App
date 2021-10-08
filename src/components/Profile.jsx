@@ -1,27 +1,49 @@
-import React, { useEffect, useState } from "react";
-import { collection, doc, getDoc } from "firebase/firestore";
+import React, { useContext, useEffect, useState } from "react";
+import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
+import { AuthContext } from "./auth/Auth";
+import Preloader from "./UI/Preloader";
 function Profile() {
 	const [col, setCol] = useState({});
-	const pers = doc(db, "user", "T89mL28JqDaelV3cJRia");
+	const [lines, setLines] = useState([]);
+	const [isLoading, setIsLoading] = useState(true);
+	const { currentUser } = useContext(AuthContext);
+	const user = doc(db, "user", `${currentUser.email}`);
 
 	useEffect(() => {
+		setIsLoading(true);
 		const getData = async () => {
-			const snap = await getDoc(pers);
+			const snap = await getDoc(user);
 			setCol(snap.data());
 		};
 		getData();
-		console.log(col);
 	}, []);
+
+	useEffect(() => {
+		setIsLoading(true);
+		let arr = [];
+		for (let [key, value] of Object.entries(col)) {
+			arr.push([key, value]);
+		}
+		setLines(arr);
+		//!need debug
+		setTimeout(() => {
+			setIsLoading(false);
+		}, 1000);
+	}, [col]);
 
 	return (
 		<div className='profile'>
-			<h4>Name :</h4>
-			<p>{col.name}</p>
-			<h4>Position</h4>
-			<p>{col.position}</p>
-			<h4>About :</h4>
-			<p>{col.about}</p>
+			{isLoading ? (
+				//<Preloader />
+				<p>loading...</p>
+			) : (
+				lines.map((line, index) => (
+					<div key={index}>
+						<b>{line[0]}</b>: {line[1]} <br />
+					</div>
+				))
+			)}
 		</div>
 	);
 }

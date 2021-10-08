@@ -11,6 +11,7 @@ function Header() {
 			<nav className='header__nav'>
 				<Link to='/profile'>{currentUserEmail}</Link>
 				<Link to='/templates'>Шаблоны</Link>
+				<Link to='/forms/about'>Форма</Link>
 				<Link to='/login'>{currentUser ? "SignOut" : "SignIn"}</Link>
 			</nav>
 		</div>
