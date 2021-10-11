@@ -38,11 +38,12 @@ function Profile() {
 				//<Preloader />
 				<p>loading...</p>
 			) : (
-				lines.map((line, index) => (
-					<div key={index}>
-						<b>{line[0]}</b>: {line[1]} <br />
-					</div>
-				))
+				""
+				//lines.map((line, index) => (
+				//	<div key={index}>
+				//		<b>{line[0]}</b>: {line[1]} <br />
+				//	</div>
+				//))
 			)}
 		</div>
 	);

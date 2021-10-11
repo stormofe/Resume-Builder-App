@@ -19,6 +19,7 @@ function About() {
 
 	return (
 		<div className='about'>
+			<h3>Личная информация: </h3>
 			<form onSubmit={handleSubmit(onSubmit)} className='about__form'>
 				<div className='about__form-line'>
 					<label htmlFor='name'>Фамилия, имя:</label>

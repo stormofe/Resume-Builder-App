@@ -23,7 +23,6 @@ function Login() {
 	};
 
 	const createDocInDB = async () => {
-		console.log(email + "DB add");
 		await setDoc(doc(db, "user", `${email}`), {});
 	};
 
