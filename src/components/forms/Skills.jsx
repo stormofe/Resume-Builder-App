@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { doc, updateDoc, setDoc } from "@firebase/firestore";
+import { doc, updateDoc, deleteField } from "@firebase/firestore";
 import { db } from "../../firebase";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../auth/Auth";
@@ -17,11 +17,13 @@ function Skills() {
 		setValue,
 	} = useForm();
 
-	const [skills, setSkills] = useState({});
-	const [gettingSkills, setGettingSkills] = useState({});
+	const [skills, setSkills] = useState([]);
+	const [gettingSkills, setGettingSkills] = useState([]);
 
 	const getSkills = async () => {
-		await getDoc(user).then((result) => setGettingSkills(result.data().skills));
+		const result = await (await getDoc(user)).data().skills;
+		const arr = Object.entries(result).map((item) => item[1]);
+		setGettingSkills(arr);
 	};
 
 	useEffect(() => {
@@ -29,14 +31,33 @@ function Skills() {
 	}, []);
 
 	const saveSkills = async () => {
-		await updateDoc(user, { skills: { ...gettingSkills, ...skills } });
-		setSkills("");
-		getSkills();
+		const arr = [...gettingSkills, ...skills];
+		await updateDoc(user, { skills: { ...arr } })
+			.then(() => setSkills([]))
+			.then(() => getSkills());
 	};
 
 	const addSkill = async (data) => {
-		await setSkills({ ...skills, [data.skill]: +data.value });
+		const skill = [data.skill, data.value];
+		await setSkills((old) => [...old, skill]);
 		setValue("skill", "");
+	};
+
+	const deleteSkillFromState = async (skillIndex) => {
+		const arr = skills.filter((skill, index) => (index !== skillIndex ? skill : false));
+		setSkills(arr);
+	};
+
+	const deleteSkillFromDB = async (index) => {
+		const arr = gettingSkills.filter((skill, i) => (i !== index ? skill : false));
+		await updateDoc(user, {
+			skills: deleteField(),
+		})
+			.then(() => {
+				updateDoc(user, { skills: { ...arr } });
+			})
+			.then(() => setSkills([]))
+			.then(() => getSkills());
 	};
 
 	return (
@@ -44,9 +65,9 @@ function Skills() {
 			<h3>Ваши навыки:</h3>
 			<div className='skills__map'>
 				{gettingSkills
-					? Object.entries(gettingSkills).map((skill, index) => (
+					? gettingSkills.map((skill, index) => (
 							<p className='skills__item' key={index}>
-								{skill}
+								{skill[0]}: {skill[1]}⭐<button onClick={() => deleteSkillFromDB(index)}>x</button>
 							</p>
 					  ))
 					: ""}
@@ -56,9 +77,10 @@ function Skills() {
 
 			<div className='skills__list'>
 				{skills
-					? Object.entries(skills).map((skill) => (
-							<p key={skill[0]}>
+					? skills.map((skill, index) => (
+							<p className='skills__list-item' key={index}>
 								<b>{skill[0]}</b>: {skill[1]}
+								<button onClick={() => deleteSkillFromState(index)}>x</button>
 							</p>
 					  ))
 					: ""}

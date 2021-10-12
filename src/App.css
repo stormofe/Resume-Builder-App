@@ -171,6 +171,18 @@ select {
 	color: white;
 	cursor: pointer;
 }
+.skills__item button, .skills__list-item button {
+	height: auto;
+	width: auto;
+	background-color: transparent;
+	border: none;
+	color: white;
+	margin: 0px 0px 0px 5px;
+	padding: 3px;
+}
+.skills__list-item button {
+	color: black;
+}
 .skills__list {
 	margin: 10px 0px;
 	display: flex;
