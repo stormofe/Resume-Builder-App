@@ -1,48 +1,26 @@
 import React, { useContext, useState } from "react";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "@firebase/auth";
 import { AuthContext } from "./Auth";
-import { doc, setDoc } from "@firebase/firestore";
-import { db } from "../../firebase";
+import { useDispatch } from "react-redux";
+import { register, login, logOut } from "../../asyncActions/login";
 
 function Login() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const { currentUser } = useContext(AuthContext);
+	const dispatch = useDispatch();
 
-	const register = () => {
-		const auth = getAuth();
-		console.log(auth);
-		createUserWithEmailAndPassword(auth, email, password)
-			.then(() => {
-				createDocInDB();
-				resetInput();
-			})
-			.catch((err) => {
-				console.log(err);
-			});
+	const setRegister = () => {
+		dispatch(register(email, password));
+		resetInput();
 	};
-
-	const createDocInDB = async () => {
-		await setDoc(doc(db, "user", `${email}`), {});
+	const setLogIn = () => {
+		dispatch(login(email, password));
+		resetInput();
 	};
-
-	const login = () => {
-		const auth = getAuth();
-
-		signInWithEmailAndPassword(auth, email, password)
-			.then(() => {
-				resetInput();
-			})
-			.catch((err) => {
-				console.log(err);
-			});
+	const setLogOut = () => {
+		dispatch(logOut());
+		resetInput();
 	};
-
-	const logOut = () => {
-		const auth = getAuth();
-		signOut(auth);
-	};
-
 	const resetInput = () => {
 		setPassword("");
 		setEmail("");
@@ -54,9 +32,9 @@ function Login() {
 			<div className='login__form'>
 				<input type='email' value={email} onChange={(e) => setEmail(e.target.value)} placeholder='email' />
 				<input type='password' value={password} onChange={(e) => setPassword(e.target.value)} placeholder='password' />
-				{currentUser ? <button onClick={logOut}>Logout</button> : <button onClick={login}>Login</button>}
+				{currentUser ? <button onClick={setLogOut}>Logout</button> : <button onClick={setLogIn}>Login</button>}
 
-				<button onClick={register}>Register</button>
+				<button onClick={setRegister}>Register</button>
 			</div>
 		</div>
 	);
