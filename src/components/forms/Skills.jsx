@@ -4,6 +4,9 @@ import { db } from "../../firebase";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../auth/Auth";
 import { getDoc } from "firebase/firestore";
+import { useDispatch, useSelector } from "react-redux";
+import { setSkillsAtState } from "../../asyncActions/forms";
+import { fetchSkills } from "./../../store/formsReducer";
 
 function Skills() {
 	const { currentUser } = useContext(AuthContext);
@@ -20,22 +23,31 @@ function Skills() {
 	const [skills, setSkills] = useState([]);
 	const [gettingSkills, setGettingSkills] = useState([]);
 
+	const skillsFromState = useSelector((state) => state.forms.skills);
+	const dispatch = useDispatch();
+
 	const getSkills = async () => {
 		const result = await (await getDoc(user)).data().skills;
 		const arr = Object.entries(result).map((item) => item[1]);
 		setGettingSkills(arr);
 	};
 
-	useEffect(() => {
+	const setSkillsFromDB = () => {
 		getSkills();
+		setSkills(gettingSkills);
+	};
+
+	useEffect(() => {
+		//debugger;
+		setSkillsFromDB();
 	}, []);
 
-	const saveSkills = async () => {
-		const arr = [...gettingSkills, ...skills];
-		await updateDoc(user, { skills: { ...arr } })
-			.then(() => setSkills([]))
-			.then(() => getSkills());
-	};
+	//const saveSkills = async () => {
+	//	const arr = [...gettingSkills, ...skills];
+	//	await updateDoc(user, { skills: { ...arr } })
+	//		.then(() => setSkills([]))
+	//		.then(() => getSkills());
+	//};
 
 	const addSkill = async (data) => {
 		const skill = [data.skill, data.value];
@@ -102,9 +114,18 @@ function Skills() {
 				</div>
 
 				<button>Добавить</button>
-				<button className='skills__form-save' onClick={saveSkills}>
+				{/*<button className='skills__form-save' onClick={saveSkills}>
 					Сохранить
-				</button>
+				</button>*/}
+				<button onClick={() => dispatch(fetchSkills())}>fetch</button>
+				<button onClick={() => console.log(skillsFromState)}>log</button>
+				{skillsFromState
+					? skillsFromState.map((skill) => (
+							<div>
+								{skill[0]}::::{skill[1]}
+							</div>
+					  ))
+					: ""}
 			</form>
 		</div>
 	);

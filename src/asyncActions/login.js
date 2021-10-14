@@ -1,7 +1,6 @@
-import { getAuth } from "@firebase/auth";
 import { doc, setDoc } from "@firebase/firestore";
 import { db } from "../firebase";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "@firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, getAuth } from "@firebase/auth";
 import { createUserAction } from "../store/loginReducer";
 import { loginUserAction } from "./../store/loginReducer";
 
