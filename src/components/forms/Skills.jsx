@@ -6,7 +6,7 @@ import { AuthContext } from "../auth/Auth";
 import { getDoc } from "firebase/firestore";
 import { useDispatch, useSelector } from "react-redux";
 import { setSkillsAtState } from "../../asyncActions/forms";
-import { fetchSkills } from "./../../store/formsReducer";
+import { fetchSkills, saveSkillsAtDBAction, saveSkillsFromState } from "./../../store/formsReducer";
 
 function Skills() {
 	const { currentUser } = useContext(AuthContext);
@@ -26,20 +26,19 @@ function Skills() {
 	const skillsFromState = useSelector((state) => state.forms.skills);
 	const dispatch = useDispatch();
 
-	const getSkills = async () => {
-		const result = await (await getDoc(user)).data().skills;
-		const arr = Object.entries(result).map((item) => item[1]);
-		setGettingSkills(arr);
-	};
+	//const getSkills = async () => {
+	//	const result = await (await getDoc(user)).data().skills;
+	//	const arr = Object.entries(result).map((item) => item[1]);
+	//	setGettingSkills(arr);
+	//};
 
-	const setSkillsFromDB = () => {
-		getSkills();
-		setSkills(gettingSkills);
-	};
+	//const setSkillsFromDB = () => {
+	//	getSkills();
+	//	setSkills(gettingSkills);
+	//};
 
 	useEffect(() => {
-		//debugger;
-		setSkillsFromDB();
+		dispatch(fetchSkills(currentUser));
 	}, []);
 
 	//const saveSkills = async () => {
@@ -60,6 +59,10 @@ function Skills() {
 		setSkills(arr);
 	};
 
+	const saveSkills = () => {
+		dispatch(saveSkillsFromState(skills));
+		//dispatch(saveSkillsAtDBAction(skills));
+	};
 	const deleteSkillFromDB = async (index) => {
 		const arr = gettingSkills.filter((skill, i) => (i !== index ? skill : false));
 		await updateDoc(user, {
@@ -68,8 +71,8 @@ function Skills() {
 			.then(() => {
 				updateDoc(user, { skills: { ...arr } });
 			})
-			.then(() => setSkills([]))
-			.then(() => getSkills());
+			.then(() => setSkills([]));
+		//.then(() => getSkills());
 	};
 
 	return (
@@ -117,8 +120,8 @@ function Skills() {
 				{/*<button className='skills__form-save' onClick={saveSkills}>
 					Сохранить
 				</button>*/}
-				<button onClick={() => dispatch(fetchSkills())}>fetch</button>
 				<button onClick={() => console.log(skillsFromState)}>log</button>
+				<button onClick={saveSkills}>save</button>
 				{skillsFromState
 					? skillsFromState.map((skill) => (
 							<div>
