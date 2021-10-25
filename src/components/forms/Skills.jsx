@@ -1,16 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
-import { doc, updateDoc, deleteField } from "@firebase/firestore";
-import { db } from "../../firebase";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../auth/Auth";
-import { getDoc } from "firebase/firestore";
 import { useDispatch, useSelector } from "react-redux";
-import { setSkillsAtState } from "../../asyncActions/forms";
-import { fetchSkills, saveSkillsAtDBAction, saveSkillsFromState } from "./../../store/formsReducer";
 
 function Skills() {
 	const { currentUser } = useContext(AuthContext);
-	const user = doc(db, "user", `${currentUser.email}`);
 
 	const {
 		register,
@@ -26,28 +20,6 @@ function Skills() {
 	const skillsFromState = useSelector((state) => state.forms.skills);
 	const dispatch = useDispatch();
 
-	//const getSkills = async () => {
-	//	const result = await (await getDoc(user)).data().skills;
-	//	const arr = Object.entries(result).map((item) => item[1]);
-	//	setGettingSkills(arr);
-	//};
-
-	//const setSkillsFromDB = () => {
-	//	getSkills();
-	//	setSkills(gettingSkills);
-	//};
-
-	useEffect(() => {
-		dispatch(fetchSkills(currentUser));
-	}, []);
-
-	//const saveSkills = async () => {
-	//	const arr = [...gettingSkills, ...skills];
-	//	await updateDoc(user, { skills: { ...arr } })
-	//		.then(() => setSkills([]))
-	//		.then(() => getSkills());
-	//};
-
 	const addSkill = async (data) => {
 		const skill = [data.skill, data.value];
 		await setSkills((old) => [...old, skill]);
@@ -59,30 +31,33 @@ function Skills() {
 		setSkills(arr);
 	};
 
-	const saveSkills = () => {
-		dispatch(saveSkillsFromState(skills));
-		//dispatch(saveSkillsAtDBAction(skills));
-	};
-	const deleteSkillFromDB = async (index) => {
-		const arr = gettingSkills.filter((skill, i) => (i !== index ? skill : false));
-		await updateDoc(user, {
-			skills: deleteField(),
-		})
-			.then(() => {
-				updateDoc(user, { skills: { ...arr } });
-			})
-			.then(() => setSkills([]));
-		//.then(() => getSkills());
-	};
+	//const deleteSkillFromDB = async (index) => {
+	//	const arr = gettingSkills.filter((skill, i) => (i !== index ? skill : false));
+	//	await updateDoc(user, {
+	//		skills: deleteField(),
+	//	})
+	//		.then(() => {
+	//			updateDoc(user, { skills: { ...arr } });
+	//		})
+	//		.then(() => setSkills([]));
+	//	//.then(() => getSkills());
+	//};
 
 	return (
 		<div className='skills'>
 			<h3>Ваши навыки:</h3>
 			<div className='skills__map'>
-				{gettingSkills
+				{/*{gettingSkills
 					? gettingSkills.map((skill, index) => (
 							<p className='skills__item' key={index}>
 								{skill[0]}: {skill[1]}⭐<button onClick={() => deleteSkillFromDB(index)}>x</button>
+							</p>
+					  ))
+					: ""}*/}
+				{skillsFromState
+					? skillsFromState.map((skill, index) => (
+							<p className='skills__item' key={index}>
+								{skill[1][0]}: {skill[1][1]}⭐<button>x</button>
 							</p>
 					  ))
 					: ""}
@@ -121,15 +96,16 @@ function Skills() {
 					Сохранить
 				</button>*/}
 				<button onClick={() => console.log(skillsFromState)}>log</button>
-				<button onClick={saveSkills}>save</button>
+				{/*<button onClick={}>save</button>*/}
 				{skillsFromState
-					? skillsFromState.map((skill) => (
-							<div>
-								{skill[0]}::::{skill[1]}
+					? skillsFromState.map((skill, index) => (
+							<div key={index}>
+								{skill[1][0]}::::{skill[1][1]}
 							</div>
 					  ))
 					: ""}
 			</form>
+			<button onClick={() => dispatch({ type: "FETCH" })}>getSkills</button>
 		</div>
 	);
 }

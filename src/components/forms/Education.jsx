@@ -1,20 +1,8 @@
-import { doc } from "@firebase/firestore";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { db } from "../../firebase";
-import { AuthContext } from "../auth/Auth";
 
 function Education() {
-	const { currentUser } = useContext(AuthContext);
-	const user = doc(db, "user", `${currentUser.email}`);
-
-	const {
-		register,
-		handleSubmit,
-		watch,
-		formState: { errors },
-		setValue,
-	} = useForm();
+	const { register, handleSubmit, setValue } = useForm();
 
 	const [edu, setEdu] = useState([]);
 

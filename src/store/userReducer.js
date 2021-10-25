@@ -1,23 +1,16 @@
 const userState = {
-	email: "none",
-	name: "Jon Dou",
-	id: 1,
-	customers: [],
+	email: "",
 };
 
-const CREATE_USER = "CREATE_USER";
-const CREATE_MANY_USERS = "CREATE_MANY_USERS";
+export const SET_USER_NAME = "SET_USER_NAME";
 
 export const userReducer = (state = userState, action) => {
 	switch (action.type) {
-		case "CREATE_USER":
-			return { ...state, ...action.payload };
-		case CREATE_MANY_USERS:
-			return { ...state, customers: [...state.customers, ...action.payload] };
+		case SET_USER_NAME:
+			return { ...state, email: action.payload };
 		default:
 			return state;
 	}
 };
 
-export const createUserAction = (payload) => ({ type: CREATE_USER, payload });
-export const createManyUserAction = (payload) => ({ type: CREATE_MANY_USERS, payload });
+export const setUserNameAction = (user) => ({ type: SET_USER_NAME, user });

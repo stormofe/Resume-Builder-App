@@ -21,7 +21,7 @@ const getRegisterAtFB = (email, password) => {
 			createDocInDB(email);
 		})
 		.catch((err) => {
-			console.log(err);
+			//console.log(err);
 		});
 };
 

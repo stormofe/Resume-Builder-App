@@ -4,10 +4,17 @@ import { loginReducer } from "./loginReducer";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { formsReducer } from "./formsReducer";
 import createSagaMiddleware from "@redux-saga/core";
-import { loginWatcher } from "../saga/loginSaga";
 import { rootWatcher } from "../saga";
+import { userInfo } from "../saga/context/userInfo";
 
-const sagaMiddleware = createSagaMiddleware();
+const sagaMiddleware = createSagaMiddleware({
+	context: {
+		userInfo,
+	},
+});
+
+
+
 
 const rootReducer = combineReducers({
 	user: userReducer,

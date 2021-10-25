@@ -5,12 +5,7 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../auth/Auth";
 
 function About() {
-	const {
-		register,
-		handleSubmit,
-		watch,
-		formState: { errors },
-	} = useForm();
+	const { register, handleSubmit } = useForm();
 
 	const { currentUser } = useContext(AuthContext);
 	const user = doc(db, "user", `${currentUser.email}`);
