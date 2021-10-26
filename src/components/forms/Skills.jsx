@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../auth/Auth";
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 
 function Skills() {
 	const { currentUser } = useContext(AuthContext);
@@ -19,6 +20,10 @@ function Skills() {
 
 	const skillsFromState = useSelector((state) => state.forms.skills);
 	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch({ type: "FETCH_SKILLS" });
+	}, []);
 
 	const addSkill = async (data) => {
 		const skill = [data.skill, data.value];
@@ -92,9 +97,9 @@ function Skills() {
 				</div>
 
 				<button>Добавить</button>
-				{/*<button className='skills__form-save' onClick={saveSkills}>
+				<button className='skills__form-save' onClick={() => dispatch({ type: "SAVE_SKILLS", payload: skills })}>
 					Сохранить
-				</button>*/}
+				</button>
 				<button onClick={() => console.log(skillsFromState)}>log</button>
 				{/*<button onClick={}>save</button>*/}
 				{skillsFromState
@@ -105,7 +110,7 @@ function Skills() {
 					  ))
 					: ""}
 			</form>
-			<button onClick={() => dispatch({ type: "FETCH" })}>getSkills</button>
+			{/*<button onClick={() => dispatch({ type: "FETCH_SKILLS" })}>getSkills</button>*/}
 		</div>
 	);
 }

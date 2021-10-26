@@ -7,12 +7,18 @@ export const getCurrentUser = async () => {
 	return currentUser;
 };
 
-export const getSkillsFromBD = async () => {
-	const currentUser = await getCurrentUser();
-	const user = await doc(db, "user", `${currentUser}`);
-	const data = await (await getDoc(user)).data().skills;
-	console.log(data);
-	return data;
+export const getSkillsFromBD = () => {
+	//const currentUser = await getCurrentUser();
+	//const user = await doc(db, "user", `${currentUser}`);
+	//const data = await (await getDoc(user)).data().skills;
+	//console.log(data);
+	//return data;
+	return getCurrentUser()
+		.then((user) => doc(db, "user", `${user}`))
+		.then((user) => getDoc(user))
+		.then((data) => data.data().skills)
+		.catch((e) => console.log(e))
+		.finally(() => console.log("finish"));
 };
 
 const setSkillsAtDB = async (skills) => {

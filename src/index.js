@@ -7,13 +7,11 @@ import { Provider } from "react-redux";
 import { store } from "./store";
 
 ReactDOM.render(
-	<React.StrictMode>
-		<Provider store={store}>
-			<AuthProvider>
-				<App />
-			</AuthProvider>
-		</Provider>
-	</React.StrictMode>,
+	<Provider store={store}>
+		<AuthProvider>
+			<App />
+		</AuthProvider>
+	</Provider>,
 	document.getElementById("root"),
 );
 
