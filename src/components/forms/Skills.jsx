@@ -1,19 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { AuthContext } from "../auth/Auth";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
 function Skills() {
-	const { currentUser } = useContext(AuthContext);
-
-	const {
-		register,
-		handleSubmit,
-		watch,
-		formState: { errors },
-		setValue,
-	} = useForm();
+	const { register, handleSubmit, setValue } = useForm();
 
 	const [skills, setSkills] = useState([]);
 	const [gettingSkills, setGettingSkills] = useState([]);
@@ -25,44 +16,38 @@ function Skills() {
 		dispatch({ type: "FETCH_SKILLS" });
 	}, []);
 
+	useEffect(() => {
+		setGettingSkills(skillsFromState);
+	}, [skillsFromState]);
+
 	const addSkill = async (data) => {
 		const skill = [data.skill, data.value];
 		await setSkills((old) => [...old, skill]);
 		setValue("skill", "");
 	};
 
+	const saveSkills = () => {
+		dispatch({ type: "SAVE_SKILLS", payload: skills });
+		setSkills([]);
+	};
 	const deleteSkillFromState = async (skillIndex) => {
 		const arr = skills.filter((skill, index) => (index !== skillIndex ? skill : false));
 		setSkills(arr);
 	};
 
-	//const deleteSkillFromDB = async (index) => {
-	//	const arr = gettingSkills.filter((skill, i) => (i !== index ? skill : false));
-	//	await updateDoc(user, {
-	//		skills: deleteField(),
-	//	})
-	//		.then(() => {
-	//			updateDoc(user, { skills: { ...arr } });
-	//		})
-	//		.then(() => setSkills([]));
-	//	//.then(() => getSkills());
-	//};
+	const deleteSkillFromDB = (index) => {
+		const newSkills = gettingSkills.filter((skill, i) => (i !== index ? skill : false));
+		dispatch({ type: "DELETE_SKILL", payload: newSkills });
+	};
 
 	return (
 		<div className='skills'>
 			<h3>Ваши навыки:</h3>
 			<div className='skills__map'>
-				{/*{gettingSkills
+				{gettingSkills
 					? gettingSkills.map((skill, index) => (
 							<p className='skills__item' key={index}>
 								{skill[0]}: {skill[1]}⭐<button onClick={() => deleteSkillFromDB(index)}>x</button>
-							</p>
-					  ))
-					: ""}*/}
-				{skillsFromState
-					? skillsFromState.map((skill, index) => (
-							<p className='skills__item' key={index}>
-								{skill[1][0]}: {skill[1][1]}⭐<button>x</button>
 							</p>
 					  ))
 					: ""}
@@ -97,20 +82,10 @@ function Skills() {
 				</div>
 
 				<button>Добавить</button>
-				<button className='skills__form-save' onClick={() => dispatch({ type: "SAVE_SKILLS", payload: skills })}>
+				<button className='skills__form-save' onClick={saveSkills}>
 					Сохранить
 				</button>
-				<button onClick={() => console.log(skillsFromState)}>log</button>
-				{/*<button onClick={}>save</button>*/}
-				{skillsFromState
-					? skillsFromState.map((skill, index) => (
-							<div key={index}>
-								{skill[1][0]}::::{skill[1][1]}
-							</div>
-					  ))
-					: ""}
 			</form>
-			{/*<button onClick={() => dispatch({ type: "FETCH_SKILLS" })}>getSkills</button>*/}
 		</div>
 	);
 }

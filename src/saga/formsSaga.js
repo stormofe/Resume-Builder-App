@@ -1,19 +1,28 @@
-import { getSkillsFromBD } from "../API/API";
-import { takeEvery, call, takeLatest, all, take, put, fork } from "redux-saga/effects";
-import { SAVE_SKILLS_FROM_PAGE, SET_SKILLS_FROM_DB } from "../store/formsReducer";
+import { getSkillsFromBD, setSkillsAtDB } from "../API/API";
+import { takeEvery, call, put, select } from "redux-saga/effects";
+import { DELETE_SKILL_FROM_DB, SAVE_SKILLS_FROM_PAGE, SET_SKILLS_FROM_DB } from "../store/formsReducer";
+
+const stateSkills = (state) => state.forms.skills;
 
 function* saveSkillsFromDBWorker() {
 	const objSkills = yield call(getSkillsFromBD);
-	debugger;
-	yield console.log(objSkills);
 	const skills = yield Object.entries(objSkills);
-	console.log(skills);
-	yield put({ type: SET_SKILLS_FROM_DB, payload: skills });
+	const newSkills = yield skills.map((arr) => arr[1]);
+	yield put({ type: SET_SKILLS_FROM_DB, payload: newSkills });
 }
 
-function* saveSkillsAtStateWorker(skills) {
-	console.log(skills);
-	//yield put({type: SAVE_SKILLS_FROM_PAGE, payload: skills })
+function* saveSkillsAtStateWorker(data) {
+	const skills = data.payload;
+	yield put({ type: SAVE_SKILLS_FROM_PAGE, payload: skills });
+	const allSkills = yield select(stateSkills);
+	yield setSkillsAtDB(allSkills);
+}
+
+function* deleteSkillFromDBWorker(data) {
+	const skills = data.payload;
+	yield put({ type: DELETE_SKILL_FROM_DB, payload: skills });
+	const allSkills = yield select(stateSkills);
+	yield setSkillsAtDB(allSkills);
 }
 
 export function* skillsFromDBWatcher() {
@@ -21,5 +30,9 @@ export function* skillsFromDBWatcher() {
 }
 
 export function* saveSkillsAtAllWatcher() {
-	yield takeLatest("SAVE_SKILLS", saveSkillsAtStateWorker);
+	yield takeEvery("SAVE_SKILLS", saveSkillsAtStateWorker);
+}
+
+export function* deleteSkillFromDBWatcher() {
+	yield takeEvery("DELETE_SKILL", deleteSkillFromDBWorker);
 }
