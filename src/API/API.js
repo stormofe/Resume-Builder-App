@@ -26,4 +26,16 @@ export const setSkillsAtDB = async (skills) => {
 	await updateDoc(user, { skills: { ...skills } });
 };
 
-
+export const setEduAtDB = async (edu) => {
+	const currentUser = await getCurrentUser();
+	const user = doc(db, "user", `${currentUser}`);
+	await updateDoc(user, { edu: { ...edu } });
+};
+export const getEduFromBD = () => {
+	return getCurrentUser()
+		.then((user) => doc(db, "user", `${user}`))
+		.then((user) => getDoc(user))
+		.then((data) => data.data().edu)
+		.catch((e) => console.log(e))
+		.finally(() => console.log("finish"));
+};

@@ -1,7 +1,23 @@
 import { call, all, spawn } from "redux-saga/effects";
-import { deleteSkillFromDBWatcher, saveSkillsAtAllWatcher, skillsFromDBWatcher } from "./formsSaga";
+import {
+	addEduWatcher,
+	deleteSkillFromDBWatcher,
+	getEduFromDBWatcher,
+	saveEduWatcher,
+	saveSkillsAtAllWatcher,
+	getSkillsFromDBWatcher,
+	deleteEduFromDBWatcher,
+} from "./formsSaga";
 export function* rootWatcher() {
-	const sagas = [skillsFromDBWatcher, saveSkillsAtAllWatcher, deleteSkillFromDBWatcher];
+	const sagas = [
+		getSkillsFromDBWatcher,
+		saveSkillsAtAllWatcher,
+		deleteSkillFromDBWatcher,
+		addEduWatcher,
+		saveEduWatcher,
+		getEduFromDBWatcher,
+		deleteEduFromDBWatcher,
+	];
 
 	//yield all([getUserWithAuth(), setSkillsFromDBWatcher()]);
 	//yield all([getUserWithAuth(), fetchSkillsWatcher(), saveSkillsWatcher()]);

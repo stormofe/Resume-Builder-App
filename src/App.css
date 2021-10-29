@@ -202,3 +202,13 @@ select {
 	margin: 10px 0px 0px 0px;
 	color: white;
 }
+
+
+.edu{}
+
+.edu__item{
+	padding: 20px;
+	background-color: whitesmoke;
+	color: black;
+	border: 3px solid white 
+}

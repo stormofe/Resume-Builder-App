@@ -30,7 +30,7 @@ function Skills() {
 		dispatch({ type: "SAVE_SKILLS", payload: skills });
 		setSkills([]);
 	};
-	const deleteSkillFromState = async (skillIndex) => {
+	const deleteSkillFromState = (skillIndex) => {
 		const arr = skills.filter((skill, index) => (index !== skillIndex ? skill : false));
 		setSkills(arr);
 	};
