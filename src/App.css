@@ -171,7 +171,7 @@ select {
 	color: white;
 	cursor: pointer;
 }
-.skills__item button, .skills__list-item button {
+.skills__item button, .skills__list-item button, .edu__item button {
 	height: auto;
 	width: auto;
 	background-color: transparent;
@@ -180,7 +180,7 @@ select {
 	margin: 0px 0px 0px 5px;
 	padding: 3px;
 }
-.skills__list-item button {
+.skills__list-item button, .edu__item button {
 	color: black;
 }
 .skills__list {
@@ -197,18 +197,43 @@ select {
 .skills__form-line {
 	display: flex;
 }
-.skills__form-save {
+.skills__form-save, .edu__form-save {
 	background-color: #4633d7;
 	margin: 10px 0px 0px 0px;
 	color: white;
 }
 
 
-.edu{}
+.edu h3 {
+	margin: 0px 0px 15px 0px;
+}
+
+.edu__form-line {
+	margin: 3px 0px 0px 0px;
+}
+
+.edu__info {
+	margin: 20px 0px 0px 0px;
+}
 
 .edu__item{
-	padding: 20px;
-	background-color: whitesmoke;
+	position: relative;
+	padding: 10px;
+	margin: 0px 0px 5px 0px;
+	background-color: rgb(205, 255, 205);
 	color: black;
 	border: 3px solid white 
+}
+.edu__item-add {
+	background-color: whitesmoke;
+}
+
+.edu__item button {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+
+.edu__item p {
+	margin: 0px 0px 10px 0px;
 }

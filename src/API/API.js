@@ -1,6 +1,7 @@
 import { doc, getDoc, updateDoc } from "@firebase/firestore";
 import { db } from "../firebase";
 import { getAuth } from "@firebase/auth";
+
 export const getCurrentUser = async () => {
 	const currentUser = await getAuth().currentUser.email;
 	return currentUser;
@@ -38,4 +39,9 @@ export const getEduFromBD = () => {
 		.then((data) => data.data().edu)
 		.catch((e) => console.log(e))
 		.finally(() => console.log("finish"));
+};
+
+export const setUserInfoAtDB = async (info) => {
+	const currentUser = await getCurrentUser();
+	await updateDoc(doc(db, "user", `${currentUser}`), info);
 };

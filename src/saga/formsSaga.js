@@ -1,5 +1,6 @@
-import { getEduFromBD, getSkillsFromBD, setEduAtDB, setSkillsAtDB } from "../API/API";
+import { getEduFromBD, getSkillsFromBD, setEduAtDB, setSkillsAtDB, setUserInfoAtDB } from "../API/API";
 import { takeEvery, call, put, select } from "redux-saga/effects";
+
 import {
 	ADD_EDU,
 	DELETE_EDU_FROM_DB,
@@ -81,4 +82,13 @@ function* deleteEduFromDBWorker(data) {
 
 export function* deleteEduFromDBWatcher() {
 	yield takeEvery("DELETE_EDU", deleteEduFromDBWorker);
+}
+
+function* saveUserInfoAtDBWorker(data) {
+	const info = data.payload;
+	yield setUserInfoAtDB(info);
+}
+
+export function* saveUserInfoAtDBWatcher() {
+	yield takeEvery("SAVE_INFO", saveUserInfoAtDBWorker);
 }
