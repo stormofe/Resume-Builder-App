@@ -2,6 +2,7 @@ const formsState = {
 	email: "",
 	skills: [],
 	edu: [],
+	exp: [],
 };
 
 export const SET_USER = "SET_USER";

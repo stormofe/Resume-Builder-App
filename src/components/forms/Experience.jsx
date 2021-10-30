@@ -2,48 +2,48 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 
-function Education() {
+function Experience() {
 	const { register, handleSubmit, setValue } = useForm();
 
-	const educationState = useSelector((state) => state.forms.edu);
+	const expState = useSelector((state) => state.forms.exp);
 
 	const dispatch = useDispatch();
-	const [edu, setEdu] = useState([]);
-	const [gettingEdu, setGettingEdu] = useState([]);
+	const [exp, setExp] = useState([]);
+	const [gettingExp, setGettingExp] = useState([]);
 
 	useEffect(() => {
-		dispatch({ type: "GET_EDU_FROM_DB" });
+		//dispatch({ type: "GET_EDU_FROM_DB" });
 	}, []);
 
 	useEffect(() => {
-		setGettingEdu(educationState);
-	}, [educationState]);
+		setGettingExp(expState);
+	}, [expState]);
 
-	const saveEdu = () => {
-		dispatch({ type: "SAVE_EDU", payload: edu });
-		setEdu([]);
+	const saveExp = () => {
+		dispatch({ type: "SAVE_EXP", payload: exp });
+		setExp([]);
 	};
 
-	const addEdu = (data) => {
+	const addExp = (data) => {
 		console.log(data);
-		setEdu((old) => [...old, data]);
+		setExp((old) => [...old, data]);
 		//dispatch({ type: "SET_EDU", payload: data });
 	};
 
-	const deleteEdu = (index) => {
-		const newEdu = edu.filter((item, i) => (i !== index ? item : false));
-		setEdu(newEdu);
+	const deleteExp = (index) => {
+		const newExp = exp.filter((item, i) => (i !== index ? item : false));
+		setExp(newExp);
 	};
 
-	const deleteEduFromDB = (index) => {
-		const newEdu = gettingEdu.filter((item, i) => (i !== index ? item : false));
-		dispatch({ type: "DELETE_EDU", payload: newEdu });
+	const deleteExpFromDB = (index) => {
+		const newExp = gettingExp.filter((item, i) => (i !== index ? item : false));
+		dispatch({ type: "DELETE_EXP", payload: newExp });
 	};
 	return (
 		<div className='edu'>
-			<h3>Ваше образование, курсы, сертификаты:</h3>
+			<h3>Ваш опыт работы в данной сфере:</h3>
 
-			<form onSubmit={handleSubmit(addEdu)} className='edu__form'>
+			<form onSubmit={handleSubmit(addExp)} className='edu__form'>
 				<div className='edu__form-line'>
 					{" "}
 					<label htmlFor='where'>Место</label>
@@ -51,13 +51,14 @@ function Education() {
 				</div>
 				<div className='edu__form-line'>
 					{" "}
-					<label htmlFor='profession'>На кого:</label>
+					<label htmlFor='profession'>Кем :</label>
 					<input type='text' {...register("profession")} />
 				</div>
 				<div className='edu__form-line'>
-					{" "}
-					<label htmlFor='data'>Дата окончания:</label>
-					<input type='date' {...register("data")} />
+					<label htmlFor='dateFrom'>Дата начала :</label>
+					<input type='date' {...register("dateFrom")} />
+					<label htmlFor='dateEnd'>Дата окончания :</label>
+					<input type='date' {...register("dateEnd")} />
 				</div>
 				<div className='edu__form-line'>
 					{" "}
@@ -67,12 +68,12 @@ function Education() {
 
 				<button>Добавить</button>
 			</form>
-			<button className='edu__form-save' onClick={saveEdu}>
+			<button className='edu__form-save' onClick={saveExp}>
 				Save
 			</button>
 			<div className='edu__info'>
-				{edu
-					? edu.map((item, index) => (
+				{exp
+					? exp.map((item, index) => (
 							<div className='edu__item edu__item-add' key={index}>
 								{item.profession ? (
 									<p>
@@ -101,19 +102,18 @@ function Education() {
 								{item.description ? (
 									<p>
 										<b>Описание деятельности: </b>
-										{item.description}
 									</p>
 								) : (
 									""
 								)}
 
-								<button onClick={() => deleteEdu(index)}>x</button>
+								<button onClick={() => deleteExp(index)}>x</button>
 							</div>
 					  ))
 					: ""}
 
-				{gettingEdu
-					? gettingEdu.map((item, index) => (
+				{gettingExp
+					? gettingExp.map((item, index) => (
 							<div key={index} className='edu__item'>
 								{item.profession ? (
 									<p>
@@ -147,7 +147,7 @@ function Education() {
 								) : (
 									""
 								)}
-								<button onClick={() => deleteEduFromDB(index)}>x</button>
+								<button onClick={() => deleteExpFromDB(index)}>x</button>
 							</div>
 					  ))
 					: ""}
@@ -156,4 +156,4 @@ function Education() {
 	);
 }
 
-export default Education;
+export default Experience;

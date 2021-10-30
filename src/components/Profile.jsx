@@ -3,47 +3,59 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { AuthContext } from "./auth/Auth";
 import Preloader from "./UI/Preloader";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 function Profile() {
-	const [col, setCol] = useState({});
-	const [lines, setLines] = useState([]);
-	const [isLoading, setIsLoading] = useState(true);
-	const { currentUser } = useContext(AuthContext);
-	const user = doc(db, "user", `${currentUser.email}`);
+	const dispatch = useDispatch();
+	const userInfo = useSelector((state) => state.user);
+
+	const { position, name, about, phone, email, website, area, hobbies } = userInfo;
 
 	useEffect(() => {
-		setIsLoading(true);
-		const getData = async () => {
-			const snap = await getDoc(user);
-			setCol(snap.data());
-		};
-		getData();
+		dispatch({ type: "GET_INFO" });
+		console.log(userInfo);
 	}, []);
-
-	useEffect(() => {
-		setIsLoading(true);
-		let arr = [];
-		for (let [key, value] of Object.entries(col)) {
-			arr.push([key, value]);
-		}
-		setLines(arr);
-		//!need debug
-		setTimeout(() => {
-			setIsLoading(false);
-		}, 1000);
-	}, [col]);
 
 	return (
 		<div className='profile'>
-			{isLoading ? (
-				//<Preloader />
-				<p>loading...</p>
+			<h3>Ваши данные: </h3>
+			{userInfo ? (
+				<div className='profile__info info'>
+					<div className='info__line'>
+						<div className='info__name'>Имя Фамилия</div>
+						<div className='info__value'>{name}</div>
+					</div>
+					<div className='info__line'>
+						<div className='info__name'>Профессия</div>
+						<div className='info__value'>{position}</div>
+					</div>
+					<div className='info__line'>
+						<div className='info__name'>Обо мне</div>
+						<div className='info__value'>{about}</div>
+					</div>
+					<div className='info__line'>
+						<div className='info__name'>Телефон </div>
+						<div className='info__value'>{phone}</div>
+					</div>
+					<div className='info__line'>
+						<div className='info__name'>Email</div>
+						<div className='info__value'>{email}</div>
+					</div>
+					<div className='info__line'>
+						<div className='info__name'>Сайт</div>
+						<div className='info__value'>{website}</div>
+					</div>
+					<div className='info__line'>
+						<div className='info__name'>Город</div>
+						<div className='info__value'>{area}</div>
+					</div>
+					<div className='info__line'>
+						<div className='info__name'>Хобби</div>
+						<div className='info__value'>{hobbies}</div>
+					</div>
+				</div>
 			) : (
-				""
-				//lines.map((line, index) => (
-				//	<div key={index}>
-				//		<b>{line[0]}</b>: {line[1]} <br />
-				//	</div>
-				//))
+				"Loading..."
 			)}
 		</div>
 	);

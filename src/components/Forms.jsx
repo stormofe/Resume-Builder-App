@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router";
 import { Link } from "react-router-dom";
 import About from "./forms/About";
 import Education from "./forms/Education";
+import Experience from "./forms/Experience";
 import Skills from "./forms/Skills";
 
 function Forms() {
@@ -12,6 +13,7 @@ function Forms() {
 				<Link to='/forms/about'>О себе</Link>
 				<Link to='/forms/skills'>Навыки</Link>
 				<Link to='/forms/education'>Образование</Link>
+				<Link to='/forms/experience'>Опыт работы</Link>
 			</div>
 			<div className='forms__content'>
 				<Switch>
@@ -23,6 +25,9 @@ function Forms() {
 					</Route>
 					<Route path='/forms/education'>
 						<Education />
+					</Route>
+					<Route path='/forms/experience'>
+						<Experience />
 					</Route>
 				</Switch>
 			</div>
