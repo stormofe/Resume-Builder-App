@@ -7,8 +7,8 @@ import {
 	saveSkillsAtAllWatcher,
 	getSkillsFromDBWatcher,
 	deleteEduFromDBWatcher,
-	saveUserInfoAtDBWatcher,
 } from "./formsSaga";
+import { getUserInfoFromDBWatcher, saveUserInfoAtDBWatcher } from "./userInfoSaga";
 
 export function* rootWatcher() {
 	const sagas = [
@@ -20,6 +20,7 @@ export function* rootWatcher() {
 		getEduFromDBWatcher,
 		deleteEduFromDBWatcher,
 		saveUserInfoAtDBWatcher,
+		getUserInfoFromDBWatcher,
 	];
 
 	//yield all([getUserWithAuth(), setSkillsFromDBWatcher()]);

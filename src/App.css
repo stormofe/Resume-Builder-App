@@ -197,7 +197,7 @@ select {
 .skills__form-line {
 	display: flex;
 }
-.skills__form-save, .edu__form-save {
+.skills__form-save, .edu__form-save, .about__form-save {
 	background-color: #4633d7;
 	margin: 10px 0px 0px 0px;
 	color: white;
@@ -236,4 +236,21 @@ select {
 
 .edu__item p {
 	margin: 0px 0px 10px 0px;
+}
+
+.about__notice {
+	display: inline-block;
+	padding: 10px;
+	background-color: rgb(255, 241, 241);
+	color: #333;
+	font-weight: 700;
+}
+
+.about__form-state {
+	display: inline-block;
+	margin: 0px 0px 10px 0px;
+	padding: 10px;
+	color: #333;
+	font-weight: 700;
+	background-color: rgb(205, 255, 205);
 }

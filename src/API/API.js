@@ -45,3 +45,12 @@ export const setUserInfoAtDB = async (info) => {
 	const currentUser = await getCurrentUser();
 	await updateDoc(doc(db, "user", `${currentUser}`), info);
 };
+
+export const getUserInfoFromDB = () => {
+	return getCurrentUser()
+		.then((user) => doc(db, "user", `${user}`))
+		.then((user) => getDoc(user))
+		.then((data) => data.data())
+		.catch((e) => console.log(e))
+		.finally(() => console.log("finish"));
+};
