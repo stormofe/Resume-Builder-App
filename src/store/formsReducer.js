@@ -13,37 +13,49 @@ export const ADD_EDU = "ADD_EDU";
 export const SET_EDU_FROM_DB = "SET_EDU_FROM_DB";
 export const SAVE_EDU_FROM_PAGE = "SAVE_EDU_FROM_PAGE";
 export const DELETE_EDU_FROM_DB = "DELETE_EDU_FROM_DB";
+export const SET_EXP_FROM_DB = "SET_EXP_FROM_DB";
+export const ADD_EXP = "ADD_EXP";
+export const SAVE_EXP_FROM_PAGE = "SAVE_EXP_FROM_PAGE";
+export const DELETE_EXP_FROM_DB = "DELETE_EXP_FROM_DB";
 
 export const formsReducer = (state = formsState, action) => {
+	const payload = action.payload;
 	switch (action.type) {
 		case SET_USER:
-			return { ...state, email: action.payload };
+			return { ...state, email: payload };
 		case SET_SKILLS_FROM_DB:
 		case DELETE_SKILL_FROM_DB:
 			return {
 				...state,
-				skills: [...action.payload],
+				skills: [...payload],
 			};
 		case SAVE_SKILLS_FROM_PAGE:
 			return {
 				...state,
-				skills: [...state.skills, ...action.payload],
-			};
-		case ADD_EDU:
-			return {
-				...state,
-				edu: [...state.edu, action.payload],
+				skills: [...state.skills, ...payload],
 			};
 		case SET_EDU_FROM_DB:
 		case DELETE_EDU_FROM_DB:
 			return {
 				...state,
-				edu: [...action.payload],
+				edu: [...payload],
 			};
 		case SAVE_EDU_FROM_PAGE:
 			return {
 				...state,
-				edu: [...state.edu, ...action.payload],
+				edu: [...state.edu, ...payload],
+			};
+		case SET_EXP_FROM_DB:
+		case DELETE_EXP_FROM_DB:
+			return {
+				...state,
+				exp: [...payload],
+			};
+
+		case SAVE_EXP_FROM_PAGE:
+			return {
+				...state,
+				exp: [...state.exp, ...payload],
 			};
 		default:
 			return state;

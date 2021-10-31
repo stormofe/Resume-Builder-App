@@ -186,7 +186,7 @@ select {
 .skills__list {
 	margin: 10px 0px;
 	display: flex;
-
+	flex-wrap: wrap;
 }
 .skills__list p {
 	display: inline-block;
@@ -254,11 +254,43 @@ select {
 	font-weight: 700;
 	background-color: rgb(205, 255, 205);
 }
-.profile__info {
+
+.about__form-save {
+	margin: 10px 0px;
+}
+
+.profile {
+	padding: 25px 0;
+
+}
+.profile h2 {
+	text-align: left;
+	margin: 0px 0px 15px 0px;
+}
+.info {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	width: 100%;
+}
+.profile__info h3, .profile__edu h3, .profile__exp h3, .profile__skills h3 {
+	margin: 10px 0px 10px 0px;
+	text-align: left;
+	display: inline-block;
+	padding: 10px;
+	background-color: rgb(233, 255, 233);
+
+}
+.profile__edu, .profile__exp, .profile__info {
+	max-width: 500px;
+	width: 100%;
+	padding: 10px 0;
+}
+
+.profile__edu-column, .profile__exp-column {
+	padding: 10px;
+	margin: 0px 0px 10px 0px;
+	border-bottom: 1px solid #999;
 }
 .info__line {
 	display: flex;
@@ -269,11 +301,39 @@ select {
 }
 .info__name {
 	width: 150px;
-	padding: 10px;
+	padding: 5px 10px 5px 0;
 	font-weight: 700;
 }
 .info__value {
 	width: 100%;
-	padding: 10px;
+	padding: 5px 10px;
+}
 
+.profile__skills {
+	max-width: 500px;
+	width: 100%;
+}
+
+.profile__skills-info {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.profile__skills-info .skills {
+	display: flex;
+	padding: 10px;
+	justify-content:center;
+	align-items: center;
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.profile__skills-info .skills__name,
+.profile__skills-info .skills__value {
+	display: inline-block;
+}
+
+.profile__skills-info .skills__name {
+	margin: 0px 5px 0px 0px;
 }

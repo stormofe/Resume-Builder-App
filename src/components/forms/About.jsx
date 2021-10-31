@@ -38,6 +38,7 @@ function About() {
 
 			<p className='about__notice'>Ставьте "-" там, где не хотите заполнять поле</p>
 			<form onSubmit={handleSubmit(saveInfo)} className='about__form'>
+				<button className='about__form-save'>Сохранить</button>
 				<div className='about__form-line'>
 					<label htmlFor='position'>Введите желаемую должность: </label>
 					<input {...register("position")} />

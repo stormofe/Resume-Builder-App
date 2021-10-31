@@ -41,6 +41,19 @@ export const getEduFromBD = () => {
 		.finally(() => console.log("finish"));
 };
 
+export const getExpFromBD = () => {
+	return getCurrentUser()
+		.then((user) => doc(db, "user", `${user}`))
+		.then((user) => getDoc(user))
+		.then((data) => data.data().exp)
+		.catch((e) => console.log(e))
+		.finally(() => console.log("finish"));
+};
+export const setExpAtDB = async (exp) => {
+	const currentUser = await getCurrentUser();
+	const user = doc(db, "user", `${currentUser}`);
+	await updateDoc(user, { exp: { ...exp } });
+};
 export const setUserInfoAtDB = async (info) => {
 	const currentUser = await getCurrentUser();
 	await updateDoc(doc(db, "user", `${currentUser}`), info);

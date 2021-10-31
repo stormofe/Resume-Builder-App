@@ -27,7 +27,6 @@ function Education() {
 	const addEdu = (data) => {
 		console.log(data);
 		setEdu((old) => [...old, data]);
-		//dispatch({ type: "SET_EDU", payload: data });
 	};
 
 	const deleteEdu = (index) => {

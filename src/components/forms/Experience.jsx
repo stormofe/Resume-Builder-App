@@ -12,7 +12,7 @@ function Experience() {
 	const [gettingExp, setGettingExp] = useState([]);
 
 	useEffect(() => {
-		//dispatch({ type: "GET_EDU_FROM_DB" });
+		dispatch({ type: "GET_EXP_FROM_DB" });
 	}, []);
 
 	useEffect(() => {
@@ -27,7 +27,7 @@ function Experience() {
 	const addExp = (data) => {
 		console.log(data);
 		setExp((old) => [...old, data]);
-		//dispatch({ type: "SET_EDU", payload: data });
+		setValue("where", "");
 	};
 
 	const deleteExp = (index) => {
@@ -56,9 +56,9 @@ function Experience() {
 				</div>
 				<div className='edu__form-line'>
 					<label htmlFor='dateFrom'>Дата начала :</label>
-					<input type='date' {...register("dateFrom")} />
+					<input type='month' {...register("dateFrom")} />
 					<label htmlFor='dateEnd'>Дата окончания :</label>
-					<input type='date' {...register("dateEnd")} />
+					<input type='month' {...register("dateEnd")} />
 				</div>
 				<div className='edu__form-line'>
 					{" "}
@@ -91,10 +91,18 @@ function Experience() {
 								) : (
 									""
 								)}
-								{item.data ? (
+								{item.dateFrom ? (
+									<p>
+										<b>Дата начала: </b>
+										{item.dateFrom}
+									</p>
+								) : (
+									""
+								)}
+								{item.dateEnd ? (
 									<p>
 										<b>Дата окончания: </b>
-										{item.data}
+										{item.dateEnd}
 									</p>
 								) : (
 									""
@@ -102,6 +110,7 @@ function Experience() {
 								{item.description ? (
 									<p>
 										<b>Описание деятельности: </b>
+										{item.description}
 									</p>
 								) : (
 									""
@@ -131,10 +140,18 @@ function Experience() {
 								) : (
 									""
 								)}
-								{item.data ? (
+								{item.dateFrom ? (
+									<p>
+										<b>Дата начала: </b>
+										{item.dateFrom}
+									</p>
+								) : (
+									""
+								)}
+								{item.dateEnd ? (
 									<p>
 										<b>Дата окончания: </b>
-										{item.data}
+										{item.dateEnd}
 									</p>
 								) : (
 									""
