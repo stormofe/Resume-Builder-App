@@ -1,4 +1,8 @@
 import React from "react";
+import letter from "./icons/letter.svg";
+import world from "./icons/world.svg";
+import area from "./icons/area.svg";
+import phone from "./icons/phone.svg";
 
 function TempFirst() {
 	return (
@@ -14,7 +18,7 @@ function TempFirst() {
 					<div className='info__wrapper'>
 						<div className='info__line'>
 							<div className='info__icon'>
-								<img src='icons/phone.svg' alt='' />
+								<img src={phone} alt='' />
 							</div>
 							<div className='info__descr'>
 								<h3>Phone</h3>
@@ -23,7 +27,7 @@ function TempFirst() {
 						</div>
 						<div className='info__line'>
 							<div className='info__icon'>
-								<img src='icons/letter.svg' alt='' />
+								<img src={letter} alt='' />
 							</div>
 							<div className='info__descr'>
 								<h3>Mail</h3>
@@ -32,7 +36,7 @@ function TempFirst() {
 						</div>
 						<div className='info__line'>
 							<div className='info__icon'>
-								<img src='icons/world.svg' alt='' />
+								<img src={world} alt='' />
 							</div>
 							<div className='info__descr'>
 								<h3>Website</h3>
@@ -41,13 +45,53 @@ function TempFirst() {
 						</div>
 						<div className='info__line'>
 							<div className='info__icon'>
-								<img src='icons/area.svg' alt='' />
+								<img src={area} alt='' />
 							</div>
 							<div className='info__descr'>
 								<h3>Area</h3>
 								<p>California 90999, United States</p>
 							</div>
 						</div>
+					</div>
+				</div>
+				<div className='sidebar__skills skills'>
+					<div className='skills__wrapper'>
+						<h2>Skills</h2>
+						<div className='skills__line'>
+							<div className='skills__name'>Figma</div>
+							<div className='skills__value'></div>
+						</div>
+						<div className='skills__line'>
+							<div className='skills__name'>Photoshop</div>
+							<div className='skills__value'></div>
+						</div>
+						<div className='skills__line'>
+							<div className='skills__name'>Illustrator</div>
+							<div className='skills__value'></div>
+						</div>
+						<div className='skills__line'>
+							<div className='skills__name'>HTML/CSS</div>
+							<div className='skills__value'></div>
+						</div>
+						<div className='skills__line'>
+							<div className='skills__name'>Fontend</div>
+							<div className='skills__value'></div>
+						</div>
+					</div>
+					<div className='skills__wrapper'>
+						<h2>Languages</h2>
+						<div className='skills__line'>
+							<div className='skills__name'>English</div>
+							<div className='skills__value'></div>
+						</div>
+						<div className='skills__line'>
+							<div className='skills__name'>Russian</div>
+							<div className='skills__value'></div>
+						</div>
+					</div>
+					<div className='skills__wrapper'>
+						<h2>Hobbies</h2>
+						<p>Socialising with firends and family, playing football, reading non-fiction books,and computing </p>
 					</div>
 				</div>
 			</aside>

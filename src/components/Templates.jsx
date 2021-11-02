@@ -4,7 +4,7 @@ import TempFirst from "./templates/temp1/TempFirst";
 import { Route } from "react-router";
 function Templates() {
 	return (
-		<div>
+		<div className='templates'>
 			<Link to='/templates/temp1' target='_blank'>
 				Шаблон 1
 			</Link>
