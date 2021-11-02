@@ -337,3 +337,89 @@ select {
 .profile__skills-info .skills__name {
 	margin: 0px 5px 0px 0px;
 }
+
+
+/*_______________________________________________________________________________*/
+/*TEMPLATES*/
+
+@import url(https://fonts.googleapis.com/css?family=Inter:100,200,300,regular,500,600,700,800,900);
+
+.template {
+	margin: 20px auto 0px auto;
+	width: 595px;
+	height: 842px;
+}
+/*FIRST*/
+
+.templateFirst {
+	font-size: 9px;
+	color: #333;
+	font-family: "Inter", sans-serif;
+}
+
+.sidebar {
+	width: 199px;
+}
+
+.sidebar__info {
+	position: relative;
+}
+
+.sidebar__info::before {
+	position: absolute;
+	content: '';
+	top: 0;
+	left: 0;
+	width: 37px;
+	height: 100%;
+	background-color: #F1BB1A;
+	z-index: 0;
+}
+
+.info__img {
+	margin: 50px 20px 0 57px;
+	width: 122px;
+	height: 122px;
+	border-radius: 50%;
+	object-fit: cover;
+	overflow: hidden;
+}
+
+.info__img img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.info__wrapper {
+	margin: 35px 0px 0px 0px;
+	width: 100%;
+}
+
+.info__line {
+	display: flex;
+	width: 100%;
+	align-items: center;
+}
+
+.info__icon {
+	width: 37px;
+	height: 13px;
+	object-fit: contain;
+	z-index: 2;
+
+}
+.info__icon img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}
+
+.info__descr {
+	flex-grow: 1;
+	padding: 0 10px;
+	margin: 0px 0px 13px 0px;
+}
+.info__descr h3 {
+	margin: 0px 0px 4px 0px;
+}

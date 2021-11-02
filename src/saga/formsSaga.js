@@ -1,18 +1,7 @@
-import {
-	getEduFromBD,
-	getExpFromBD,
-	getSkillsFromBD,
-	getUserInfoFromDB,
-	setEduAtDB,
-	setExpAtDB,
-	setSkillsAtDB,
-	setUserInfoAtDB,
-} from "../API/API";
+import { getEduFromBD, getExpFromBD, getSkillsFromBD, setEduAtDB, setExpAtDB, setSkillsAtDB } from "../API/API";
 import { takeEvery, call, put, select } from "redux-saga/effects";
 
 import {
-	ADD_EDU,
-	ADD_EXP,
 	DELETE_EDU_FROM_DB,
 	DELETE_EXP_FROM_DB,
 	DELETE_SKILL_FROM_DB,

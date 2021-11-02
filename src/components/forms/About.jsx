@@ -1,14 +1,10 @@
-import { doc, updateDoc } from "@firebase/firestore";
-import React, { useContext, useEffect, useState } from "react";
-import { db } from "../../firebase";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { AuthContext } from "../auth/Auth";
-import FormLine from "./about/FormLine";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
 function About() {
-	const { register, handleSubmit } = useForm();
+	const { register, handleSubmit, setValue } = useForm();
 
 	const dispatch = useDispatch();
 	const userInfo = useSelector((state) => state.user);
@@ -19,7 +15,6 @@ function About() {
 	const saveInfo = (data) => {
 		dispatch({ type: "SAVE_INFO", payload: data });
 		setGettingInfo(userInfo);
-
 		console.log(about);
 	};
 	useEffect(() => {

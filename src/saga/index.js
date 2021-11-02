@@ -10,6 +10,7 @@ import {
 	saveExpWatcher,
 	deleteExpFromDBWatcher,
 } from "./formsSaga";
+import { loginLogicWatcher, logoutLogicWatcher, registerLogicWatcher } from "./loginsSaga";
 import { getUserInfoFromDBWatcher, saveUserInfoAtDBWatcher } from "./userInfoSaga";
 
 export function* rootWatcher() {
@@ -25,6 +26,9 @@ export function* rootWatcher() {
 		getExpFromDBWatcher,
 		saveExpWatcher,
 		deleteExpFromDBWatcher,
+		loginLogicWatcher,
+		logoutLogicWatcher,
+		registerLogicWatcher,
 	];
 
 	//yield all([getUserWithAuth(), setSkillsFromDBWatcher()]);

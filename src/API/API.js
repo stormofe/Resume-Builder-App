@@ -1,6 +1,33 @@
-import { doc, getDoc, updateDoc } from "@firebase/firestore";
+import { doc, getDoc, setDoc, updateDoc } from "@firebase/firestore";
 import { db } from "../firebase";
-import { getAuth } from "@firebase/auth";
+import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "@firebase/auth";
+import { initState } from "../store/loginReducer";
+
+const auth = getAuth();
+
+const createDocInDB = async (email) => {
+	await setDoc(doc(db, "user", `${email}`), { ...initState, email: email });
+};
+
+export const register = (email, password) => {
+	return createUserWithEmailAndPassword(auth, email, password)
+		.then(() => {
+			createDocInDB(email);
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+};
+
+export const login = (email, password) => {
+	return signInWithEmailAndPassword(auth, email, password).catch((err) => {
+		console.log(err);
+	});
+};
+
+export const logOut = () => {
+	return signOut(auth);
+};
 
 export const getCurrentUser = async () => {
 	const currentUser = await getAuth().currentUser.email;

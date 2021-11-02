@@ -1,13 +1,27 @@
+export const initState = {
+	skills: {},
+	edu: {},
+	exp: {},
+};
+
 const loginState = {
 	email: "",
 	isLogin: false,
 	login: [],
 };
-const CREATE_USER = "CREATE_USER";
-const LOGIN_USER = "LOGIN_USER";
+export const SET_USER_LOGIN = "SET_USER_LOGIN";
 
 export const loginReducer = (state = loginState, action) => {
+	const payload = action.payload;
 	switch (action.type) {
+		case SET_USER_LOGIN:
+			debugger;
+			return {
+				...state,
+				email: action.email,
+				isLogin: action.isLogin,
+			};
+
 		case "CREATE_USER":
 			return { ...state, email: action.payload };
 		case "LOGIN_USER":
@@ -16,6 +30,3 @@ export const loginReducer = (state = loginState, action) => {
 			return state;
 	}
 };
-
-export const createUserAction = (payload) => ({ type: CREATE_USER, payload });
-export const loginUserAction = (payload) => ({ type: LOGIN_USER, payload });
