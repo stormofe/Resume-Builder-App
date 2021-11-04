@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
-import Preloader from "./UI/Preloader";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 function Profile() {

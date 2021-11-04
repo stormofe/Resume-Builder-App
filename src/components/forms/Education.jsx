@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 
 function Education() {
-	const { register, handleSubmit, setValue } = useForm();
+	const { register, handleSubmit } = useForm();
 
 	const educationState = useSelector((state) => state.forms.edu);
 

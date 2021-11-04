@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import letter from "./icons/letter.svg";
 import world from "./icons/world.svg";
-import area from "./icons/area.svg";
-import phone from "./icons/phone.svg";
+import areaIcon from "./icons/area.svg";
+import phoneIcon from "./icons/phone.svg";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 function TempFirst() {
+	const info = useSelector((s) => s.user);
+	const { name, phone, email, website, area, position, about, skills, hobbies, edu, exp } = info;
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch({ type: "GET_INFO" });
+	}, []);
+
 	return (
 		<div className='template templateFirst'>
 			<aside className='sidebar'>
@@ -18,11 +28,11 @@ function TempFirst() {
 					<div className='info__wrapper'>
 						<div className='info__line'>
 							<div className='info__icon'>
-								<img src={phone} alt='' />
+								<img src={phoneIcon} alt='' />
 							</div>
 							<div className='info__descr'>
 								<h3>Phone</h3>
-								<p>+84 - 969877097</p>
+								<p>{phone}</p>
 							</div>
 						</div>
 						<div className='info__line'>
@@ -31,7 +41,7 @@ function TempFirst() {
 							</div>
 							<div className='info__descr'>
 								<h3>Mail</h3>
-								<p>toannd.figmateam@gmail.com</p>
+								<p>{email}</p>
 							</div>
 						</div>
 						<div className='info__line'>
@@ -40,16 +50,16 @@ function TempFirst() {
 							</div>
 							<div className='info__descr'>
 								<h3>Website</h3>
-								<p>www.github.com</p>
+								<p>{website}</p>
 							</div>
 						</div>
 						<div className='info__line'>
 							<div className='info__icon'>
-								<img src={area} alt='' />
+								<img src={areaIcon} alt='' />
 							</div>
 							<div className='info__descr'>
 								<h3>Area</h3>
-								<p>California 90999, United States</p>
+								<p>{area}</p>
 							</div>
 						</div>
 					</div>
@@ -57,26 +67,18 @@ function TempFirst() {
 				<div className='sidebar__skills skills'>
 					<div className='skills__wrapper'>
 						<h2>Skills</h2>
-						<div className='skills__line'>
-							<div className='skills__name'>Figma</div>
-							<div className='skills__value'></div>
-						</div>
-						<div className='skills__line'>
-							<div className='skills__name'>Photoshop</div>
-							<div className='skills__value'></div>
-						</div>
-						<div className='skills__line'>
-							<div className='skills__name'>Illustrator</div>
-							<div className='skills__value'></div>
-						</div>
-						<div className='skills__line'>
-							<div className='skills__name'>HTML/CSS</div>
-							<div className='skills__value'></div>
-						</div>
-						<div className='skills__line'>
-							<div className='skills__name'>Fontend</div>
-							<div className='skills__value'></div>
-						</div>
+						{skills
+							? Object.entries(skills).map((skill, index) => (
+									<div key={index} className='skills__line'>
+										<div className='skills__name'>{skill[1][0]}</div>
+										<div className='skills__value'>
+											<div
+												className='skills__range'
+												style={{ width: `${Math.floor(Number(skill[1][1]) * 20)}%` }}></div>
+										</div>
+									</div>
+							  ))
+							: ""}
 					</div>
 					<div className='skills__wrapper'>
 						<h2>Languages</h2>
@@ -91,10 +93,60 @@ function TempFirst() {
 					</div>
 					<div className='skills__wrapper'>
 						<h2>Hobbies</h2>
-						<p>Socialising with firends and family, playing football, reading non-fiction books,and computing </p>
+						<p>{hobbies} </p>
 					</div>
 				</div>
 			</aside>
+			<main className='main'>
+				<div className='main__box'>
+					<h1 className='main__name'>
+						{/*<span>Justin</span> Nguen*/}
+						{name}
+					</h1>
+					<p className='main__prof'>{position}</p>
+				</div>
+
+				<div className='main__block block'>
+					<h2>About me</h2>
+					<article className='block__descr'>{about}</article>
+				</div>
+				<div className='main__block block'>
+					<h2>EXPERIENCE</h2>
+					{exp
+						? Object.entries(exp).map((exp, index) => (
+								<div key={index} className='block__column column'>
+									<h3>{exp[1].profession}</h3>
+									<div className='column__line'>
+										<p>{exp[1].where}</p>
+										<p>
+											<span>
+												{exp[1].dateFrom} - {exp[1].dateEnd}
+											</span>
+										</p>
+									</div>
+									<p className='column__descr'>{exp[1].description}</p>
+								</div>
+						  ))
+						: ""}
+				</div>
+				<div className='main__block block'>
+					<h2>Education</h2>
+					{edu
+						? Object.entries(edu).map((edu, index) => (
+								<div key={index} className='block__column column'>
+									<h3>{edu[1].profession}</h3>
+									<div className='column__line'>
+										<p>{edu[1].where}</p>
+										<p>
+											<span>{edu[1].data}</span>
+										</p>
+									</div>
+									<p className='column__descr'>{edu[1].description}</p>
+								</div>
+						  ))
+						: ""}
+				</div>
+			</main>
 		</div>
 	);
 }

@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
 function About() {
-	const { register, handleSubmit, setValue } = useForm();
+	const { register, handleSubmit } = useForm();
 
 	const dispatch = useDispatch();
 	const userInfo = useSelector((state) => state.user);
