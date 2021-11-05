@@ -47,12 +47,42 @@ export const getSkillsFromBD = () => {
 		.catch((e) => console.log(e))
 		.finally(() => console.log("finish"));
 };
-
 export const setSkillsAtDB = async (skills) => {
 	const currentUser = await getCurrentUser();
 	const user = doc(db, "user", `${currentUser}`);
 	await updateDoc(user, { skills: { ...skills } });
 };
+
+export const getSoftSkillsFromBD = () => {
+	return getCurrentUser()
+		.then((user) => doc(db, "user", `${user}`))
+		.then((user) => getDoc(user))
+		.then((data) => data.data().softSkills)
+		.catch((e) => console.log(e))
+		.finally(() => console.log("finish"));
+};
+
+export const setSoftSkillsAtDB = async (skills) => {
+	const currentUser = await getCurrentUser();
+	const user = doc(db, "user", `${currentUser}`);
+	await updateDoc(user, { softSkills: { ...skills } });
+};
+
+export const getLangSkillsFromBD = () => {
+	return getCurrentUser()
+		.then((user) => doc(db, "user", `${user}`))
+		.then((user) => getDoc(user))
+		.then((data) => data.data().langSkills)
+		.catch((e) => console.log(e))
+		.finally(() => console.log("finish"));
+};
+
+export const setLangSkillsAtDB = async (skills) => {
+	const currentUser = await getCurrentUser();
+	const user = doc(db, "user", `${currentUser}`);
+	await updateDoc(user, { langSkills: { ...skills } });
+};
+
 
 export const setEduAtDB = async (edu) => {
 	const currentUser = await getCurrentUser();

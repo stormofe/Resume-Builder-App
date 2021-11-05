@@ -9,6 +9,12 @@ import {
 	getExpFromDBWatcher,
 	saveExpWatcher,
 	deleteExpFromDBWatcher,
+	getSoftSkillsFromDBWatcher,
+	saveSoftSkillsAtAllWatcher,
+	deleteSoftSkillFromDBWatcher,
+	getLangSkillsFromDBWatcher,
+	saveLangSkillsAtAllWatcher,
+	deleteLangSkillFromDBWatcher,
 } from "./formsSaga";
 import { loginLogicWatcher, logoutLogicWatcher, registerLogicWatcher } from "./loginsSaga";
 import { getUserInfoFromDBWatcher, saveUserInfoAtDBWatcher } from "./userInfoSaga";
@@ -29,6 +35,12 @@ export function* rootWatcher() {
 		loginLogicWatcher,
 		logoutLogicWatcher,
 		registerLogicWatcher,
+		getSoftSkillsFromDBWatcher,
+		saveSoftSkillsAtAllWatcher,
+		deleteSoftSkillFromDBWatcher,
+		getLangSkillsFromDBWatcher,
+		saveLangSkillsAtAllWatcher,
+		deleteLangSkillFromDBWatcher,
 	];
 
 	//yield all([getUserWithAuth(), setSkillsFromDBWatcher()]);

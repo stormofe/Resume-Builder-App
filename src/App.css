@@ -156,7 +156,11 @@ select {
 	margin: 0 5px;
 }
 
-
+.skills {
+	padding: 10px 0px 20px 0px;
+	margin: 0px 0px 20px 0px;
+	border-bottom: 3px solid #999;
+}
 .skills__map {
 	display: flex;
 	flex-wrap: wrap;
@@ -354,6 +358,7 @@ select {
 	height: 842px;
 	background-color: white;
 }
+/*_______________________________________________________________________________*/
 /*FIRST*/
 
 .templateFirst {
@@ -364,15 +369,15 @@ select {
 	border-bottom: 16px solid #EFB815;
 }
 
-.sidebar {
+.templateFirst .sidebar {
 	width: 199px;
 }
 
-.sidebar__info {
+.templateFirst .sidebar__info {
 	position: relative;
 }
 
-.sidebar__info::before {
+.templateFirst .sidebar__info::before {
 	position: absolute;
 	content: '';
 	top: 0;
@@ -383,7 +388,7 @@ select {
 	z-index: 0;
 }
 
-.info__img {
+.templateFirst .info__img {
 	margin: 50px 20px 0 57px;
 	width: 122px;
 	height: 122px;
@@ -392,51 +397,51 @@ select {
 	overflow: hidden;
 }
 
-.info__img img {
+.templateFirst .info__img img {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
 }
 
-.info__wrapper {
+.templateFirst .info__wrapper {
 	margin: 35px 0px 0px 0px;
 	width: 100%;
 }
 
-.info__line {
+.templateFirst .info__line {
 	display: flex;
 	width: 100%;
 	align-items: center;
 }
 
-.info__icon {
+.templateFirst .info__icon {
 	width: 37px;
 	height: 13px;
 	object-fit: contain;
 	z-index: 2;
 
 }
-.info__icon img {
+.templateFirst .info__icon img {
 	width: 100%;
 	height: 100%;
 	object-fit: contain;
 }
 
-.info__descr {
+.templateFirst .info__descr {
 	flex-grow: 1;
 	padding: 0 10px;
 	margin: 0px 0px 13px 0px;
 }
-.info__descr h3 {
+.templateFirst .info__descr h3 {
 	margin: 0px 0px 4px 0px;
 }
 
-.skills {
+.templateFirst .skills {
 	padding: 0px 0px 0px 37px;
 	margin: 44px 0px;
 }
 
-.skills__wrapper h2 {
+.templateFirst .skills__wrapper h2 {
 	margin: 0px 0px 23px 0px;
 	font-size: 13px;
 	letter-spacing: 0.15em;
@@ -444,16 +449,16 @@ select {
 	font-weight: bold;
 	color: #242732;
 }
-.skills__wrapper {
+.templateFirst .skills__wrapper {
 	margin: 0px 0px 32px 0px;
 }
-.skills__line {
+.templateFirst .skills__line {
 	margin: 0px 0px 15px 0px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 }
-.skills__name {
+.templateFirst .skills__name {
 	padding: 0px 2px 0px 0px;
 	font-style: italic;
 	font-weight: 500;
@@ -463,14 +468,14 @@ select {
 	line-break: auto;
 	word-wrap: break-word;
 }
-.skills__value {
+.templateFirst .skills__value {
 	position: relative;
 	width: 92px;
 	height: 4px;
 	background-color: rgba(80, 46, 46, 0.2);
 	margin: 0px 6px 0px 0px;
 }
-.skills__range {
+.templateFirst .skills__range {
 	position: absolute;
 	content: '';
 	height: 100%;
@@ -480,13 +485,13 @@ select {
 	background-color: #333;
 }
 
-.main{
+.templateFirst .main{
 	display: flex;
 	flex-direction: column;
 	width: 100%;
 }
 
-.main__box {
+.templateFirst .main__box {
 	display: inline-block;
 	max-width: 310px;
 	word-wrap: break-word;
@@ -498,7 +503,7 @@ select {
 	text-align: center;
 }
 
-.main__name {
+.templateFirst .main__name {
 	font-family: 'Roboto', sans-serif;
 	font-weight: 400;
 	font-size: 22px;
@@ -507,11 +512,11 @@ select {
 	text-transform: uppercase;
 }
 
-.main__name span {
+.templateFirst .main__name span {
 	font-weight: 700;
 }
 
-.main__prof {
+.templateFirst .main__prof {
 	position: absolute;
 	display: inline-block;
 	white-space: nowrap;
@@ -523,12 +528,12 @@ select {
 	font-size: 10px;
 }
 
-.block {
+.templateFirst .block {
 	margin: 25px 0px 0px 0px;
 	padding: 0px 58px 0px 50px;
 }
 
-.block h2 {
+.templateFirst .block h2 {
 	font-weight: bold;
 	font-size: 13px;
 	letter-spacing: 0.15em;
@@ -536,7 +541,7 @@ select {
 	color: #242732;
 }
 
-.block__descr {
+.templateFirst .block__descr {
 	margin: 3px 0px 0px 0px;
 	font-style: italic;
 	font-weight: normal;
@@ -545,33 +550,33 @@ select {
 	color: #4F4F4F;
 	line-height: 178%;
 }
-.block__column {
+.templateFirst .block__column {
 	margin: 25px 0px 0px 0px;
 }
-.column h3 {
+.templateFirst .column h3 {
 	font-weight: 500;
 	font-size: 13px;
 	letter-spacing: 0.05em;
 }
-.column__line {
+.templateFirst .column__line {
 	margin: 6px 0px 0px 0px;
 	display: flex;
 	justify-content: space-between;
 	align-self: flex-start;
 }
 
-.column__line p {
+.templateFirst .column__line p {
 	font-style: italic;
 	font-weight: 500;
 	font-size: 9px;
 	letter-spacing: 0.03em;
 	color: #999999;
 }
-.column__line p > span {
+.templateFirst .column__line p > span {
 	color: inherit;
 	margin: 0px 0px 0px 3px;
 }
-.column__descr {
+.templateFirst .column__descr {
 	margin: 6px 0px 0px 0px;
 	font-size: 9px;
 	line-height: 16px;

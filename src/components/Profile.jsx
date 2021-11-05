@@ -5,7 +5,7 @@ function Profile() {
 	const dispatch = useDispatch();
 	const userInfo = useSelector((state) => state.user);
 
-	const { position, name, about, phone, email, website, area, hobbies, skills, edu, exp } = userInfo;
+	const { position, name, about, phone, email, website, area, hobbies, skills, edu, exp, softSkills } = userInfo;
 
 	useEffect(() => {
 		dispatch({ type: "GET_INFO" });
@@ -60,6 +60,19 @@ function Profile() {
 				<div className='profile__skills-info'>
 					{skills
 						? Object.entries(skills).map((item, index) => (
+								<div className='skills' key={index}>
+									<div className='skills__name'>{item[1][0]}</div>
+									<div className='skills__value'> {item[1][1]}⭐</div>
+								</div>
+						  ))
+						: ""}
+				</div>
+			</div>
+			<div className='profile__skills'>
+				<h3>Мягкие навыки</h3>
+				<div className='profile__skills-info'>
+					{softSkills
+						? Object.entries(softSkills).map((item, index) => (
 								<div className='skills' key={index}>
 									<div className='skills__name'>{item[1][0]}</div>
 									<div className='skills__value'> {item[1][1]}⭐</div>

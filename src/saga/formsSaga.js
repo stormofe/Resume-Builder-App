@@ -1,19 +1,38 @@
-import { getEduFromBD, getExpFromBD, getSkillsFromBD, setEduAtDB, setExpAtDB, setSkillsAtDB } from "../API/API";
+import {
+	getEduFromBD,
+	getExpFromBD,
+	getLangSkillsFromBD,
+	getSkillsFromBD,
+	getSoftSkillsFromBD,
+	setEduAtDB,
+	setExpAtDB,
+	setLangSkillsAtDB,
+	setSkillsAtDB,
+	setSoftSkillsAtDB,
+} from "../API/API";
 import { takeEvery, call, put, select } from "redux-saga/effects";
 
 import {
 	DELETE_EDU_FROM_DB,
 	DELETE_EXP_FROM_DB,
+	DELETE_LANG_SKILL_FROM_DB,
 	DELETE_SKILL_FROM_DB,
+	DELETE_SOFT_SKILL_FROM_DB,
 	SAVE_EDU_FROM_PAGE,
 	SAVE_EXP_FROM_PAGE,
+	SAVE_LANG_SKILLS_FROM_PAGE,
 	SAVE_SKILLS_FROM_PAGE,
+	SAVE_SOFT_SKILLS_FROM_PAGE,
 	SET_EDU_FROM_DB,
 	SET_EXP_FROM_DB,
+	SET_LANG_SKILLS_FROM_DB,
 	SET_SKILLS_FROM_DB,
+	SET_SOFT_SKILLS_FROM_DB,
 } from "../store/formsReducer";
 
 const stateSkills = (state) => state.forms.skills;
+const stateSoftSkills = (state) => state.forms.softSkills;
+const stateLangSkills = (state) => state.forms.langSkills;
 const stateEdu = (state) => state.forms.edu;
 const stateExp = (state) => state.forms.exp;
 
@@ -45,6 +64,67 @@ function* deleteSkillFromDBWorker(data) {
 }
 export function* deleteSkillFromDBWatcher() {
 	yield takeEvery("DELETE_SKILL", deleteSkillFromDBWorker);
+}
+
+function* getSoftSkillsFromDBWorker() {
+	const objSkills = yield call(getSoftSkillsFromBD);
+	const skills = yield Object.entries(objSkills);
+	const newSkills = yield skills.map((arr) => arr[1]);
+	yield put({ type: SET_SOFT_SKILLS_FROM_DB, payload: newSkills });
+}
+export function* getSoftSkillsFromDBWatcher() {
+	yield takeEvery("FETCH_SOFT_SKILLS", getSoftSkillsFromDBWorker);
+}
+
+function* saveSoftSkillsWorker(data) {
+	debugger;
+	const skills = data.payload;
+	yield put({ type: SAVE_SOFT_SKILLS_FROM_PAGE, payload: skills });
+	const allSkills = yield select(stateSoftSkills);
+	yield setSoftSkillsAtDB(allSkills);
+}
+export function* saveSoftSkillsAtAllWatcher() {
+	yield takeEvery("SAVE_SOFT_SKILLS", saveSoftSkillsWorker);
+}
+
+function* deleteSoftSkillFromDBWorker(data) {
+	const skills = data.payload;
+	yield put({ type: DELETE_SOFT_SKILL_FROM_DB, payload: skills });
+	const allSkills = yield select(stateSoftSkills);
+	yield setSoftSkillsAtDB(allSkills);
+}
+export function* deleteSoftSkillFromDBWatcher() {
+	yield takeEvery("DELETE_SOFT_SKILL", deleteSoftSkillFromDBWorker);
+}
+
+function* getLangSkillsFromDBWorker() {
+	const objSkills = yield call(getLangSkillsFromBD);
+	const skills = yield Object.entries(objSkills);
+	const newSkills = yield skills.map((arr) => arr[1]);
+	yield put({ type: SET_LANG_SKILLS_FROM_DB, payload: newSkills });
+}
+export function* getLangSkillsFromDBWatcher() {
+	yield takeEvery("FETCH_LANG_SKILLS", getLangSkillsFromDBWorker);
+}
+
+function* saveLangSkillsWorker(data) {
+	const skills = data.payload;
+	yield put({ type: SAVE_LANG_SKILLS_FROM_PAGE, payload: skills });
+	const allSkills = yield select(stateLangSkills);
+	yield setLangSkillsAtDB(allSkills);
+}
+export function* saveLangSkillsAtAllWatcher() {
+	yield takeEvery("SAVE_LANG_SKILLS", saveLangSkillsWorker);
+}
+
+function* deleteLangSkillFromDBWorker(data) {
+	const skills = data.payload;
+	yield put({ type: DELETE_LANG_SKILL_FROM_DB, payload: skills });
+	const allSkills = yield select(stateLangSkills);
+	yield setLangSkillsAtDB(allSkills);
+}
+export function* deleteLangSkillFromDBWatcher() {
+	yield takeEvery("DELETE_LANG_SKILL", deleteLangSkillFromDBWorker);
 }
 
 function* getEduFromDBWorker() {

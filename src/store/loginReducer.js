@@ -1,5 +1,7 @@
 export const initState = {
 	skills: {},
+	langSkills: {},
+	softSkills: {},
 	edu: {},
 	exp: {},
 };
