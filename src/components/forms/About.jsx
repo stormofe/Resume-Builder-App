@@ -2,20 +2,28 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { getPhotoURL } from "../../API/API";
 
 function About() {
 	const { register, handleSubmit } = useForm();
 
 	const dispatch = useDispatch();
 	const userInfo = useSelector((state) => state.user);
+	const userPhoto = useSelector((state) => state.user.photo);
 
 	const [gettingInfo, setGettingInfo] = useState({});
+	const [photo, setPhoto] = useState(null);
+	const [gettingPhoto, setGettingPhoto] = useState(null);
 	const { about, area, email, position, name, phone, website, hobbies } = gettingInfo;
 
 	const saveInfo = (data) => {
 		dispatch({ type: "SAVE_INFO", payload: data });
 		setGettingInfo(userInfo);
 		console.log(about);
+	};
+
+	const savePhoto = () => {
+		dispatch({ type: "SAVE_PHOTO", payload: photo });
 	};
 	useEffect(() => {
 		dispatch({ type: "GET_INFO" });
@@ -24,12 +32,20 @@ function About() {
 	useEffect(() => {
 		setGettingInfo(userInfo);
 	}, [userInfo]);
+	useEffect(() => {
+		setGettingPhoto(userPhoto);
+	}, [userPhoto]);
 
 	return (
 		<div className='about'>
-			<h3>Личная информация: </h3>
+			<h3>Личная информация</h3>
+			<h4>Добавьте фото:</h4>
+			<input type='file' name='file' onChange={(e) => setPhoto(e.target.files[0])} />
+			<button onClick={savePhoto}>OK</button>
+			<button onClick={() => setPhoto(null)}>X</button>
+			<button onClick={() => getPhotoURL()}></button>
 
-			{/*<button onClick={() => dispatch({ type: "GET_INFO" })}>Get info</button>*/}
+			{gettingPhoto ? <>{console.log(gettingPhoto)}</> : "No photo"}
 
 			<p className='about__notice notice'>Ставьте "-" там, где не хотите заполнять поле</p>
 			<form onSubmit={handleSubmit(saveInfo)} className='about__form'>

@@ -2,6 +2,7 @@ import { doc, getDoc, setDoc, updateDoc } from "@firebase/firestore";
 import { db } from "../firebase";
 import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "@firebase/auth";
 import { initState } from "../store/loginReducer";
+import { getStorage, ref, uploadBytes } from "firebase/storage";
 
 const auth = getAuth();
 
@@ -83,7 +84,6 @@ export const setLangSkillsAtDB = async (skills) => {
 	await updateDoc(user, { langSkills: { ...skills } });
 };
 
-
 export const setEduAtDB = async (edu) => {
 	const currentUser = await getCurrentUser();
 	const user = doc(db, "user", `${currentUser}`);
@@ -137,4 +137,20 @@ export const getUserInfoFromDB = () => {
 export const setUserInfoAtDB = async (info) => {
 	const currentUser = await getCurrentUser();
 	await updateDoc(doc(db, "user", `${currentUser}`), info);
+};
+
+export const setStorage = async (photo) => {
+	const user = await getCurrentUser();
+	const storage = await getStorage();
+	debugger;
+	const storageRef = ref(storage, user);
+	uploadBytes(storageRef, photo).then((snapshot) => {
+		console.log("Uploaded a blob or file!");
+	});
+};
+export const getPhotoURL = async () => {
+	const user = await getCurrentUser();
+	const storage = await getStorage();
+	const storageRef = ref(storage, user);
+	console.log(storageRef);
 };

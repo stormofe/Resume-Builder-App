@@ -1,9 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
+import { setStorage } from "../API/API";
 function Profile() {
 	const dispatch = useDispatch();
 	const userInfo = useSelector((state) => state.user);
+
+	const [file, setFile] = useState(null);
 
 	const { position, name, about, phone, email, website, area, hobbies, skills, edu, exp, softSkills } = userInfo;
 
@@ -12,8 +15,16 @@ function Profile() {
 		console.log(userInfo);
 	}, []);
 
+	const uploadFile = () => {
+		setStorage(file);
+	};
+
 	return (
 		<div className='profile'>
+			<form action=''>
+				<input type='file' name='file' onChange={(e) => setFile(e.target.files[0])} />
+				<button onClick={uploadFile}>setStorage</button>
+			</form>
 			{userInfo ? (
 				<div className='profile__info'>
 					<h3>Общая информация: </h3>
