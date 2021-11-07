@@ -242,7 +242,7 @@ select {
 	margin: 0px 0px 10px 0px;
 }
 
-.about__notice {
+.notice {
 	display: inline-block;
 	padding: 10px;
 	background-color: rgb(255, 241, 241);
@@ -331,6 +331,7 @@ select {
 	align-items: center;
 	font-size: 18px;
 	font-weight: 600;
+	border: none;
 }
 
 .profile__skills-info .skills__name,
@@ -348,6 +349,7 @@ select {
 
 .templates {
 	background-color: rgb(226, 226, 226);
+	padding: 20px 0;
 }
 
 @import url(https://fonts.googleapis.com/css?family=Inter:100,200,300,regular,500,600,700,800,900);
@@ -439,6 +441,7 @@ select {
 .templateFirst .skills {
 	padding: 0px 0px 0px 37px;
 	margin: 44px 0px;
+	border: none;
 }
 
 .templateFirst .skills__wrapper h2 {

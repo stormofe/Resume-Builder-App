@@ -31,7 +31,7 @@ function About() {
 
 			{/*<button onClick={() => dispatch({ type: "GET_INFO" })}>Get info</button>*/}
 
-			<p className='about__notice'>Ставьте "-" там, где не хотите заполнять поле</p>
+			<p className='about__notice notice'>Ставьте "-" там, где не хотите заполнять поле</p>
 			<form onSubmit={handleSubmit(saveInfo)} className='about__form'>
 				<button className='about__form-save'>Сохранить</button>
 				<div className='about__form-line'>

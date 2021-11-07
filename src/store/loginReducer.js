@@ -4,6 +4,7 @@ export const initState = {
 	softSkills: {},
 	edu: {},
 	exp: {},
+	custom: {},
 };
 
 const loginState = {

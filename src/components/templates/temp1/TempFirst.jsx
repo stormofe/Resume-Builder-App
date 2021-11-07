@@ -8,7 +8,22 @@ import { useDispatch } from "react-redux";
 
 function TempFirst() {
 	const info = useSelector((s) => s.user);
-	const { name, phone, email, website, area, position, about, skills, hobbies, edu, exp } = info;
+	const {
+		name,
+		phone,
+		email,
+		website,
+		area,
+		position,
+		about,
+		skills,
+		hobbies,
+		edu,
+		exp,
+		langSkills,
+		softSkills,
+		custom,
+	} = info;
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -26,76 +41,118 @@ function TempFirst() {
 						/>
 					</div>
 					<div className='info__wrapper'>
-						<div className='info__line'>
-							<div className='info__icon'>
-								<img src={phoneIcon} alt='' />
+						{phone ? (
+							<div className='info__line'>
+								<div className='info__icon'>
+									<img src={phoneIcon} alt='' />
+								</div>
+								<div className='info__descr'>
+									<h3>Phone</h3>
+									<p>{phone}</p>
+								</div>
 							</div>
-							<div className='info__descr'>
-								<h3>Phone</h3>
-								<p>{phone}</p>
+						) : (
+							""
+						)}
+
+						{email ? (
+							<div className='info__line'>
+								<div className='info__icon'>
+									<img src={letter} alt='' />
+								</div>
+								<div className='info__descr'>
+									<h3>Mail</h3>
+									<p>{email}</p>
+								</div>
 							</div>
-						</div>
-						<div className='info__line'>
-							<div className='info__icon'>
-								<img src={letter} alt='' />
+						) : (
+							""
+						)}
+						{website ? (
+							<div className='info__line'>
+								<div className='info__icon'>
+									<img src={world} alt='' />
+								</div>
+								<div className='info__descr'>
+									<h3>Website</h3>
+									<p>{website}</p>
+								</div>
 							</div>
-							<div className='info__descr'>
-								<h3>Mail</h3>
-								<p>{email}</p>
+						) : (
+							""
+						)}
+						{area ? (
+							<div className='info__line'>
+								<div className='info__icon'>
+									<img src={areaIcon} alt='' />
+								</div>
+								<div className='info__descr'>
+									<h3>Area</h3>
+									<p>{area}</p>
+								</div>
 							</div>
-						</div>
-						<div className='info__line'>
-							<div className='info__icon'>
-								<img src={world} alt='' />
-							</div>
-							<div className='info__descr'>
-								<h3>Website</h3>
-								<p>{website}</p>
-							</div>
-						</div>
-						<div className='info__line'>
-							<div className='info__icon'>
-								<img src={areaIcon} alt='' />
-							</div>
-							<div className='info__descr'>
-								<h3>Area</h3>
-								<p>{area}</p>
-							</div>
-						</div>
+						) : (
+							""
+						)}
 					</div>
 				</div>
-				<div className='sidebar__skills skills'>
-					<div className='skills__wrapper'>
-						<h2>Skills</h2>
-						{skills
-							? Object.entries(skills).map((skill, index) => (
-									<div key={index} className='skills__line'>
-										<div className='skills__name'>{skill[1][0]}</div>
-										<div className='skills__value'>
-											<div
-												className='skills__range'
-												style={{ width: `${Math.floor(Number(skill[1][1]) * 20)}%` }}></div>
+				{skills || softSkills || langSkills ? (
+					<div className='sidebar__skills skills'>
+						<div className='skills__wrapper'>
+							{Object.keys(skills).length !== 0 || Object.keys(softSkills).length !== 0 ? <h2>Skills</h2> : ""}
+
+							{Object.keys(skills).length !== 0
+								? Object.entries(skills).map((skill, index) => (
+										<div key={index} className='skills__line'>
+											<div className='skills__name'>{skill[1][0]}</div>
+											<div className='skills__value'>
+												<div
+													className='skills__range'
+													style={{ width: `${Math.floor(Number(skill[1][1]) * 20)}%` }}></div>
+											</div>
 										</div>
-									</div>
-							  ))
-							: ""}
-					</div>
-					<div className='skills__wrapper'>
-						<h2>Languages</h2>
-						<div className='skills__line'>
-							<div className='skills__name'>English</div>
-							<div className='skills__value'></div>
+								  ))
+								: ""}
+							{Object.keys(softSkills).length !== 0
+								? Object.entries(softSkills).map((skill, index) => (
+										<div key={index} className='skills__line'>
+											<div className='skills__name'>{skill[1][0]}</div>
+											<div className='skills__value'>
+												<div
+													className='skills__range'
+													style={{ width: `${Math.floor(Number(skill[1][1]) * 20)}%` }}></div>
+											</div>
+										</div>
+								  ))
+								: ""}
 						</div>
-						<div className='skills__line'>
-							<div className='skills__name'>Russian</div>
-							<div className='skills__value'></div>
+						<div className='skills__wrapper'>
+							{Object.keys(langSkills).length !== 0 ? <h2>Languages</h2> : ""}
+							{Object.keys(langSkills).length !== 0
+								? Object.entries(langSkills).map((skill, index) => (
+										<div key={index} className='skills__line'>
+											<div className='skills__name'>{skill[1][0]}</div>
+											<div className='skills__value'>
+												<div
+													className='skills__range'
+													style={{ width: `${Math.floor(Number(skill[1][1]) * 20)}%` }}></div>
+											</div>
+										</div>
+								  ))
+								: ""}
 						</div>
+						{hobbies ? (
+							<div className='skills__wrapper'>
+								<h2>Hobbies</h2>
+								<p>{hobbies} </p>
+							</div>
+						) : (
+							""
+						)}
 					</div>
-					<div className='skills__wrapper'>
-						<h2>Hobbies</h2>
-						<p>{hobbies} </p>
-					</div>
-				</div>
+				) : (
+					""
+				)}
 			</aside>
 			<main className='main'>
 				<div className='main__box'>
@@ -111,8 +168,8 @@ function TempFirst() {
 					<article className='block__descr'>{about}</article>
 				</div>
 				<div className='main__block block'>
-					<h2>EXPERIENCE</h2>
-					{exp
+					{exp && Object.keys(exp).length !== 0 ? <h2>EXPERIENCE</h2> : ""}
+					{exp && Object.keys(exp).length !== 0
 						? Object.entries(exp).map((exp, index) => (
 								<div key={index} className='block__column column'>
 									<h3>{exp[1].profession}</h3>
@@ -130,8 +187,8 @@ function TempFirst() {
 						: ""}
 				</div>
 				<div className='main__block block'>
-					<h2>Education</h2>
-					{edu
+					{edu && Object.keys(edu).length !== 0 ? <h2>Education</h2> : ""}
+					{edu && Object.keys(edu).length !== 0
 						? Object.entries(edu).map((edu, index) => (
 								<div key={index} className='block__column column'>
 									<h3>{edu[1].profession}</h3>
@@ -142,6 +199,26 @@ function TempFirst() {
 										</p>
 									</div>
 									<p className='column__descr'>{edu[1].description}</p>
+								</div>
+						  ))
+						: ""}
+				</div>
+				<div className='main__block block'>
+					{custom && Object.keys(custom).length !== 0 ? <h2>Additional Information</h2> : ""}
+					{custom && Object.keys(custom).length !== 0
+						? Object.entries(custom).map((block, index) => (
+								<div key={index} className='block__column column'>
+									<h3>{block[1].name}</h3>
+									<div className='column__line'>
+										<p>{block[1].obj}</p>
+										<p>
+											<span>{block[1].dateFrom}</span>
+										</p>
+										<p>
+											<span>{block[1].dateEnd}</span>
+										</p>
+									</div>
+									<p className='column__descr'>{block[1].description}</p>
 								</div>
 						  ))
 						: ""}

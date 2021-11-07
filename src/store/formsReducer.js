@@ -5,6 +5,7 @@ const formsState = {
 	langSkills: [],
 	edu: [],
 	exp: [],
+	custom: [],
 };
 
 export const SET_USER = "SET_USER";
@@ -28,6 +29,10 @@ export const DELETE_EDU_FROM_DB = "DELETE_EDU_FROM_DB";
 export const SET_EXP_FROM_DB = "SET_EXP_FROM_DB";
 export const SAVE_EXP_FROM_PAGE = "SAVE_EXP_FROM_PAGE";
 export const DELETE_EXP_FROM_DB = "DELETE_EXP_FROM_DB";
+
+export const SET_CUST_BLOCK_FROM_DB = "SET_CUST_BLOCK_FROM_DB";
+export const SAVE_CUST_BLOCK_FROM_PAGE = "SAVE_CUST_BLOCK_FROM_PAGE";
+export const DELETE_CUST_BLOCK_FROM_DB = "DELETE_CUST_BLOCK_FROM_DB";
 
 export const formsReducer = (state = formsState, action) => {
 	const payload = action.payload;
@@ -90,6 +95,18 @@ export const formsReducer = (state = formsState, action) => {
 			return {
 				...state,
 				exp: [...state.exp, ...payload],
+			};
+		case SET_CUST_BLOCK_FROM_DB:
+		case DELETE_CUST_BLOCK_FROM_DB:
+			return {
+				...state,
+				custom: [...payload],
+			};
+
+		case SAVE_CUST_BLOCK_FROM_PAGE:
+			return {
+				...state,
+				custom: [...state.custom, ...payload],
 			};
 		default:
 			return state;

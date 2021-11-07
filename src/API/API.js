@@ -111,9 +111,19 @@ export const setExpAtDB = async (exp) => {
 	const user = doc(db, "user", `${currentUser}`);
 	await updateDoc(user, { exp: { ...exp } });
 };
-export const setUserInfoAtDB = async (info) => {
+
+export const getCustomBlockFromBD = () => {
+	return getCurrentUser()
+		.then((user) => doc(db, "user", `${user}`))
+		.then((user) => getDoc(user))
+		.then((data) => data.data().custom)
+		.catch((e) => console.log(e))
+		.finally(() => console.log("finish"));
+};
+export const setCustomBlockAtDB = async (block) => {
 	const currentUser = await getCurrentUser();
-	await updateDoc(doc(db, "user", `${currentUser}`), info);
+	const user = doc(db, "user", `${currentUser}`);
+	await updateDoc(user, { custom: { ...block } });
 };
 
 export const getUserInfoFromDB = () => {
@@ -123,4 +133,8 @@ export const getUserInfoFromDB = () => {
 		.then((data) => data.data())
 		.catch((e) => console.log(e))
 		.finally(() => console.log("finish"));
+};
+export const setUserInfoAtDB = async (info) => {
+	const currentUser = await getCurrentUser();
+	await updateDoc(doc(db, "user", `${currentUser}`), info);
 };

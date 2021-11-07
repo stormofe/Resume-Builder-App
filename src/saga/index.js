@@ -15,6 +15,9 @@ import {
 	getLangSkillsFromDBWatcher,
 	saveLangSkillsAtAllWatcher,
 	deleteLangSkillFromDBWatcher,
+	getCustomBlockFromDBWatcher,
+	deleteCustomBlockFromDBWatcher,
+	saveCustomBlockWatcher,
 } from "./formsSaga";
 import { loginLogicWatcher, logoutLogicWatcher, registerLogicWatcher } from "./loginsSaga";
 import { getUserInfoFromDBWatcher, saveUserInfoAtDBWatcher } from "./userInfoSaga";
@@ -41,6 +44,9 @@ export function* rootWatcher() {
 		getLangSkillsFromDBWatcher,
 		saveLangSkillsAtAllWatcher,
 		deleteLangSkillFromDBWatcher,
+		getCustomBlockFromDBWatcher,
+		saveCustomBlockWatcher,
+		deleteCustomBlockFromDBWatcher,
 	];
 
 	//yield all([getUserWithAuth(), setSkillsFromDBWatcher()]);

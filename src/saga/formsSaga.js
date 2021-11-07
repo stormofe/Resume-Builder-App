@@ -1,9 +1,11 @@
 import {
+	getCustomBlockFromBD,
 	getEduFromBD,
 	getExpFromBD,
 	getLangSkillsFromBD,
 	getSkillsFromBD,
 	getSoftSkillsFromBD,
+	setCustomBlockAtDB,
 	setEduAtDB,
 	setExpAtDB,
 	setLangSkillsAtDB,
@@ -13,16 +15,19 @@ import {
 import { takeEvery, call, put, select } from "redux-saga/effects";
 
 import {
+	DELETE_CUST_BLOCK_FROM_DB,
 	DELETE_EDU_FROM_DB,
 	DELETE_EXP_FROM_DB,
 	DELETE_LANG_SKILL_FROM_DB,
 	DELETE_SKILL_FROM_DB,
 	DELETE_SOFT_SKILL_FROM_DB,
+	SAVE_CUST_BLOCK_FROM_PAGE,
 	SAVE_EDU_FROM_PAGE,
 	SAVE_EXP_FROM_PAGE,
 	SAVE_LANG_SKILLS_FROM_PAGE,
 	SAVE_SKILLS_FROM_PAGE,
 	SAVE_SOFT_SKILLS_FROM_PAGE,
+	SET_CUST_BLOCK_FROM_DB,
 	SET_EDU_FROM_DB,
 	SET_EXP_FROM_DB,
 	SET_LANG_SKILLS_FROM_DB,
@@ -35,6 +40,7 @@ const stateSoftSkills = (state) => state.forms.softSkills;
 const stateLangSkills = (state) => state.forms.langSkills;
 const stateEdu = (state) => state.forms.edu;
 const stateExp = (state) => state.forms.exp;
+const stateCustom = (state) => state.forms.custom;
 
 function* getSkillsFromDBWorker() {
 	const objSkills = yield call(getSkillsFromBD);
@@ -155,7 +161,6 @@ function* deleteEduFromDBWorker(data) {
 	const allEdu = yield select(stateEdu);
 	yield setEduAtDB(allEdu);
 }
-
 export function* deleteEduFromDBWatcher() {
 	yield takeEvery("DELETE_EDU", deleteEduFromDBWorker);
 }
@@ -188,7 +193,38 @@ function* deleteExpFromDBWorker(data) {
 	const allExp = yield select(stateEdu);
 	yield setExpAtDB(allExp);
 }
-
 export function* deleteExpFromDBWatcher() {
 	yield takeEvery("DELETE_EXP", deleteExpFromDBWorker);
+}
+
+function* getCustomBlockFromDBWorker() {
+	const objBlocks = yield call(getCustomBlockFromBD);
+	const custom = yield Object.entries(objBlocks);
+	const newECustom = yield custom.map((arr) => arr[1]);
+	//debugger;
+	yield put({ type: SET_CUST_BLOCK_FROM_DB, payload: newECustom });
+}
+export function* getCustomBlockFromDBWatcher() {
+	yield takeEvery("GET_CUST_BLOCK_FROM_DB", getCustomBlockFromDBWorker);
+}
+
+function* saveCustomBlockWorker(data) {
+	const newBlock = data.payload;
+	yield put({ type: SAVE_CUST_BLOCK_FROM_PAGE, payload: newBlock });
+	const block = yield select(stateCustom);
+	yield setCustomBlockAtDB(block);
+	//yield call(saveEduFromDBWorker);
+}
+export function* saveCustomBlockWatcher() {
+	yield takeEvery("SAVE_CUST_BLOCK", saveCustomBlockWorker);
+}
+
+function* deleteCustomBlockFromDBWorker(data) {
+	const block = data.payload;
+	yield put({ type: DELETE_CUST_BLOCK_FROM_DB, payload: block });
+	const allBlocks = yield select(stateCustom);
+	yield setCustomBlockAtDB(allBlocks);
+}
+export function* deleteCustomBlockFromDBWatcher() {
+	yield takeEvery("DELETE_CUST_BLOCK", deleteCustomBlockFromDBWorker);
 }

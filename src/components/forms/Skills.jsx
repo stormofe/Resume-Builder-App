@@ -9,6 +9,7 @@ function Skills() {
 	useEffect(() => {
 		dispatch({ type: "FETCH_SKILLS" });
 		dispatch({ type: "FETCH_SOFT_SKILLS" });
+		dispatch({ type: "FETCH_LANG_SKILLS" });
 	}, []);
 	return (
 		<>
