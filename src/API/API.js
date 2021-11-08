@@ -2,7 +2,7 @@ import { doc, getDoc, setDoc, updateDoc } from "@firebase/firestore";
 import { db } from "../firebase";
 import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "@firebase/auth";
 import { initState } from "../store/loginReducer";
-import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const auth = getAuth();
 
@@ -140,17 +140,34 @@ export const setUserInfoAtDB = async (info) => {
 };
 
 export const setStorage = async (photo) => {
+	//const storage = await getStorage();
+	//return getCurrentUser().then((user) => {
+	//	debugger;
+	//	return uploadBytes(ref(storage, user), photo).then((snapshot) => {
+	//		console.log("Uploaded a blob or file!");
+	//	});
+	//});
 	const user = await getCurrentUser();
 	const storage = await getStorage();
-	debugger;
-	const storageRef = ref(storage, user);
-	uploadBytes(storageRef, photo).then((snapshot) => {
-		console.log("Uploaded a blob or file!");
-	});
+	const storageRef = await ref(storage, user);
+
+	await uploadBytes(storageRef, photo)
+		.then((snapshot) => {
+			console.log("Uploaded a blob or file!");
+		})
+		.catch((e) => {
+			console.log(e);
+		});
 };
-export const getPhotoURL = async () => {
+export const getPhoto = async () => {
 	const user = await getCurrentUser();
 	const storage = await getStorage();
-	const storageRef = ref(storage, user);
-	console.log(storageRef);
+	const storageRef = await ref(storage, user);
+	return getDownloadURL(storageRef)
+		.then((url) => {
+			return url;
+		})
+		.catch((error) => {
+			console.log(error);
+		});
 };

@@ -20,7 +20,12 @@ import {
 	saveCustomBlockWatcher,
 } from "./formsSaga";
 import { loginLogicWatcher, logoutLogicWatcher, registerLogicWatcher } from "./loginsSaga";
-import { getUserInfoFromDBWatcher, saveUserInfoAtDBWatcher, saveUserPhotoWatcher } from "./userInfoSaga";
+import {
+	getPhotoFromDBWatcher,
+	getUserInfoFromDBWatcher,
+	saveUserInfoAtDBWatcher,
+	saveUserPhotoWatcher,
+} from "./userInfoSaga";
 
 export function* rootWatcher() {
 	const sagas = [
@@ -48,6 +53,7 @@ export function* rootWatcher() {
 		saveCustomBlockWatcher,
 		deleteCustomBlockFromDBWatcher,
 		saveUserPhotoWatcher,
+		getPhotoFromDBWatcher,
 	];
 
 	//yield all([getUserWithAuth(), setSkillsFromDBWatcher()]);

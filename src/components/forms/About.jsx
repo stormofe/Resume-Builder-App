@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { getPhotoURL } from "../../API/API";
+import { getPhoto } from "../../API/API";
 
 function About() {
 	const { register, handleSubmit } = useForm();
 
 	const dispatch = useDispatch();
 	const userInfo = useSelector((state) => state.user);
-	const userPhoto = useSelector((state) => state.user.photo);
+	const userPhoto = useSelector((state) => state.user.photoURL);
 
 	const [gettingInfo, setGettingInfo] = useState({});
 	const [photo, setPhoto] = useState(null);
@@ -19,19 +19,22 @@ function About() {
 	const saveInfo = (data) => {
 		dispatch({ type: "SAVE_INFO", payload: data });
 		setGettingInfo(userInfo);
-		console.log(about);
 	};
 
-	const savePhoto = () => {
+	const savePhoto = (e) => {
+		e.preventDefault();
 		dispatch({ type: "SAVE_PHOTO", payload: photo });
+		setPhoto(null);
 	};
 	useEffect(() => {
 		dispatch({ type: "GET_INFO" });
+		dispatch({ type: "GET_PHOTO" });
 	}, []);
 
 	useEffect(() => {
 		setGettingInfo(userInfo);
 	}, [userInfo]);
+
 	useEffect(() => {
 		setGettingPhoto(userPhoto);
 	}, [userPhoto]);
@@ -39,13 +42,39 @@ function About() {
 	return (
 		<div className='about'>
 			<h3>Личная информация</h3>
-			<h4>Добавьте фото:</h4>
-			<input type='file' name='file' onChange={(e) => setPhoto(e.target.files[0])} />
-			<button onClick={savePhoto}>OK</button>
-			<button onClick={() => setPhoto(null)}>X</button>
-			<button onClick={() => getPhotoURL()}></button>
-
-			{gettingPhoto ? <>{console.log(gettingPhoto)}</> : "No photo"}
+			<h4>Ваше фото:</h4>
+			<form className='about__photo' onSubmit={savePhoto}>
+				<div className='about__photo-col'>
+					{gettingPhoto ? <img src={gettingPhoto} alt='' /> : ""}
+					<div className='about__photo-col_inp'>
+						<label htmlFor='file'>Выберите фото</label>
+						<input style={{ opacity: 0 }} type='file' name='file' onChange={(e) => setPhoto(e.target.files[0])} />
+					</div>
+				</div>
+				<div className='about__photo-col'>
+					{photo ? (
+						<>
+							<img src={photo ? URL.createObjectURL(photo) : null} alt='' />
+						</>
+					) : (
+						""
+					)}
+					{photo ? (
+						<>
+							<p>
+								Выбран файл: <br /> {photo.name}
+							</p>
+							<div className='about__photo-col_buttons buttons'>
+								<button>OK</button>
+								<button onClick={() => setPhoto(null)}>X</button>
+							</div>
+						</>
+					) : (
+						""
+					)}
+				</div>
+			</form>
+			<button onClick={() => dispatch({ type: "GET_PHOTO" })}>get</button>
 
 			<p className='about__notice notice'>Ставьте "-" там, где не хотите заполнять поле</p>
 			<form onSubmit={handleSubmit(saveInfo)} className='about__form'>
