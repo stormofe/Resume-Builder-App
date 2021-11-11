@@ -1,6 +1,5 @@
 const userState = {
 	email: "",
-	photo: null,
 	photoURL: null,
 };
 

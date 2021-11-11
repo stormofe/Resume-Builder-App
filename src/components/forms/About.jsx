@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
@@ -15,8 +15,10 @@ function About() {
 	const [photo, setPhoto] = useState(null);
 	const [gettingPhoto, setGettingPhoto] = useState(null);
 	const { about, area, email, position, name, phone, website, hobbies } = gettingInfo;
+	const photoInp = useRef(null);
 
-	const saveInfo = (data) => {
+	const saveInfo = (data, event) => {
+		event.target.reset();
 		dispatch({ type: "SAVE_INFO", payload: data });
 		setGettingInfo(userInfo);
 	};
@@ -24,7 +26,13 @@ function About() {
 	const savePhoto = (e) => {
 		e.preventDefault();
 		dispatch({ type: "SAVE_PHOTO", payload: photo });
+		//setPhoto(null);
+		deletePhoto();
+	};
+
+	const deletePhoto = () => {
 		setPhoto(null);
+		photoInp.current.value = "";
 	};
 	useEffect(() => {
 		dispatch({ type: "GET_INFO" });
@@ -43,12 +51,18 @@ function About() {
 		<div className='about'>
 			<h3>Личная информация</h3>
 			<h4>Ваше фото:</h4>
-			<form className='about__photo' onSubmit={savePhoto}>
+			<form className='about__photo' onSubmit={(e) => savePhoto(e)}>
 				<div className='about__photo-col'>
 					{gettingPhoto ? <img src={gettingPhoto} alt='' /> : ""}
 					<div className='about__photo-col_inp'>
 						<label htmlFor='file'>Выберите фото</label>
-						<input style={{ opacity: 0 }} type='file' name='file' onChange={(e) => setPhoto(e.target.files[0])} />
+						<input
+							style={{ opacity: 0 }}
+							type='file'
+							name='file'
+							ref={photoInp}
+							onChange={(e) => setPhoto(e.target.files[0])}
+						/>
 					</div>
 				</div>
 				<div className='about__photo-col'>
@@ -66,7 +80,7 @@ function About() {
 							</p>
 							<div className='about__photo-col_buttons buttons'>
 								<button>OK</button>
-								<button onClick={() => setPhoto(null)}>X</button>
+								<button onClick={deletePhoto}>X</button>
 							</div>
 						</>
 					) : (
@@ -74,7 +88,6 @@ function About() {
 					)}
 				</div>
 			</form>
-			<button onClick={() => dispatch({ type: "GET_PHOTO" })}>get</button>
 
 			<p className='about__notice notice'>Ставьте "-" там, где не хотите заполнять поле</p>
 			<form onSubmit={handleSubmit(saveInfo)} className='about__form'>

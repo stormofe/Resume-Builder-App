@@ -23,23 +23,20 @@ function TempFirst() {
 		langSkills,
 		softSkills,
 		custom,
+		photoURL,
 	} = info;
 	const dispatch = useDispatch();
 
 	useEffect(() => {
 		dispatch({ type: "GET_INFO" });
+		dispatch({ type: "GET_PHOTO" });
 	}, []);
 
 	return (
 		<div className='template templateFirst'>
 			<aside className='sidebar'>
 				<div className='sidebar__info info'>
-					<div className='info__img'>
-						<img
-							src='https://images.unsplash.com/photo-1625201925673-1054ca34b3f4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=464&q=80'
-							alt=''
-						/>
-					</div>
+					<div className='info__img'>{photoURL ? <img src={photoURL} alt='' /> : ""}</div>
 					<div className='info__wrapper'>
 						{phone ? (
 							<div className='info__line'>
