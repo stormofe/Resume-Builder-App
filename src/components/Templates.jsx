@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import TempFirst from "./templates/temp1/TempFirst";
 import { Route } from "react-router";
+
 function Templates() {
 	return (
 		<div className='templates'>

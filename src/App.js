@@ -6,6 +6,7 @@ import Login from "./components/auth/Login";
 import Profile from "./components/Profile";
 import Forms from "./components/Forms";
 import Templates from "./components/Templates";
+
 function App() {
 	return (
 		<div className='App'>

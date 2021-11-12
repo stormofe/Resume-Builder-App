@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { getPhoto } from "../../API/API";
 
 function About() {
 	const { register, handleSubmit } = useForm();
