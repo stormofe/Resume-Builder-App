@@ -36,7 +36,7 @@ function TempFirst() {
 	const componentRef = useRef();
 	const pageStyle = `
   @page {
-    size: A4;
+    size: auto;
 	 margin: 0mm;
 	 width: 100%;
 	 bleed: 1.5cm;

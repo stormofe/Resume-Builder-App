@@ -19,4 +19,4 @@ export const AuthProvider = ({ children }) => {
 		return <Preloader />;
 	}
 	return <AuthContext.Provider value={{ currentUser }}>{children}</AuthContext.Provider>;
-};
+};;

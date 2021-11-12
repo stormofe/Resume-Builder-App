@@ -487,7 +487,6 @@ select {
 	align-items: center;
 	margin: 0px 0px 13px 0px;
 }
-
 .templateFirst .info__icon {
 	width: 37px;
 	height: 13px;
@@ -500,7 +499,6 @@ select {
 	height: 100%;
 	object-fit: contain;
 }
-
 .templateFirst .info__descr {
 	flex-grow: 1;
 	padding: 0 10px;
@@ -509,13 +507,11 @@ select {
 .templateFirst .info__descr h3 {
 	margin: 0px 0px 4px 0px;
 }
-
 .templateFirst .skills {
 	padding: 0px 0px 0px 37px;
 	margin: 44px 0px;
 	border: none;
 }
-
 .templateFirst .skills__wrapper h2 {
 	margin: 0px 0px 23px 0px;
 	font-size: 13px;
@@ -559,13 +555,11 @@ select {
 	top: 0;
 	background-color: #333;
 }
-
 .templateFirst .main{
 	display: flex;
 	flex-direction: column;
 	width: 100%;
 }
-
 .templateFirst .main__box {
 	display: inline-block;
 	max-width: 310px;
@@ -577,7 +571,6 @@ select {
 	align-items: center;
 	text-align: center;
 }
-
 .templateFirst .main__name {
 	font-family: 'Roboto', sans-serif;
 	font-weight: 400;
@@ -586,11 +579,9 @@ select {
 	color: #242732;
 	text-transform: uppercase;
 }
-
 .templateFirst .main__name span {
 	font-weight: 700;
 }
-
 .templateFirst .main__prof {
 	position: absolute;
 	display: inline-block;
@@ -602,12 +593,10 @@ select {
 	transform: translateX(50%);
 	font-size: 10px;
 }
-
 .templateFirst .block {
 	margin: 25px 0px 0px 0px;
 	padding: 0px 58px 0px 50px;
 }
-
 .templateFirst .block h2 {
 	font-weight: bold;
 	font-size: 13px;
@@ -615,7 +604,6 @@ select {
 	text-transform: uppercase;
 	color: #242732;
 }
-
 .templateFirst .block__descr {
 	margin: 3px 0px 0px 0px;
 	font-style: italic;
@@ -639,7 +627,6 @@ select {
 	justify-content: space-between;
 	align-self: flex-start;
 }
-
 .templateFirst .column__line p {
 	font-style: italic;
 	font-weight: 500;
@@ -658,3 +645,152 @@ select {
 	color: #666666;
 	letter-spacing: 0.03em;
 }
+
+/*_______________________________________________________________________________*/
+/*SECOND*/
+
+.templateSecond {
+	display: flex;
+	padding: 0 52px;
+	font-family: 'Roboto', sans-serif;
+	color: #2C2A27;
+}
+.templateSecond .sidebar {
+	width: 170px;
+	padding: 30px 27px 30px 0;
+}
+.templateSecond .sidebar__photo {
+	width: 96px;
+height: 126px;
+}
+.templateSecond .sidebar__photo img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+.templateSecond .block {
+	margin: 24px 0px 0px 0px;
+}
+.templateSecond .block h2 {
+	margin: 0px 0px 15px 0px;
+	font-weight: bold;
+	font-size: 9px;
+	letter-spacing: 0.15em;
+	text-transform: uppercase;
+	color: #AD764B;
+}
+.templateSecond .block h3 {
+	letter-spacing: 0.3px;
+	font-size: 9px;
+	font-weight: normal;
+}
+.templateSecond .sidebar__about p {
+	font-weight: 300;
+font-size: 9px;
+line-height: 150%;
+letter-spacing: 0.3px;
+}
+.templateSecond .sidebar__skills {
+	border: 0;
+	padding: 0;
+}
+.templateSecond .skills__line {
+	margin: 0px 0px 12px 0px;
+}
+.templateSecond .skills__value {
+	position: relative;
+	margin: 6px 0px 0px 0px;
+	width: 114px;
+	height: 3px;
+	background-color: #DEB392;
+}
+.templateSecond .skills__range {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	width: 80%;
+	background-color: #AD764B;
+}
+.templateSecond .sidebar__social {}
+.templateSecond .social__line {
+	display: flex;
+	margin: 0px 0px 12px 0px;
+	align-items: center;
+}
+.templateSecond .social__icon {
+	width: 12px;
+	height: 12px;
+	margin: 0px 6px 0px 0px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.templateSecond .social__icon img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}
+.templateSecond .social__link {
+	letter-spacing: 0.3px;
+	font-weight: normal;
+	font-size: 9px;
+	color: #2C2A27;
+	text-decoration: none;
+	line-height: 150%;
+}
+.templateSecond .main {
+	border-left : 0.3px solid #DEB392;
+	padding: 109px 51px 40px 13px;
+}
+.templateSecond h1 {
+	font-size: 30px;
+	text-transform: capitalize;
+	font-style: normal;
+	font-weight: 500;
+}
+.templateSecond .main__prof {
+	margin: 0px 0px 6px 0px;
+	font-weight: bold;
+	font-size: 9px;
+	letter-spacing: 0.15em;
+	text-transform: uppercase;
+	color: #84522A;
+}
+.templateSecond .main__block {}
+.templateSecond .block__wrapper {
+	margin: 24px 0px 0px 0px;
+	display: flex;
+	position: relative;
+}
+.templateSecond .block__wrapper::before {
+	position: absolute;
+	content: '';
+	top: 11px;
+	left: -16px;
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background: #DEB392;
+background: radial-gradient(circle, #AD764B 30%, #DEB392 31%);
+}
+
+.templateSecond .block__wrapper p {
+	font-weight: 300;
+	font-size: 9px;
+	line-height: 150%;
+	letter-spacing: 0.3px;
+}
+.templateSecond .block__date {
+	padding: 0px 30px 0px 0px;
+}
+.templateSecond .block__info {
+	align-items: flex-start;
+}
+.templateSecond .info__title {
+	font-size: 9px;
+	font-weight: 700;
+	margin: 0px 0px 3px 0px;
+}
+.templateSecond .info__company {}
+.templateSecond .info__descr {}
