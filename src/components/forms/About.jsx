@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import Social from "./about/Social";
 
 function About() {
 	const { register, handleSubmit } = useForm();
@@ -18,6 +19,7 @@ function About() {
 
 	const saveInfo = (data, event) => {
 		event.target.reset();
+		console.log(data);
 		dispatch({ type: "SAVE_INFO", payload: data });
 		setGettingInfo(userInfo);
 	};
@@ -78,7 +80,7 @@ function About() {
 								Выбран файл: <br /> {photo.name}
 							</p>
 							<div className='about__photo-col_buttons buttons'>
-								<button>OK</button>
+								<button>✓</button>
 								<button onClick={deletePhoto}>X</button>
 							</div>
 						</>
@@ -87,6 +89,8 @@ function About() {
 					)}
 				</div>
 			</form>
+
+			<Social />
 
 			<p className='about__notice notice'>Ставьте "-" там, где не хотите заполнять поле</p>
 			<form onSubmit={handleSubmit(saveInfo)} className='about__form'>
@@ -126,6 +130,7 @@ function About() {
 					<input {...register("website")} />
 					{website ? <p className='about__form-state'>{website}</p> : ""}
 				</div>
+
 				<div className='about__form-line'>
 					<label htmlFor='hobbies'>Ваше хобби: </label>
 					<input {...register("hobbies")} />

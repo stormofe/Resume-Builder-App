@@ -5,7 +5,7 @@ import areaIcon from "./icons/area.svg";
 import phoneIcon from "./icons/phone.svg";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import ReactToPrint, { useReactToPrint } from "react-to-print";
+import ReactToPrint from "react-to-print";
 
 function TempFirst() {
 	const info = useSelector((s) => s.user);
@@ -13,7 +13,6 @@ function TempFirst() {
 		name,
 		phone,
 		email,
-		website,
 		area,
 		position,
 		about,
@@ -25,6 +24,7 @@ function TempFirst() {
 		softSkills,
 		custom,
 		photoURL,
+		socials,
 	} = info;
 	const dispatch = useDispatch();
 
@@ -35,22 +35,18 @@ function TempFirst() {
 
 	const componentRef = useRef();
 	const pageStyle = `
-  @page {
-    size: auto;
-	 margin: 0mm;
-	 width: 100%;
-	 bleed: 1.5cm;
-  }
-  @media all {
-	.pagebreak {
-	  display: none;
+	@page {
+		padding: 1cm;
+		margin: 0;
 	}
- }
- @media print {
-	.pagebreak {
-	  page-break-before: always;
-	}
- }
+	#pageborder {
+      position:fixed;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      border-bottom: 16px solid #EFB815;
+    }
 
 `;
 
@@ -88,14 +84,20 @@ function TempFirst() {
 							) : (
 								""
 							)}
-							{website ? (
+							{socials && Object.keys(socials).length !== 0 ? (
 								<div className='info__line'>
 									<div className='info__icon'>
 										<img src={world} alt='' />
 									</div>
 									<div className='info__descr'>
-										<h3>Website</h3>
-										<p>{website}</p>
+										<h3>Websites</h3>
+										{Object.entries(socials).map((soc, index) => (
+											<div key={index}>
+												<a target='_blank' href={`${soc[1]}`} rel='noreferrer'>
+													{soc[1]}
+												</a>{" "}
+											</div>
+										))}
 									</div>
 								</div>
 							) : (
@@ -245,11 +247,11 @@ function TempFirst() {
 					</div>
 				</main>
 			</div>
+			<div id='pageborder'></div>
 			<ReactToPrint
 				trigger={() => <button>Print this out!</button>}
 				content={() => componentRef.current}
 				pageStyle={pageStyle}
-				bodyClass='border'
 			/>
 		</>
 	);

@@ -401,36 +401,37 @@ select {
 	background-color: rgb(226, 226, 226);
 	padding: 20px 0;
 }
+.templates__link {
+	width: 150px;
+	height: 200px;
+	margin: 0px 20px 0px 0px;
+}
 
 @import url(https://fonts.googleapis.com/css?family=Inter:100,200,300,regular,500,600,700,800,900);
 @import url(https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,regular,italic,500,500italic,700,700italic,900,900italic);
 .template {
+	position: relative;
 	margin: 0px auto 0px auto;
 	width: 595px;
-	min-height: 842px;
+	min-height: 800px;
+	height: 100%;
 	background-color: white;
+	overflow: hidden;
+	word-break: break-word;
+	
 }
 /*_______________________________________________________________________________*/
 /*FIRST*/
-@media print { 
-	@page {
-		/*border-color: #EFB815;
-		border-width: 16px;
-		border-style: solid;
-		border-bottom-style: solid;*/
-		 /*border-bottom: 16px solid #EFB815; */
-		 background-color: red;
-		 width: 100%;
-		 scale: 140%;
-	}
-}
+
 .templateFirst {
 	display: flex;
 	font-size: 9px;
 	color: #333;
 	font-family: "Inter", sans-serif;
 	position: relative;
+	padding-bottom: 1cm;
 }
+
 .border {
 	
 
@@ -501,6 +502,7 @@ select {
 }
 .templateFirst .info__descr {
 	flex-grow: 1;
+	max-width: 162px;
 	padding: 0 10px;
 	
 }
@@ -596,6 +598,7 @@ select {
 .templateFirst .block {
 	margin: 25px 0px 0px 0px;
 	padding: 0px 58px 0px 50px;
+	page-break-inside: avoid;
 }
 .templateFirst .block h2 {
 	font-weight: bold;
@@ -645,7 +648,14 @@ select {
 	color: #666666;
 	letter-spacing: 0.03em;
 }
-
+@media print {
+	.template {
+		width: 100% !important;
+	}
+	.column, .skills__line, .block__wrapper {
+		page-break-inside: avoid !important;
+	}
+}
 /*_______________________________________________________________________________*/
 /*SECOND*/
 
@@ -794,3 +804,4 @@ background: radial-gradient(circle, #AD764B 30%, #DEB392 31%);
 }
 .templateSecond .info__company {}
 .templateSecond .info__descr {}
+

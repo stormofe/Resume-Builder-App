@@ -171,3 +171,17 @@ export const getPhoto = async () => {
 			console.log(error);
 		});
 };
+
+export const getSocialsFromBD = () => {
+	return getCurrentUser()
+		.then((user) => doc(db, "user", `${user}`))
+		.then((user) => getDoc(user))
+		.then((data) => data.data().socials)
+		.catch((e) => console.log(e))
+		.finally(() => console.log("finish"));
+};
+export const setSocialsAtDB = async (socials) => {
+	const currentUser = await getCurrentUser();
+	const user = doc(db, "user", `${currentUser}`);
+	await updateDoc(user, { socials: { ...socials } });
+};

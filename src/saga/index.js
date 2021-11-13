@@ -18,6 +18,9 @@ import {
 	getCustomBlockFromDBWatcher,
 	deleteCustomBlockFromDBWatcher,
 	saveCustomBlockWatcher,
+	getSocialsFromDBWatcher,
+	saveSocialsAtAllWatcher,
+	deleteSocialsFromDBWatcher,
 } from "./formsSaga";
 import { loginLogicWatcher, logoutLogicWatcher, registerLogicWatcher } from "./loginsSaga";
 import {
@@ -54,6 +57,9 @@ export function* rootWatcher() {
 		deleteCustomBlockFromDBWatcher,
 		saveUserPhotoWatcher,
 		getPhotoFromDBWatcher,
+		getSocialsFromDBWatcher,
+		saveSocialsAtAllWatcher,
+		deleteSocialsFromDBWatcher,
 	];
 
 	//yield all([getUserWithAuth(), setSkillsFromDBWatcher()]);

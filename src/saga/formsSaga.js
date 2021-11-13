@@ -4,12 +4,14 @@ import {
 	getExpFromBD,
 	getLangSkillsFromBD,
 	getSkillsFromBD,
+	getSocialsFromBD,
 	getSoftSkillsFromBD,
 	setCustomBlockAtDB,
 	setEduAtDB,
 	setExpAtDB,
 	setLangSkillsAtDB,
 	setSkillsAtDB,
+	setSocialsAtDB,
 	setSoftSkillsAtDB,
 } from "../API/API";
 import { takeEvery, call, put, select } from "redux-saga/effects";
@@ -20,18 +22,21 @@ import {
 	DELETE_EXP_FROM_DB,
 	DELETE_LANG_SKILL_FROM_DB,
 	DELETE_SKILL_FROM_DB,
+	DELETE_SOCIAL_FROM_DB,
 	DELETE_SOFT_SKILL_FROM_DB,
 	SAVE_CUST_BLOCK_FROM_PAGE,
 	SAVE_EDU_FROM_PAGE,
 	SAVE_EXP_FROM_PAGE,
 	SAVE_LANG_SKILLS_FROM_PAGE,
 	SAVE_SKILLS_FROM_PAGE,
+	SAVE_SOCIALS_FROM_PAGE,
 	SAVE_SOFT_SKILLS_FROM_PAGE,
 	SET_CUST_BLOCK_FROM_DB,
 	SET_EDU_FROM_DB,
 	SET_EXP_FROM_DB,
 	SET_LANG_SKILLS_FROM_DB,
 	SET_SKILLS_FROM_DB,
+	SET_SOCIALS_FROM_DB,
 	SET_SOFT_SKILLS_FROM_DB,
 } from "../store/formsReducer";
 
@@ -41,6 +46,7 @@ const stateLangSkills = (state) => state.forms.langSkills;
 const stateEdu = (state) => state.forms.edu;
 const stateExp = (state) => state.forms.exp;
 const stateCustom = (state) => state.forms.custom;
+const stateSocials = (state) => state.forms.socials;
 
 function* getSkillsFromDBWorker() {
 	const objSkills = yield call(getSkillsFromBD);
@@ -227,4 +233,34 @@ function* deleteCustomBlockFromDBWorker(data) {
 }
 export function* deleteCustomBlockFromDBWatcher() {
 	yield takeEvery("DELETE_CUST_BLOCK", deleteCustomBlockFromDBWorker);
+}
+
+function* getSocialsFromDBWorker() {
+	const objSocials = yield call(getSocialsFromBD);
+	const socials = yield Object.entries(objSocials);
+	const newSocials = yield socials.map((arr) => arr[1]);
+	yield put({ type: SET_SOCIALS_FROM_DB, payload: newSocials });
+}
+export function* getSocialsFromDBWatcher() {
+	yield takeEvery("FETCH_SOCIALS", getSocialsFromDBWorker);
+}
+
+function* saveSocialsWorker(data) {
+	const socials = data.payload;
+	yield put({ type: SAVE_SOCIALS_FROM_PAGE, payload: socials });
+	const allSocials = yield select(stateSocials);
+	yield setSocialsAtDB(allSocials);
+}
+export function* saveSocialsAtAllWatcher() {
+	yield takeEvery("SAVE_SOCIALS", saveSocialsWorker);
+}
+
+function* deleteSocialFromDBWorker(data) {
+	const socials = data.payload;
+	yield put({ type: DELETE_SOCIAL_FROM_DB, payload: socials });
+	const allSocials = yield select(stateSocials);
+	yield setSocialsAtDB(allSocials);
+}
+export function* deleteSocialsFromDBWatcher() {
+	yield takeEvery("DELETE_SOCIAL", deleteSocialFromDBWorker);
 }

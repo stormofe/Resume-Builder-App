@@ -32,23 +32,10 @@ function TempSecond() {
 
 	const componentRef = useRef();
 	const pageStyle = `
-  @page {
-    size: auto;
-	 margin: 0mm;
-	 width: 100%;
-	 bleed: 1.5cm;
-  }
-  @media all {
-	.pagebreak {
-	  display: none;
+	@page {
+		padding: 1cm;
+		margin: 0;
 	}
- }
- @media print {
-	.pagebreak {
-	  page-break-before: always;
-	}
- }
-
 `;
 
 	return (

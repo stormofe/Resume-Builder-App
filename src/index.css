@@ -6,6 +6,7 @@
 	font-family: "Inter", sans-serif;
 	text-decoration: none;
 	color: #333;
+	word-break: break-word;
 }
 @import url(https://fonts.googleapis.com/css?family=Inter:100,200,300,regular,500,600,700,800,900);
 

@@ -5,6 +5,7 @@ export const initState = {
 	edu: {},
 	exp: {},
 	custom: {},
+	socials: {},
 };
 
 const loginState = {

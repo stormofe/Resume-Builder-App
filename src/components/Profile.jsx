@@ -8,23 +8,16 @@ function Profile() {
 
 	const [file, setFile] = useState(null);
 
-	const { position, name, about, phone, email, website, area, hobbies, skills, edu, exp, softSkills } = userInfo;
+	const { position, name, about, phone, email, website, area, hobbies, skills, edu, exp, softSkills, socials } =
+		userInfo;
 
 	useEffect(() => {
 		dispatch({ type: "GET_INFO" });
 		console.log(userInfo);
 	}, []);
 
-	const uploadFile = () => {
-		setStorage(file);
-	};
-
 	return (
 		<div className='profile'>
-			<form action=''>
-				<input type='file' name='file' onChange={(e) => setFile(e.target.files[0])} />
-				<button onClick={uploadFile}>setStorage</button>
-			</form>
 			{userInfo ? (
 				<div className='profile__info'>
 					<h3>Общая информация: </h3>
@@ -66,6 +59,21 @@ function Profile() {
 			) : (
 				"Loading..."
 			)}
+
+			<div className='profile__skills'>
+				<h3>Coциальные сети </h3>
+				<div className='profile__skills-info'>
+					{socials && Object.keys(socials).length !== 0
+						? Object.entries(socials).map((soc, index) => (
+								<div key={index} className='skills'>
+									<a target='_blank' href={`${soc[1]}`}>
+										{soc[1]}
+									</a>{" "}
+								</div>
+						  ))
+						: ""}
+				</div>
+			</div>
 			<div className='profile__skills'>
 				<h3>Навыки</h3>
 				<div className='profile__skills-info'>
