@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/Resume-Builder-App/static/css/main.01a0739c.chunk.css",
+    "main.js": "/Resume-Builder-App/static/js/main.8a7ace19.chunk.js",
+    "main.js.map": "/Resume-Builder-App/static/js/main.8a7ace19.chunk.js.map",
+    "runtime-main.js": "/Resume-Builder-App/static/js/runtime-main.366abc5c.js",
+    "runtime-main.js.map": "/Resume-Builder-App/static/js/runtime-main.366abc5c.js.map",
+    "static/js/2.62a3a97d.chunk.js": "/Resume-Builder-App/static/js/2.62a3a97d.chunk.js",
+    "static/js/2.62a3a97d.chunk.js.map": "/Resume-Builder-App/static/js/2.62a3a97d.chunk.js.map",
+    "index.html": "/Resume-Builder-App/index.html",
+    "static/css/main.01a0739c.chunk.css.map": "/Resume-Builder-App/static/css/main.01a0739c.chunk.css.map",
+    "static/js/2.62a3a97d.chunk.js.LICENSE.txt": "/Resume-Builder-App/static/js/2.62a3a97d.chunk.js.LICENSE.txt",
+    "static/media/area.05302503.svg": "/Resume-Builder-App/static/media/area.05302503.svg",
+    "static/media/icon-mail.439af78d.svg": "/Resume-Builder-App/static/media/icon-mail.439af78d.svg",
+    "static/media/letter.de8f8353.svg": "/Resume-Builder-App/static/media/letter.de8f8353.svg",
+    "static/media/phone.06df7280.svg": "/Resume-Builder-App/static/media/phone.06df7280.svg",
+    "static/media/temp1.2b1c071c.jpg": "/Resume-Builder-App/static/media/temp1.2b1c071c.jpg",
+    "static/media/temp2.e6c4141c.jpg": "/Resume-Builder-App/static/media/temp2.e6c4141c.jpg",
+    "static/media/world.57baef93.svg": "/Resume-Builder-App/static/media/world.57baef93.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.366abc5c.js",
+    "static/js/2.62a3a97d.chunk.js",
+    "static/css/main.01a0739c.chunk.css",
+    "static/js/main.8a7ace19.chunk.js"
+  ]
+}
