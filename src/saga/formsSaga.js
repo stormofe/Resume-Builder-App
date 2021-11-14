@@ -62,7 +62,8 @@ function* saveSkillsWorker(data) {
 	const skills = data.payload;
 	yield put({ type: SAVE_SKILLS_FROM_PAGE, payload: skills });
 	const allSkills = yield select(stateSkills);
-	yield setSkillsAtDB(allSkills);
+	const result = yield setSkillsAtDB(allSkills);
+	console.log(result);
 }
 export function* saveSkillsAtAllWatcher() {
 	yield takeEvery("SAVE_SKILLS", saveSkillsWorker);

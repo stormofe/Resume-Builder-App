@@ -1,7 +1,7 @@
 import "./App.css";
 import Header from "./components/Header";
 import { Route, Switch } from "react-router";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, HashRouter } from "react-router-dom";
 import Login from "./components/auth/Login";
 import Profile from "./components/Profile";
 import Forms from "./components/Forms";
@@ -10,7 +10,7 @@ import Templates from "./components/Templates";
 function App() {
 	return (
 		<div className='App'>
-			<BrowserRouter>
+			<HashRouter>
 				<Header />
 				<Switch>
 					<Route path='/login'>
@@ -26,7 +26,7 @@ function App() {
 						<Templates />
 					</Route>
 				</Switch>
-			</BrowserRouter>
+			</HashRouter>
 		</div>
 	);
 }

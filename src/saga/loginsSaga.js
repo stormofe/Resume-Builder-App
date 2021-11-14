@@ -5,8 +5,14 @@ import { register } from "./../API/API";
 
 function* loginLogicWorker(data) {
 	const { email, password } = data;
-	yield login(email, password);
-	yield put({ type: SET_USER_LOGIN, email, isLogin: true });
+	const result = yield login(email, password);
+	console.log(result);
+	if (result.err) {
+		console.log(result.err.message);
+		yield put({ type: "SET_ERROR_LOGIN", payload: result.err.message });
+		return;
+	}
+	yield put({ type: SET_USER_LOGIN, email, isLogin: true, error: false });
 }
 export function* loginLogicWatcher() {
 	yield takeEvery("LOG_IN", loginLogicWorker);
@@ -23,7 +29,12 @@ export function* logoutLogicWatcher() {
 
 function* registerLogicWorker(data) {
 	const { email, password } = data;
-	yield register(email, password);
+	const result = yield register(email, password);
+	yield put({ type: "SET_ERROR_LOGIN", payload: false });
+	if (result) {
+		const error = result.customData._tokenResponse.error.message;
+		yield put({ type: "SET_ERROR_LOGIN", payload: error });
+	}
 }
 
 export function* registerLogicWatcher() {

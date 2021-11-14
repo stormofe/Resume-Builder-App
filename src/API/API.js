@@ -16,13 +16,14 @@ export const register = (email, password) => {
 			createDocInDB(email);
 		})
 		.catch((err) => {
-			console.log(err);
+			return err;
 		});
 };
 
 export const login = (email, password) => {
 	return signInWithEmailAndPassword(auth, email, password).catch((err) => {
-		console.log(err);
+		const result = { err };
+		return result;
 	});
 };
 
@@ -49,9 +50,15 @@ export const getSkillsFromBD = () => {
 		.finally(() => console.log("finish"));
 };
 export const setSkillsAtDB = async (skills) => {
-	const currentUser = await getCurrentUser();
-	const user = doc(db, "user", `${currentUser}`);
-	await updateDoc(user, { skills: { ...skills } });
+	try {
+		const currentUser = await getCurrentUser();
+		const user = doc(db, "user", `${currentUser}`);
+		await updateDoc(user, { skills: { ...skills } });
+	} catch (error) {
+		console.log(error);
+		const result = { error, result: false };
+		return result;
+	}
 };
 
 export const getSoftSkillsFromBD = () => {

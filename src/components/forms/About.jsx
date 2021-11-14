@@ -126,12 +126,6 @@ function About() {
 					{email ? <p className='about__form-state'>{email}</p> : ""}
 				</div>
 				<div className='about__form-line'>
-					<label htmlFor='website'>Ваш сайт: </label>
-					<input {...register("website")} />
-					{website ? <p className='about__form-state'>{website}</p> : ""}
-				</div>
-
-				<div className='about__form-line'>
 					<label htmlFor='hobbies'>Ваше хобби: </label>
 					<input {...register("hobbies")} />
 					{hobbies ? <p className='about__form-state'>{hobbies}</p> : ""}
