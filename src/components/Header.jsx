@@ -1,5 +1,6 @@
 import { AppBar, Badge, Button, IconButton, Menu, MenuItem, Toolbar, Typography } from "@mui/material";
-import { Box, typography } from "@mui/system";
+import { Box, styled, typography } from "@mui/system";
+import MuiAppBar from "@mui/material/AppBar";
 import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MoreIcon from "@mui/icons-material/MoreVert";
@@ -101,6 +102,7 @@ function Header() {
 			)}
 		</Menu>
 	);
+
 	return (
 		//<div className='header'>
 		//	<h1>Создай свое резюме</h1>

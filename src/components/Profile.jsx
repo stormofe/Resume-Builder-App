@@ -1,68 +1,232 @@
-import { Container, Grid, Paper, Typography } from "@mui/material";
+import { Container, Grid, Paper, Link } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { setStorage } from "../API/API";
+import Box from "@mui/material/Box";
+import PropTypes from "prop-types";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Typography from "@mui/material/Typography";
+
+function TabPanel(props) {
+	const { children, value, index, ...other } = props;
+
+	return (
+		<div
+			role='tabpanel'
+			hidden={value !== index}
+			id={`vertical-tabpanel-${index}`}
+			aria-labelledby={`vertical-tab-${index}`}
+			{...other}>
+			{value === index && <Box sx={{ p: 3, width: "100%", marginX: "auto" }}>{children}</Box>}
+		</div>
+	);
+}
+
+TabPanel.propTypes = {
+	children: PropTypes.node,
+	index: PropTypes.number.isRequired,
+	value: PropTypes.number.isRequired,
+};
+
+function a11yProps(index) {
+	return {
+		id: `vertical-tab-${index}`,
+		"aria-controls": `vertical-tabpanel-${index}`,
+	};
+}
+
 function Profile() {
 	const dispatch = useDispatch();
 	const userInfo = useSelector((state) => state.user);
 
 	const [file, setFile] = useState(null);
 
-	const { position, name, about, phone, email, website, area, hobbies, skills, edu, exp, softSkills, socials } =
-		userInfo;
+	const {
+		position,
+		name,
+		about,
+		phone,
+		email,
+		website,
+		area,
+		hobbies,
+		photoUrl,
+		skills,
+		edu,
+		exp,
+		softSkills,
+		langSkills,
+		socials,
+	} = userInfo;
 
 	useEffect(() => {
 		dispatch({ type: "GET_INFO" });
 		console.log(userInfo);
 	}, []);
 
-	const ItemLeft = styled(Paper)(({ theme }) => ({
-		...theme.typography.body1,
-		padding: theme.spacing(1),
-		textAlign: "center",
-		color: theme.palette.text.primary,
-	}));
-	const ItemRight = styled(Paper)(({ theme }) => ({
-		...theme.typography.body1,
-		padding: theme.spacing(1),
-		textAlign: "left",
-		color: theme.palette.text.secondary,
+	const [value, setValue] = React.useState(0);
+
+	const handleChange = (event, newValue) => {
+		setValue(newValue);
+	};
+
+	const SidebarItem = styled(Grid)(({ theme }) => ({
+		marginTop: theme.spacing(2),
+		paddingTop: theme.spacing(1),
 	}));
 
+	const Title = styled(Typography)(({ theme }) => ({
+		marginBottom: theme.spacing(2),
+		...theme.typography.h6,
+		...theme.palette.getContrastText,
+	}));
+	const Skill = ({ item }) => {
+		return (
+			<Paper sx={{ p: 1, width: "180px", display: "flex", justifyContent: "space-between", mb: 1 }}>
+				<Typography variant='body2' sx={{ marginRight: "5px" }}>
+					{item[1][0]}
+				</Typography>
+				<Typography variant='body2'>{item[1][1]}⭐</Typography>
+			</Paper>
+		);
+	};
+	const LinkRow = ({ name, link }) => {
+		return (
+			<Paper sx={{ p: 1, width: "180px", display: "flex", mb: 1 }}>
+				{name ? <Typography sx={{ marginRight: "5px", textTransform: "lowercase" }}>{name}</Typography> : ""}
+				<Link href={link} underline='hover' color='secondary' variant='body1'>
+					{link}
+				</Link>
+			</Paper>
+		);
+	};
+	const ExpBlock = ({ name, dateFrom, dateEnd, description, position }) => {
+		console.log(dateFrom);
+		return (
+			<Paper sx={{ p: 1, mt: 1 }}>
+				<Typography variant='subtitle1' sx={{ fontWeight: 500 }}>
+					{position}
+				</Typography>
+				<Typography variant='caption' color='GrayText'>
+					{name}
+				</Typography>
+				<Typography variant='caption' ml={1}>
+					{dateFrom ? `${dateFrom} - ` : ""}
+					{dateEnd}
+				</Typography>
+				<Typography variant='body2' color='InfoText'>
+					{description}
+				</Typography>
+			</Paper>
+		);
+	};
+
 	return (
-		<Container>
-			<Typography variant='h5' component='h2' mb='20px'>
-				Общая информация:
-			</Typography>
-			<Grid container spacing={2}>
-				<Grid item xs={3}>
-					<ItemLeft>Имя Фамилия</ItemLeft>
-				</Grid>
-				<Grid item xs={9}>
-					<ItemRight>{name}</ItemRight>
-				</Grid>{" "}
-				<Grid item xs={3}>
-					<ItemLeft>Профессия</ItemLeft>
-				</Grid>
-				<Grid item xs={9}>
-					<ItemRight>{position}</ItemRight>
-				</Grid>
-				<Grid item xs={3}>
-					<ItemLeft>Имя Фамилия</ItemLeft>
-				</Grid>
-				<Grid item xs={9}>
-					<ItemRight>{name}</ItemRight>
-				</Grid>
-				<Grid item xs={3}>
-					<ItemLeft>Имя Фамилия</ItemLeft>
-				</Grid>
-				<Grid item xs={9}>
-					<ItemRight>{name}</ItemRight>
-				</Grid>
-			</Grid>
-		</Container>
+		<Box sx={{ flexGrow: 1, display: "flex", minHeight: "calc(100vh - 60px)" }}>
+			<Tabs
+				orientation='vertical'
+				variant='scrollable'
+				value={value}
+				onChange={handleChange}
+				aria-label='Vertical tabs example'
+				sx={{ borderRight: 1, borderColor: "divider" }}>
+				<Tab label='Ваш профиль' {...a11yProps(0)} />
+				<Tab label='Шаблон 1' {...a11yProps(1)} />
+			</Tabs>
+			<TabPanel value={value} index={0}>
+				<Paper sx={{ width: "620px", minHeight: "877px", flexGrow: 1 }}>
+					<Grid container sx={{ minHeight: "100%" }} columns={2} wrap='nowrap'>
+						<Grid item p={2} sx={{ width: "240px", borderRight: "2px solid #fdfdfd" }}>
+							<Grid container sx={{ display: "flex", justifyContent: "center" }}>
+								<SidebarItem item>
+									<Paper sx={{ width: "180px", height: "230px" }} elevation={3}>
+										<img
+											style={{ width: "100%", height: "100%", objectFit: "cover" }}
+											src='https://images.unsplash.com/photo-1625201925673-1054ca34b3f4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80'
+											alt=''
+										/>
+									</Paper>
+								</SidebarItem>
+								<SidebarItem item>
+									<Box>
+										<LinkRow name={"email"} link={email} />
+										<LinkRow name={""} link={phone} />
+										{socials
+											? Object.entries(socials).map((item) => <LinkRow name='' link={item[1]} key={item[1]} />)
+											: ""}
+									</Box>
+								</SidebarItem>
+								<SidebarItem item>
+									<Title>Навыки</Title>
+									{skills ? Object.entries(skills).map((item, index) => <Skill key={index} item={item}></Skill>) : ""}
+								</SidebarItem>
+								<SidebarItem item>
+									<Title>Мягкие навыки</Title>
+									{softSkills
+										? Object.entries(softSkills).map((item, index) => <Skill key={index} item={item}></Skill>)
+										: ""}
+								</SidebarItem>
+								<SidebarItem item>
+									<Title>Языки</Title>
+									{langSkills
+										? Object.entries(langSkills).map((item, index) => <Skill key={index} item={item}></Skill>)
+										: ""}
+								</SidebarItem>
+							</Grid>
+						</Grid>
+						<Grid item p={3} sx={{ flexGrow: 0 }}>
+							<Box mt={3} sx={{ width: "100%", textAlign: "center" }}>
+								<Typography alignItems='center' color='primary' variant='h4' sx={{ fontWeight: 500 }}>
+									{name}
+								</Typography>
+								<Typography variant='h6' color='primary'>
+									{position}
+								</Typography>
+							</Box>
+							<Typography paragraph mt={1} fontSize='14px' color='GrayText'>
+								{about}
+							</Typography>
+							<Box mb={2}>
+								<Title>Образование</Title>
+								{edu
+									? Object.entries(edu).map((item, index) => (
+											<ExpBlock
+												key={index}
+												name={item[1].where}
+												dateFrom={""}
+												dateEnd={item[1].data}
+												description={item[1].description}
+												position={item[1].profession}
+											/>
+									  ))
+									: ""}
+							</Box>
+							<Box mb={2}>
+								<Title>Опыт работы</Title>
+								{exp
+									? Object.entries(exp).map((item, index) => (
+											<ExpBlock
+												key={index}
+												name={item[1].where}
+												dateFrom={item[1].dateFrom}
+												dateEnd={item[1].dateEnd}
+												description={item[1].description}
+												position={item[1].profession}
+											/>
+									  ))
+									: ""}
+							</Box>
+						</Grid>
+					</Grid>
+				</Paper>
+			</TabPanel>
+			<TabPanel value={value} index={1}>
+				Item Two
+			</TabPanel>
+		</Box>
+
 		//<div className='profile'>
 		//	{userInfo ? (
 		//		<div className='profile__info'>
