@@ -1,12 +1,5 @@
 import {
-	getCustomBlockFromBD,
 	getDataFromDB,
-	getEduFromBD,
-	getExpFromBD,
-	getLangSkillsFromBD,
-	getSkillsFromBD,
-	getSocialsFromBD,
-	getSoftSkillsFromBD,
 	setCustomBlockAtDB,
 	setEduAtDB,
 	setExpAtDB,
