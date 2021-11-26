@@ -1,13 +1,4 @@
-import {
-	getDataFromDB,
-	setCustomBlockAtDB,
-	setEduAtDB,
-	setExpAtDB,
-	setLangSkillsAtDB,
-	setSkillsAtDB,
-	setSocialsAtDB,
-	setSoftSkillsAtDB,
-} from "../API/API";
+import { getDataFromDB, setDataAtDB } from "../API/API";
 import { takeEvery, call, put, select } from "redux-saga/effects";
 
 import {
@@ -57,8 +48,9 @@ function* saveSkillsWorker(data) {
 	const skills = data.payload;
 	yield put({ type: SAVE_SKILLS_FROM_PAGE, payload: skills });
 	const allSkills = yield select(stateSkills);
-	const result = yield setSkillsAtDB(allSkills);
-	console.log(result);
+	//const result = yield setSkillsAtDB(allSkills);
+	//console.log(result);
+	yield setDataAtDB({ dataName: "skills", data: allSkills });
 }
 export function* saveSkillsAtAllWatcher() {
 	yield takeEvery("SAVE_SKILLS", saveSkillsWorker);
@@ -68,7 +60,7 @@ function* deleteSkillFromDBWorker(data) {
 	const skills = data.payload;
 	yield put({ type: DELETE_SKILL_FROM_DB, payload: skills });
 	const allSkills = yield select(stateSkills);
-	yield setSkillsAtDB(allSkills);
+	yield setDataAtDB({ dataName: "skills", data: allSkills });
 }
 export function* deleteSkillFromDBWatcher() {
 	yield takeEvery("DELETE_SKILL", deleteSkillFromDBWorker);
@@ -90,7 +82,8 @@ function* saveSoftSkillsWorker(data) {
 	const skills = data.payload;
 	yield put({ type: SAVE_SOFT_SKILLS_FROM_PAGE, payload: skills });
 	const allSkills = yield select(stateSoftSkills);
-	yield setSoftSkillsAtDB(allSkills);
+	//yield setSoftSkillsAtDB(allSkills);
+	yield setDataAtDB({ dataName: "softSkills", data: allSkills });
 }
 export function* saveSoftSkillsAtAllWatcher() {
 	yield takeEvery("SAVE_SOFT_SKILLS", saveSoftSkillsWorker);
@@ -100,7 +93,7 @@ function* deleteSoftSkillFromDBWorker(data) {
 	const skills = data.payload;
 	yield put({ type: DELETE_SOFT_SKILL_FROM_DB, payload: skills });
 	const allSkills = yield select(stateSoftSkills);
-	yield setSoftSkillsAtDB(allSkills);
+	yield setDataAtDB({ dataName: "softSkills", data: allSkills });
 }
 export function* deleteSoftSkillFromDBWatcher() {
 	yield takeEvery("DELETE_SOFT_SKILL", deleteSoftSkillFromDBWorker);
@@ -121,7 +114,7 @@ function* saveLangSkillsWorker(data) {
 	const skills = data.payload;
 	yield put({ type: SAVE_LANG_SKILLS_FROM_PAGE, payload: skills });
 	const allSkills = yield select(stateLangSkills);
-	yield setLangSkillsAtDB(allSkills);
+	yield setDataAtDB({ dataName: "langSkills", data: allSkills });
 }
 export function* saveLangSkillsAtAllWatcher() {
 	yield takeEvery("SAVE_LANG_SKILLS", saveLangSkillsWorker);
@@ -131,7 +124,7 @@ function* deleteLangSkillFromDBWorker(data) {
 	const skills = data.payload;
 	yield put({ type: DELETE_LANG_SKILL_FROM_DB, payload: skills });
 	const allSkills = yield select(stateLangSkills);
-	yield setLangSkillsAtDB(allSkills);
+	yield setDataAtDB({ dataName: "langSkills", data: allSkills });
 }
 export function* deleteLangSkillFromDBWatcher() {
 	yield takeEvery("DELETE_LANG_SKILL", deleteLangSkillFromDBWorker);
@@ -153,8 +146,8 @@ function* saveEduWorker(data) {
 	const newEdu = data.payload;
 	yield put({ type: SAVE_EDU_FROM_PAGE, payload: newEdu });
 	const edu = yield select(stateEdu);
-	yield setEduAtDB(edu);
-	//yield call(saveEduFromDBWorker);
+	//yield setEduAtDB(edu);
+	yield setDataAtDB({ dataName: "edu", data: edu });
 }
 export function* saveEduWatcher() {
 	yield takeEvery("SAVE_EDU", saveEduWorker);
@@ -164,7 +157,7 @@ function* deleteEduFromDBWorker(data) {
 	const edu = data.payload;
 	yield put({ type: DELETE_EDU_FROM_DB, payload: edu });
 	const allEdu = yield select(stateEdu);
-	yield setEduAtDB(allEdu);
+	yield setDataAtDB({ dataName: "edu", data: allEdu });
 }
 export function* deleteEduFromDBWatcher() {
 	yield takeEvery("DELETE_EDU", deleteEduFromDBWorker);
@@ -186,8 +179,8 @@ function* saveExpWorker(data) {
 	const newEdu = data.payload;
 	yield put({ type: SAVE_EXP_FROM_PAGE, payload: newEdu });
 	const exp = yield select(stateExp);
-	yield setExpAtDB(exp);
-	//yield call(saveEduFromDBWorker);
+	//yield setExpAtDB(exp);
+	yield setDataAtDB({ dataName: "exp", data: exp });
 }
 export function* saveExpWatcher() {
 	yield takeEvery("SAVE_EXP", saveExpWorker);
@@ -197,7 +190,7 @@ function* deleteExpFromDBWorker(data) {
 	const exp = data.payload;
 	yield put({ type: DELETE_EXP_FROM_DB, payload: exp });
 	const allExp = yield select(stateEdu);
-	yield setExpAtDB(allExp);
+	yield setDataAtDB({ dataName: "exp", data: allExp });
 }
 export function* deleteExpFromDBWatcher() {
 	yield takeEvery("DELETE_EXP", deleteExpFromDBWorker);
@@ -219,8 +212,8 @@ function* saveCustomBlockWorker(data) {
 	const newBlock = data.payload;
 	yield put({ type: SAVE_CUST_BLOCK_FROM_PAGE, payload: newBlock });
 	const block = yield select(stateCustom);
-	yield setCustomBlockAtDB(block);
-	//yield call(saveEduFromDBWorker);
+	//yield setCustomBlockAtDB(block);
+	yield setDataAtDB({ dataName: "custom", data: block });
 }
 export function* saveCustomBlockWatcher() {
 	yield takeEvery("SAVE_CUST_BLOCK", saveCustomBlockWorker);
@@ -230,7 +223,7 @@ function* deleteCustomBlockFromDBWorker(data) {
 	const block = data.payload;
 	yield put({ type: DELETE_CUST_BLOCK_FROM_DB, payload: block });
 	const allBlocks = yield select(stateCustom);
-	yield setCustomBlockAtDB(allBlocks);
+	yield setDataAtDB({ dataName: "custom", data: allBlocks });
 }
 export function* deleteCustomBlockFromDBWatcher() {
 	yield takeEvery("DELETE_CUST_BLOCK", deleteCustomBlockFromDBWorker);
@@ -251,7 +244,8 @@ function* saveSocialsWorker(data) {
 	const socials = data.payload;
 	yield put({ type: SAVE_SOCIALS_FROM_PAGE, payload: socials });
 	const allSocials = yield select(stateSocials);
-	yield setSocialsAtDB(allSocials);
+	//yield setSocialsAtDB(allSocials);
+	yield setDataAtDB({ dataName: "socials", data: allSocials });
 }
 export function* saveSocialsAtAllWatcher() {
 	yield takeEvery("SAVE_SOCIALS", saveSocialsWorker);
@@ -261,7 +255,7 @@ function* deleteSocialFromDBWorker(data) {
 	const socials = data.payload;
 	yield put({ type: DELETE_SOCIAL_FROM_DB, payload: socials });
 	const allSocials = yield select(stateSocials);
-	yield setSocialsAtDB(allSocials);
+	yield setDataAtDB({ dataName: "socials", data: allSocials });
 }
 export function* deleteSocialsFromDBWatcher() {
 	yield takeEvery("DELETE_SOCIAL", deleteSocialFromDBWorker);

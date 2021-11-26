@@ -71,46 +71,30 @@ export const getDataFromDB = (dataName) => {
 		.finally(() => console.log("finish"));
 };
 
-export const setSkillsAtDB = async (skills) => {
-	try {
-		const currentUser = await getCurrentUser();
-		const user = doc(db, "user", `${currentUser}`);
-		await updateDoc(user, { skills: { ...skills } });
-	} catch (error) {
-		console.log(error);
-		const result = { error, result: false };
-		return result;
+export const setDataAtDB = async ({ dataName, data }) => {
+	const currentUser = await getCurrentUser();
+	const user = doc(db, "user", `${currentUser}`);
+	if (dataName === "softSkills") {
+		await updateDoc(user, { softSkills: { ...data } });
 	}
-};
-
-export const setSoftSkillsAtDB = async (skills) => {
-	const currentUser = await getCurrentUser();
-	const user = doc(db, "user", `${currentUser}`);
-	await updateDoc(user, { softSkills: { ...skills } });
-};
-
-export const setLangSkillsAtDB = async (skills) => {
-	const currentUser = await getCurrentUser();
-	const user = doc(db, "user", `${currentUser}`);
-	await updateDoc(user, { langSkills: { ...skills } });
-};
-
-export const setEduAtDB = async (edu) => {
-	const currentUser = await getCurrentUser();
-	const user = doc(db, "user", `${currentUser}`);
-	await updateDoc(user, { edu: { ...edu } });
-};
-
-export const setExpAtDB = async (exp) => {
-	const currentUser = await getCurrentUser();
-	const user = doc(db, "user", `${currentUser}`);
-	await updateDoc(user, { exp: { ...exp } });
-};
-
-export const setCustomBlockAtDB = async (block) => {
-	const currentUser = await getCurrentUser();
-	const user = doc(db, "user", `${currentUser}`);
-	await updateDoc(user, { custom: { ...block } });
+	if (dataName === "skills") {
+		await updateDoc(user, { skills: { ...data } });
+	}
+	if (dataName === "langSkills") {
+		await updateDoc(user, { langSkills: { ...data } });
+	}
+	if (dataName === "edu") {
+		await updateDoc(user, { edu: { ...data } });
+	}
+	if (dataName === "exp") {
+		await updateDoc(user, { exp: { ...data } });
+	}
+	if (dataName === "custom") {
+		await updateDoc(user, { custom: { ...data } });
+	}
+	if (dataName === "socials") {
+		await updateDoc(user, { socials: { ...data } });
+	}
 };
 
 export const setUserInfoAtDB = async (info) => {
@@ -151,8 +135,3 @@ export const getPhoto = async () => {
 		});
 };
 
-export const setSocialsAtDB = async (socials) => {
-	const currentUser = await getCurrentUser();
-	const user = doc(db, "user", `${currentUser}`);
-	await updateDoc(user, { socials: { ...socials } });
-};
