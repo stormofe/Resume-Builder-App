@@ -1,5 +1,6 @@
 import {
 	getCustomBlockFromBD,
+	getDataFromDB,
 	getEduFromBD,
 	getExpFromBD,
 	getLangSkillsFromBD,
@@ -49,7 +50,8 @@ const stateCustom = (state) => state.forms.custom;
 const stateSocials = (state) => state.forms.socials;
 
 function* getSkillsFromDBWorker() {
-	const objSkills = yield call(getSkillsFromBD);
+	//const objSkills = yield call(getSkillsFromBD);
+	const objSkills = yield getDataFromDB("skills");
 	const skills = yield Object.entries(objSkills);
 	const newSkills = yield skills.map((arr) => arr[1]);
 	yield put({ type: SET_SKILLS_FROM_DB, payload: newSkills });
@@ -80,7 +82,8 @@ export function* deleteSkillFromDBWatcher() {
 }
 
 function* getSoftSkillsFromDBWorker() {
-	const objSkills = yield call(getSoftSkillsFromBD);
+	//const objSkills = yield call(getSoftSkillsFromBD);
+	const objSkills = yield getDataFromDB("softSkills");
 	const skills = yield Object.entries(objSkills);
 	const newSkills = yield skills.map((arr) => arr[1]);
 	yield put({ type: SET_SOFT_SKILLS_FROM_DB, payload: newSkills });
@@ -111,7 +114,8 @@ export function* deleteSoftSkillFromDBWatcher() {
 }
 
 function* getLangSkillsFromDBWorker() {
-	const objSkills = yield call(getLangSkillsFromBD);
+	//const objSkills = yield call(getLangSkillsFromBD);
+	const objSkills = yield getDataFromDB("langSkills");
 	const skills = yield Object.entries(objSkills);
 	const newSkills = yield skills.map((arr) => arr[1]);
 	yield put({ type: SET_LANG_SKILLS_FROM_DB, payload: newSkills });
@@ -141,7 +145,8 @@ export function* deleteLangSkillFromDBWatcher() {
 }
 
 function* getEduFromDBWorker() {
-	const objEdu = yield call(getEduFromBD);
+	//const objEdu = yield call(getEduFromBD);
+	const objEdu = yield getDataFromDB("edu");
 	const edu = yield Object.entries(objEdu);
 	const newEdu = yield edu.map((arr) => arr[1]);
 	//debugger;
@@ -173,7 +178,8 @@ export function* deleteEduFromDBWatcher() {
 }
 
 function* getExpFromDBWorker() {
-	const objExp = yield call(getExpFromBD);
+	//const objExp = yield call(getExpFromBD);
+	const objExp = yield getDataFromDB("exp");
 	const edu = yield Object.entries(objExp);
 	const newExp = yield edu.map((arr) => arr[1]);
 	//debugger;
@@ -205,7 +211,8 @@ export function* deleteExpFromDBWatcher() {
 }
 
 function* getCustomBlockFromDBWorker() {
-	const objBlocks = yield call(getCustomBlockFromBD);
+	//const objBlocks = yield call(getCustomBlockFromBD);
+	const objBlocks = yield getDataFromDB("custom");
 	const custom = yield Object.entries(objBlocks);
 	const newECustom = yield custom.map((arr) => arr[1]);
 	//debugger;
@@ -237,7 +244,8 @@ export function* deleteCustomBlockFromDBWatcher() {
 }
 
 function* getSocialsFromDBWorker() {
-	const objSocials = yield call(getSocialsFromBD);
+	//const objSocials = yield call(getSocialsFromBD);
+	const objSocials = yield getDataFromDB("socials");
 	const socials = yield Object.entries(objSocials);
 	const newSocials = yield socials.map((arr) => arr[1]);
 	yield put({ type: SET_SOCIALS_FROM_DB, payload: newSocials });

@@ -36,6 +36,37 @@ export const getCurrentUser = async () => {
 	return currentUser;
 };
 
+export const getDataFromDB = (dataName) => {
+	return getCurrentUser()
+		.then((user) => doc(db, "user", `${user}`))
+		.then((user) => getDoc(user))
+		.then((data) => {
+			if (dataName === "skills") {
+				return data.data().skills;
+			}
+			if (dataName === "softSkills") {
+				return data.data().softSkills;
+			}
+			if (dataName === "langSkills") {
+				return data.data().langSkills;
+			}
+			if (dataName === "edu") {
+				return data.data().edu;
+			}
+			if (dataName === "exp") {
+				return data.data().exp;
+			}
+			if (dataName === "custom") {
+				return data.data().custom;
+			}
+			if (dataName === "socials") {
+				return data.data().socials;
+			}
+			return undefined;
+		})
+		.catch((e) => console.log(e))
+		.finally(() => console.log("finish"));
+};
 export const getSkillsFromBD = () => {
 	//const currentUser = await getCurrentUser();
 	//const user = await doc(db, "user", `${currentUser}`);
