@@ -1,4 +1,4 @@
-import { Container, Grid, Paper, Link } from "@mui/material";
+import { Container, Grid, Paper, Link, TextField, Button } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -8,6 +8,7 @@ import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
+import { useForm, Controller } from "react-hook-form";
 
 function TabPanel(props) {
 	const { children, value, index, ...other } = props;
@@ -40,6 +41,21 @@ function a11yProps(index) {
 function Profile() {
 	const dispatch = useDispatch();
 	const userInfo = useSelector((state) => state.user);
+	const userPhoto = useSelector((state) => state.user.photoURL);
+	const { control, handleSubmit } = useForm({
+		defaultValues: {
+			firstName: "",
+			lastName: "",
+			position: "",
+			phone: "",
+			about: "",
+			area: "",
+			email: "",
+			hobbies: "",
+		},
+	});
+
+	const onSubmit = (data) => alert(JSON.stringify(data));
 
 	const [file, setFile] = useState(null);
 
@@ -56,6 +72,7 @@ function Profile() {
 		skills,
 		edu,
 		exp,
+		custom,
 		softSkills,
 		langSkills,
 		socials,
@@ -63,7 +80,7 @@ function Profile() {
 
 	useEffect(() => {
 		dispatch({ type: "GET_INFO" });
-		console.log(userInfo);
+		dispatch({ type: "GET_PHOTO" });
 	}, []);
 
 	const [value, setValue] = React.useState(0);
@@ -77,6 +94,10 @@ function Profile() {
 		paddingTop: theme.spacing(1),
 	}));
 
+	const FormBlock = styled(Box)(({ theme }) => ({
+		padding: theme.spacing(3),
+		flexGrow: 1,
+	}));
 	const Title = styled(Typography)(({ theme }) => ({
 		marginBottom: theme.spacing(2),
 		...theme.typography.h6,
@@ -123,6 +144,10 @@ function Profile() {
 		);
 	};
 
+	const FormField = (props) => {
+		return <TextField sx={{ marginBottom: 2 }} variant='outlined' fullWidth size='small' multiline {...props} />;
+	};
+
 	return (
 		<Box sx={{ flexGrow: 1, display: "flex", minHeight: "calc(100vh - 60px)" }}>
 			<Tabs
@@ -136,91 +161,150 @@ function Profile() {
 				<Tab label='Шаблон 1' {...a11yProps(1)} />
 			</Tabs>
 			<TabPanel value={value} index={0}>
-				<Paper sx={{ width: "620px", minHeight: "877px", flexGrow: 1 }}>
-					<Grid container sx={{ minHeight: "100%" }} columns={2} wrap='nowrap'>
-						<Grid item p={2} sx={{ width: "240px", borderRight: "2px solid #fdfdfd" }}>
-							<Grid container sx={{ display: "flex", justifyContent: "center" }}>
-								<SidebarItem item>
-									<Paper sx={{ width: "180px", height: "230px" }} elevation={3}>
-										<img
-											style={{ width: "100%", height: "100%", objectFit: "cover" }}
-											src='https://images.unsplash.com/photo-1625201925673-1054ca34b3f4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80'
-											alt=''
-										/>
-									</Paper>
-								</SidebarItem>
-								<SidebarItem item>
-									<Box>
-										<LinkRow name={"email"} link={email} />
-										<LinkRow name={""} link={phone} />
-										{socials
-											? Object.entries(socials).map((item) => <LinkRow name='' link={item[1]} key={item[1]} />)
+				<Container sx={{ display: "flex", gap: 3 }}>
+					<Paper sx={{ minHeight: "877px", flexGrow: 0, flexShrink: 0, flexBasis: "620px" }}>
+						<Grid container sx={{ minHeight: "100%" }} columns={2} wrap='nowrap'>
+							<Grid item p={2} sx={{ width: "240px", borderRight: "2px solid #fdfdfd" }}>
+								<Grid container sx={{ display: "flex", justifyContent: "center" }}>
+									<SidebarItem item>
+										<Paper sx={{ width: "180px", height: "230px" }} elevation={3}>
+											<img style={{ width: "100%", height: "100%", objectFit: "cover" }} src={userPhoto} alt='' />
+										</Paper>
+									</SidebarItem>
+									<SidebarItem item>
+										<Box>
+											<LinkRow name={"email"} link={email} />
+											<LinkRow name={""} link={phone} />
+											{socials
+												? Object.entries(socials).map((item) => <LinkRow name='' link={item[1]} key={item[1]} />)
+												: ""}
+										</Box>
+									</SidebarItem>
+									<SidebarItem item>
+										<Title>Навыки</Title>
+										{skills ? Object.entries(skills).map((item, index) => <Skill key={index} item={item}></Skill>) : ""}
+									</SidebarItem>
+									<SidebarItem item>
+										<Title>Мягкие навыки</Title>
+										{softSkills
+											? Object.entries(softSkills).map((item, index) => <Skill key={index} item={item}></Skill>)
 											: ""}
-									</Box>
-								</SidebarItem>
-								<SidebarItem item>
-									<Title>Навыки</Title>
-									{skills ? Object.entries(skills).map((item, index) => <Skill key={index} item={item}></Skill>) : ""}
-								</SidebarItem>
-								<SidebarItem item>
-									<Title>Мягкие навыки</Title>
-									{softSkills
-										? Object.entries(softSkills).map((item, index) => <Skill key={index} item={item}></Skill>)
+									</SidebarItem>
+									<SidebarItem item>
+										<Title>Языки</Title>
+										{langSkills
+											? Object.entries(langSkills).map((item, index) => <Skill key={index} item={item}></Skill>)
+											: ""}
+									</SidebarItem>
+								</Grid>
+							</Grid>
+							<Grid item p={3} sx={{ flexGrow: 0 }}>
+								<Box mt={3} sx={{ width: "100%", textAlign: "center" }}>
+									<Typography alignItems='center' color='primary' variant='h4' sx={{ fontWeight: 500 }}>
+										{name}
+									</Typography>
+									<Typography variant='h6' color='primary'>
+										{position}
+									</Typography>
+								</Box>
+								<Typography paragraph mt={1} fontSize='14px' color='GrayText'>
+									{about}
+								</Typography>
+								<Box mb={2}>
+									<Title>Образование</Title>
+									{edu
+										? Object.entries(edu).map((item, index) => (
+												<ExpBlock
+													key={index}
+													name={item[1].where}
+													dateFrom={""}
+													dateEnd={item[1].data}
+													description={item[1].description}
+													position={item[1].profession}
+												/>
+										  ))
 										: ""}
-								</SidebarItem>
-								<SidebarItem item>
-									<Title>Языки</Title>
-									{langSkills
-										? Object.entries(langSkills).map((item, index) => <Skill key={index} item={item}></Skill>)
+								</Box>
+								<Box mb={2}>
+									<Title>Опыт работы</Title>
+									{exp
+										? Object.entries(exp).map((item, index) => (
+												<ExpBlock
+													key={index}
+													name={item[1].where}
+													dateFrom={item[1].dateFrom}
+													dateEnd={item[1].dateEnd}
+													description={item[1].description}
+													position={item[1].profession}
+												/>
+										  ))
 										: ""}
-								</SidebarItem>
+								</Box>
+								<Box mb={2}>
+									<Title>Дополнительные сведения</Title>
+									{custom
+										? Object.entries(custom).map((item, index) => (
+												<ExpBlock
+													key={index}
+													name={item[1].name}
+													dateFrom={item[1].dateFrom}
+													dateEnd={item[1].dateEnd}
+													description={item[1].description}
+													position={item[1].obj}
+												/>
+										  ))
+										: ""}
+								</Box>
 							</Grid>
 						</Grid>
-						<Grid item p={3} sx={{ flexGrow: 0 }}>
-							<Box mt={3} sx={{ width: "100%", textAlign: "center" }}>
-								<Typography alignItems='center' color='primary' variant='h4' sx={{ fontWeight: 500 }}>
-									{name}
-								</Typography>
-								<Typography variant='h6' color='primary'>
-									{position}
-								</Typography>
-							</Box>
-							<Typography paragraph mt={1} fontSize='14px' color='GrayText'>
-								{about}
-							</Typography>
-							<Box mb={2}>
-								<Title>Образование</Title>
-								{edu
-									? Object.entries(edu).map((item, index) => (
-											<ExpBlock
-												key={index}
-												name={item[1].where}
-												dateFrom={""}
-												dateEnd={item[1].data}
-												description={item[1].description}
-												position={item[1].profession}
-											/>
-									  ))
-									: ""}
-							</Box>
-							<Box mb={2}>
-								<Title>Опыт работы</Title>
-								{exp
-									? Object.entries(exp).map((item, index) => (
-											<ExpBlock
-												key={index}
-												name={item[1].where}
-												dateFrom={item[1].dateFrom}
-												dateEnd={item[1].dateEnd}
-												description={item[1].description}
-												position={item[1].profession}
-											/>
-									  ))
-									: ""}
-							</Box>
-						</Grid>
-					</Grid>
-				</Paper>
+					</Paper>
+					<FormBlock>
+						<Box component='form' noValidate autoComplete='off' onSubmit={handleSubmit(onSubmit)}>
+							<Controller
+								name='firstName'
+								control={control}
+								render={({ field }) => <FormField {...field} id='firstName' label='Имя' />}
+							/>
+							<Controller
+								name='lastName'
+								control={control}
+								render={({ field }) => <FormField {...field} id='lastName' label='Фамилия' />}
+							/>
+							<Controller
+								name='position'
+								control={control}
+								render={({ field }) => <FormField {...field} id='position' label='Профессия' />}
+							/>
+							<Controller
+								name='email'
+								control={control}
+								render={({ field }) => <FormField {...field} id='email' label='Email' />}
+							/>
+							<Controller
+								name='phone'
+								control={control}
+								render={({ field }) => <FormField {...field} id='phone' label='Телефон' type='number' />}
+							/>
+							<Controller
+								name='about'
+								control={control}
+								render={({ field }) => <FormField {...field} id='about' label='Расскажите о себе' multiline rows={4} />}
+							/>
+							<Controller
+								name='area'
+								control={control}
+								render={({ field }) => <FormField {...field} id='area' label='Ваша страна, город' />}
+							/>
+							<Controller
+								name='hobbies'
+								control={control}
+								render={({ field }) => <FormField {...field} id='hobbies' label='Ваше хобби' />}
+							/>
+
+							<Button type='submit'>submit</Button>
+						</Box>
+					</FormBlock>
+				</Container>
 			</TabPanel>
 			<TabPanel value={value} index={1}>
 				Item Two
