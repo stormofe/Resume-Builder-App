@@ -28,7 +28,7 @@ function Layout({ children }) {
 				</Typography>
 			</Drawer>*/}
 
-			<Box component='main' sx={{ flexGrow: 1, bgcolor: "whitesmoke", p: 3 }}>
+			<Box component='main' sx={{ flexGrow: 1, bgcolor: "whitesmoke", paddingY: 3, paddingX: 1 }}>
 				{children}
 			</Box>
 		</Box>

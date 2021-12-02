@@ -248,11 +248,11 @@ function TempFirst() {
 				</main>
 			</div>
 			<div id='pageborder'></div>
-			<ReactToPrint
+			{/*<ReactToPrint
 				trigger={() => <button>Print this out!</button>}
 				content={() => componentRef.current}
 				pageStyle={pageStyle}
-			/>
+			/>*/}
 		</>
 	);
 }
