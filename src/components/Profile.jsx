@@ -1,5 +1,4 @@
-import { Container, Grid, Paper, Link, TextField, Button, IconButton } from "@mui/material";
-import { styled } from "@mui/material/styles";
+import { Grid, Paper } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -8,7 +7,10 @@ import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
-import { useForm, Controller } from "react-hook-form";
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
+import LooksOneIcon from "@mui/icons-material/LooksOne";
+import LooksTwoIcon from "@mui/icons-material/LooksTwo";
+import CreateIcon from "@mui/icons-material/Create";
 import {
 	ExpBlock,
 	FormBlock,
@@ -21,6 +23,7 @@ import {
 import TempFirst from "./templates/temp1/TempFirst";
 import TempSecond from "./templates/temp2/TempSecond";
 import DeleteIcon from "@mui/icons-material/Delete";
+import Form from "./Form";
 
 function TabPanel(props) {
 	const { children, value, index, ...other } = props;
@@ -55,20 +58,6 @@ function Profile() {
 	const dispatch = useDispatch();
 	const userInfo = useSelector((state) => state.user);
 	const userPhoto = useSelector((state) => state.user.photoURL);
-	const { control, handleSubmit } = useForm({
-		defaultValues: {
-			firstName: "",
-			lastName: "",
-			position: "",
-			phone: "",
-			about: "",
-			area: "",
-			email: "",
-			hobbies: "",
-		},
-	});
-
-	const onSubmit = (data) => alert(JSON.stringify(data));
 
 	const [file, setFile] = useState(null);
 
@@ -113,9 +102,51 @@ function Profile() {
 						onChange={handleChange}
 						aria-label='Vertical tabs example'
 						sx={{ borderRight: 1, borderColor: "divider" }}>
-						<Tab label='Ваш профиль' {...a11yProps(0)} />
-						<Tab label='Шаблон 1' {...a11yProps(1)} />
-						<Tab label='Шаблон 2' {...a11yProps(2)} />
+						<Tab
+							icon={<AccountBoxIcon />}
+							sx={{
+								padding: 1,
+								minWidth: "48px",
+								pl: 0,
+								fontSize: { xs: 0, md: 0, lg: "14px" },
+							}}
+							label='Ваш профиль'
+							{...a11yProps(0)}
+						/>
+						<Tab
+							icon={<LooksOneIcon />}
+							sx={{
+								padding: 1,
+								minWidth: "48px",
+								pl: 0,
+								fontSize: { xs: 0, md: 0, lg: "14px" },
+							}}
+							label='Шаблон 1'
+							{...a11yProps(1)}
+						/>
+						<Tab
+							icon={<LooksTwoIcon />}
+							sx={{
+								padding: 1,
+								minWidth: "48px",
+								pl: 0,
+								fontSize: { xs: 0, md: 0, lg: "14px" },
+							}}
+							label='Шаблон 2'
+							{...a11yProps(2)}
+						/>
+
+						<Tab
+							icon={<CreateIcon />}
+							sx={{
+								padding: 1,
+								minWidth: "48px",
+								pl: 0,
+								fontSize: { xs: 0, md: 0, lg: "14px" },
+							}}
+							label=''
+							{...a11yProps(3)}
+						/>
 					</Tabs>
 					<TabPanel value={value} index={0}>
 						<Box sx={{ display: "flex", gap: 3, maxWidth: "650px" }}>
@@ -229,66 +260,12 @@ function Profile() {
 							<TempSecond />
 						</Box>
 					</TabPanel>
+					<TabPanel value={value} index={3}>
+						<Form sm={12} />
+					</TabPanel>
 				</Box>
 			</Grid>
-			<Grid item sm={12} md={3} lg={4}>
-				<FormBlock>
-					<Box
-						component='form'
-						noValidate
-						autoComplete='off'
-						onSubmit={handleSubmit(onSubmit)}
-						sx={{ maxWidth: "600px", marginX: "auto" }}>
-						<Typography variant='h5' color='primary' mb={2}>
-							Заполните поля резюме
-						</Typography>
-						<Controller
-							name='firstName'
-							control={control}
-							render={({ field }) => <FormField {...field} id='firstName' label='Имя' />}
-						/>
-						<Controller
-							name='lastName'
-							control={control}
-							render={({ field }) => <FormField {...field} id='lastName' label='Фамилия' />}
-						/>
-						<Controller
-							name='position'
-							control={control}
-							render={({ field }) => <FormField {...field} id='position' label='Профессия' />}
-						/>
-						<Controller
-							name='email'
-							control={control}
-							render={({ field }) => <FormField {...field} id='email' label='Email' />}
-						/>
-						<Controller
-							name='phone'
-							control={control}
-							render={({ field }) => <FormField {...field} id='phone' label='Телефон' type='number' />}
-						/>
-						<Controller
-							name='about'
-							control={control}
-							render={({ field }) => <FormField {...field} id='about' label='Расскажите о себе' multiline rows={4} />}
-						/>
-						<Controller
-							name='area'
-							control={control}
-							render={({ field }) => <FormField {...field} id='area' label='Ваша страна, город' />}
-						/>
-						<Controller
-							name='hobbies'
-							control={control}
-							render={({ field }) => <FormField {...field} id='hobbies' label='Ваше хобби' />}
-						/>
-						<IconButton aria-label='delete' disabled color='primary'>
-							<DeleteIcon />
-						</IconButton>
-						<Button type='submit'>submit</Button>
-					</Box>
-				</FormBlock>
-			</Grid>
+			<Form sm={12} md={3} lg={4} />
 		</Grid>
 
 		//<div className='profile'>

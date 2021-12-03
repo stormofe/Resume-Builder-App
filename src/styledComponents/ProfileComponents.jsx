@@ -1,7 +1,8 @@
 import { Calculate } from "@mui/icons-material";
 import { Grid, Typography, Box, Paper, Link, TextField, Container, IconButton } from "@mui/material";
 import { styled } from "@mui/system";
-import { DeleteIcon } from "@mui/icons-material/Delete";
+
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 
 export const SidebarItem = styled(Grid)(({ theme }) => ({
 	marginTop: theme.spacing(2),
@@ -70,5 +71,25 @@ export const FormField = (props) => {
 			multiline
 			{...props}
 		/>
+	);
+};
+
+export const SendButton = (props) => {
+	return (
+		<IconButton
+			{...props}
+			aria-label='submit'
+			sx={{
+				position: "absolute",
+				top: 0,
+				right: 0,
+				width: "fit-content",
+				color: "grey.500",
+				"&:hover": {
+					color: "success.light",
+				},
+			}}>
+			<AddCircleIcon />
+		</IconButton>
 	);
 };
