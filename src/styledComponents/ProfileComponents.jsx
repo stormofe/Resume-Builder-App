@@ -10,7 +10,7 @@ export const SidebarItem = styled(Grid)(({ theme }) => ({
 }));
 
 export const FormBlock = styled(Box)(({ theme }) => ({
-	padding: theme.spacing(3),
+	padding: theme.spacing(0),
 	paddingTop: 0,
 	maxWidth: "600px",
 }));

@@ -21,6 +21,7 @@ import {
 	getSocialsFromDBWatcher,
 	saveSocialsAtAllWatcher,
 	deleteSocialsFromDBWatcher,
+	saveMainInfoAtDBWatcher,
 } from "./formsSaga";
 import { loginLogicWatcher, logoutLogicWatcher, registerLogicWatcher } from "./loginsSaga";
 import {
@@ -60,6 +61,7 @@ export function* rootWatcher() {
 		getSocialsFromDBWatcher,
 		saveSocialsAtAllWatcher,
 		deleteSocialsFromDBWatcher,
+		saveMainInfoAtDBWatcher,
 	];
 
 	//yield all([getUserWithAuth(), setSkillsFromDBWatcher()]);

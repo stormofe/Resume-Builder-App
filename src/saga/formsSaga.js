@@ -1,4 +1,4 @@
-import { getDataFromDB, setDataAtDB } from "../API/API";
+import { getDataFromDB, setDataAtDB, setUserInfoAtDB } from "../API/API";
 import { takeEvery, call, put, select } from "redux-saga/effects";
 
 import {
@@ -20,10 +20,12 @@ import {
 	SET_EDU_FROM_DB,
 	SET_EXP_FROM_DB,
 	SET_LANG_SKILLS_FROM_DB,
+	SET_MAIN_INFO,
 	SET_SKILLS_FROM_DB,
 	SET_SOCIALS_FROM_DB,
 	SET_SOFT_SKILLS_FROM_DB,
 } from "../store/formsReducer";
+import { getUserInfoFromDBWorker } from "./userInfoSaga";
 
 const stateSkills = (state) => state.forms.skills;
 const stateSoftSkills = (state) => state.forms.softSkills;
@@ -32,6 +34,22 @@ const stateEdu = (state) => state.forms.edu;
 const stateExp = (state) => state.forms.exp;
 const stateCustom = (state) => state.forms.custom;
 const stateSocials = (state) => state.forms.socials;
+const stateMainInfo = (state) => state.forms.mainInfo;
+
+function* saveMainInfoAtDBWorker(data) {
+	const mainInfoObj = data.payload;
+	yield put({ type: SET_MAIN_INFO, payload: mainInfoObj });
+	const fullMainInfoObj = yield select(stateMainInfo);
+	const arrInfo = yield Object.entries(fullMainInfoObj);
+	const filteredArrInfo = yield arrInfo.filter(([key, value]) => value !== "");
+	const filteredObjInfo = yield Object.fromEntries(filteredArrInfo);
+	yield setUserInfoAtDB(filteredObjInfo);
+	yield call(getUserInfoFromDBWorker);
+}
+
+export function* saveMainInfoAtDBWatcher() {
+	yield takeEvery("SAVE_MAIN_INFO", saveMainInfoAtDBWorker);
+}
 
 function* getSkillsFromDBWorker() {
 	//const objSkills = yield call(getSkillsFromBD);

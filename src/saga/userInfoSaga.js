@@ -2,7 +2,7 @@ import { takeEvery, put, call, select } from "redux-saga/effects";
 import { getDataFromDB, getPhoto, setStorage, setUserInfoAtDB } from "../API/API";
 import { SET_PHOTO_FROM_DB, SET_USER_INFO } from "../store/userReducer";
 
-function* getUserInfoFromDBWorker() {
+export function* getUserInfoFromDBWorker() {
 	//const data = yield getUserInfoFromDB();
 	const data = yield getDataFromDB("info");
 
