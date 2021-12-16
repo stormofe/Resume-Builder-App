@@ -161,7 +161,7 @@ function Profile() {
 											</SidebarItem>
 											<SidebarItem item>
 												<Box>
-													<LinkRow name={"email"} link={email} />
+													<LinkRow name={""} link={email} />
 													<LinkRow name={""} link={phone} />
 													{socials
 														? Object.entries(socials).map((item) => <LinkRow name='' link={item[1]} key={item[1]} />)
@@ -265,7 +265,7 @@ function Profile() {
 					</TabPanel>
 				</Box>
 			</Grid>
-			<Form sm={12} md={3} lg={4} />
+			<Form sm={12} md={3} lg={4} userInfo={userInfo} />
 		</Grid>
 
 		//<div className='profile'>

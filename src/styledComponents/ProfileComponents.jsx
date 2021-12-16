@@ -34,7 +34,7 @@ export const LinkRow = ({ name, link }) => {
 	return (
 		<Paper sx={{ p: 1, width: "180px", display: "flex", mb: 1 }}>
 			{name ? <Typography sx={{ marginRight: "5px", textTransform: "lowercase" }}>{name}</Typography> : ""}
-			<Link href={link} underline='hover' color='secondary' variant='body1'>
+			<Link href={link} underline='hover' color='primary' variant='body1'>
 				{link}
 			</Link>
 		</Paper>

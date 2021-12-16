@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useForm, Controller, useFieldArray } from "react-hook-form";
 import { Grid, Button, Typography, ButtonGroup } from "@mui/material";
 import { FormBlock, FormField, SendButton } from "../styledComponents/ProfileComponents";
@@ -46,7 +46,28 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 function Form(props) {
 	const dispatch = useDispatch();
 	const { control, handleSubmit, setValue, formState } = useForm({
+		mode: "onChange",
 		defaultValues: {
+			mainInfo: {
+				firstName: "",
+				lastName: "",
+				position: "",
+				phone: "",
+				about: "",
+				area: "",
+				email: "",
+				hobbies: "",
+			},
+		},
+	});
+	const { isDirty, isValid } = formState;
+	const photoInp = useRef(null);
+	const [photo, setPhoto] = useState(null);
+
+	const onSubmit = (data, event) => {
+		const info = { ...data.mainInfo };
+		console.log(info);
+		setValue("mainInfo", {
 			firstName: "",
 			lastName: "",
 			position: "",
@@ -55,18 +76,9 @@ function Form(props) {
 			area: "",
 			email: "",
 			hobbies: "",
-		},
-	});
-	const { isDirty, isValid } = formState;
-	const formFields = ["firstName", "lastName", "position", "phone"];
-	const photoInp = useRef(null);
-	const [photo, setPhoto] = useState(null);
-
-	const onSubmit = (data, event) => {
-		dispatch({ type: "SAVE_MAIN_INFO", payload: data });
-		event.target.reset();
-		//setValue("firstName", "", { shouldDirty: true });
-		//formFields.map((item) => setValue(item, ""));
+		});
+		dispatch({ type: "SAVE_MAIN_INFO", payload: info });
+		//event.target.reset();
 	};
 
 	const [expanded, setExpanded] = React.useState("panel1");
@@ -85,14 +97,40 @@ function Form(props) {
 		//setPhoto(null);
 		deletePhoto();
 	};
+
+	const fullUserInfo = props.userInfo;
+	const { firstName, lastName, position, phone, about, area, email, hobbies, photoURL } = fullUserInfo;
+	const formFieldsNames = [firstName, lastName, position, phone, about, area, email, hobbies, photoURL];
+
+	const valueOfFormFill = () => {
+		let count = formFieldsNames.length;
+		let fillingForms = formFieldsNames.filter((item) => item);
+		return Math.round((fillingForms.length / count) * 100);
+	};
+	const [percent, setPercent] = useState(0);
+	useEffect(() => {
+		setPercent(valueOfFormFill());
+	}, [formFieldsNames]);
 	return (
-		<Grid item {...props}>
+		<Grid item sm={props.sm} md={props.md} lg={props.lg}>
 			<Typography variant='h5' color='primary' mb={2}>
 				Заполните поля резюме
 			</Typography>
 			<Accordion expanded={expanded === "panel1"} onChange={handleChangeAccord("panel1")} sx={{ marginRight: 2 }}>
 				<AccordionSummary aria-controls='panel1d-content' id='panel1d-header'>
-					<Typography>Основная информация</Typography>
+					<Box sx={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
+						<Typography>Основная информация</Typography>
+						<Box
+							sx={{
+								backgroundColor: `${percent > 70 ? "green" : "red"}`,
+								borderRadius: "8px",
+								color: "white",
+								fontWeight: 700,
+								padding: "5px",
+							}}>
+							{percent}%
+						</Box>
+					</Box>
 				</AccordionSummary>
 				<AccordionDetails>
 					<Box mb={1}>
@@ -153,9 +191,9 @@ function Form(props) {
 							sx={{ maxWidth: "600px", marginX: "auto" }}>
 							<Box sx={{ position: "relative" }}>
 								<Controller
-									name='lastName'
+									name='mainInfo.lastName'
 									control={control}
-									render={({ field: { onChange, onBlur, value, ref } }) => (
+									render={({ field: { onChange, onBlur, name, value, ref } }) => (
 										<FormField
 											onChange={onChange}
 											onBlur={onBlur}
@@ -163,6 +201,7 @@ function Form(props) {
 											inputRef={ref}
 											id='lastName'
 											label='Фамилия'
+											value={value}
 										/>
 									)}
 								/>
@@ -170,7 +209,7 @@ function Form(props) {
 							</Box>
 							<Box sx={{ position: "relative" }}>
 								<Controller
-									name='firstName'
+									name='mainInfo.firstName'
 									control={control}
 									render={({ field: { onChange, onBlur, value, ref } }) => (
 										<FormField
@@ -180,6 +219,7 @@ function Form(props) {
 											inputRef={ref}
 											id='firstName'
 											label='Имя'
+											value={value}
 										/>
 									)}
 								/>
@@ -187,7 +227,7 @@ function Form(props) {
 							</Box>
 							<Box sx={{ position: "relative" }}>
 								<Controller
-									name='email'
+									name='mainInfo.email'
 									control={control}
 									render={({ field: { onChange, onBlur, value, ref } }) => (
 										<FormField
@@ -197,6 +237,7 @@ function Form(props) {
 											inputRef={ref}
 											id='email'
 											label='E-mail'
+											value={value}
 										/>
 									)}
 								/>
@@ -204,7 +245,7 @@ function Form(props) {
 							</Box>
 							<Box sx={{ position: "relative" }}>
 								<Controller
-									name='phone'
+									name='mainInfo.phone'
 									control={control}
 									render={({ field: { onChange, onBlur, value, ref } }) => (
 										<FormField
@@ -214,6 +255,7 @@ function Form(props) {
 											inputRef={ref}
 											id='phone'
 											label='Номер телефона'
+											value={value}
 										/>
 									)}
 								/>
@@ -222,7 +264,7 @@ function Form(props) {
 
 							<Box sx={{ position: "relative" }}>
 								<Controller
-									name='position'
+									name='mainInfo.position'
 									control={control}
 									render={({ field: { onChange, onBlur, value, ref } }) => (
 										<FormField
@@ -232,6 +274,7 @@ function Form(props) {
 											inputRef={ref}
 											id='position'
 											label='Профессия'
+											value={value}
 										/>
 									)}
 								/>
@@ -240,7 +283,7 @@ function Form(props) {
 
 							<Box sx={{ position: "relative" }}>
 								<Controller
-									name='area'
+									name='mainInfo.area'
 									control={control}
 									render={({ field: { onChange, onBlur, value, ref } }) => (
 										<FormField
@@ -250,6 +293,7 @@ function Form(props) {
 											inputRef={ref}
 											id='area'
 											label='Страна / область / город  проживания'
+											value={value}
 										/>
 									)}
 								/>
@@ -257,7 +301,7 @@ function Form(props) {
 							</Box>
 							<Box sx={{ position: "relative" }}>
 								<Controller
-									name='about'
+									name='mainInfo.about'
 									control={control}
 									render={({ field: { onChange, onBlur, value, ref } }) => (
 										<FormField
@@ -268,6 +312,7 @@ function Form(props) {
 											id='about'
 											label='Расскажите о себе'
 											rows={2}
+											value={value}
 										/>
 									)}
 								/>
@@ -276,7 +321,7 @@ function Form(props) {
 
 							<Box sx={{ position: "relative" }}>
 								<Controller
-									name='hobbies'
+									name='mainInfo.hobbies'
 									control={control}
 									render={({ field: { onChange, onBlur, value, ref } }) => (
 										<FormField
@@ -286,6 +331,7 @@ function Form(props) {
 											inputRef={ref}
 											id='hobbies'
 											label='Ваши хобби'
+											value={value}
 										/>
 									)}
 								/>
