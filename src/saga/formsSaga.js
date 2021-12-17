@@ -51,6 +51,7 @@ export function* saveMainInfoAtDBWatcher() {
 	yield takeEvery("SAVE_MAIN_INFO", saveMainInfoAtDBWorker);
 }
 
+
 function* getSkillsFromDBWorker() {
 	//const objSkills = yield call(getSkillsFromBD);
 	const objSkills = yield getDataFromDB("skills");

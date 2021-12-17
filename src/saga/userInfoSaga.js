@@ -1,6 +1,6 @@
 import { takeEvery, put, call, select } from "redux-saga/effects";
-import { getDataFromDB, getPhoto, setStorage, setUserInfoAtDB } from "../API/API";
-import { SET_PHOTO_FROM_DB, SET_USER_INFO } from "../store/userReducer";
+import { getDataFromDB, getPhoto, setDataAtDB, setStorage, setUserInfoAtDB } from "../API/API";
+import { CLEAN_INFO_LINE, SET_PHOTO_FROM_DB, SET_USER_INFO } from "../store/userReducer";
 
 export function* getUserInfoFromDBWorker() {
 	//const data = yield getUserInfoFromDB();
@@ -8,6 +8,17 @@ export function* getUserInfoFromDBWorker() {
 
 	//yield console.log(data);
 	yield put({ type: SET_USER_INFO, payload: data });
+}
+
+function* cleanMainInfoLineFromDBWorker(data) {
+	const name = yield data.payload;
+	yield setDataAtDB({ dataName: name, data: "" });
+
+	yield yield put({ type: CLEAN_INFO_LINE, payload: name });
+}
+
+export function* cleanMainInfoLineFromDB() {
+	yield takeEvery("DELETE_LINE", cleanMainInfoLineFromDBWorker);
 }
 
 export function* getUserInfoFromDBWatcher() {

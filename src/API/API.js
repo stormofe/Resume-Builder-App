@@ -1,4 +1,4 @@
-import { doc, getDoc, setDoc, updateDoc } from "@firebase/firestore";
+import { doc, getDoc, setDoc, updateDoc, deleteField } from "@firebase/firestore";
 import { db } from "../firebase";
 import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "@firebase/auth";
 import { initState } from "../store/loginReducer";
@@ -95,6 +95,9 @@ export const setDataAtDB = async ({ dataName, data }) => {
 	if (dataName === "socials") {
 		await updateDoc(user, { socials: { ...data } });
 	}
+	if (data === "") {
+		await updateDoc(user, { [dataName]: deleteField() });
+	}
 };
 
 export const setUserInfoAtDB = async (info) => {
@@ -134,4 +137,3 @@ export const getPhoto = async () => {
 			console.log(error);
 		});
 };
-

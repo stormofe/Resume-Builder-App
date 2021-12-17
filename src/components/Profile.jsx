@@ -11,18 +11,9 @@ import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import LooksOneIcon from "@mui/icons-material/LooksOne";
 import LooksTwoIcon from "@mui/icons-material/LooksTwo";
 import CreateIcon from "@mui/icons-material/Create";
-import {
-	ExpBlock,
-	FormBlock,
-	FormField,
-	LinkRow,
-	SidebarItem,
-	Skill,
-	Title,
-} from "../styledComponents/ProfileComponents";
+import { ExpBlock, LinkRow, SidebarItem, Skill, Title } from "../styledComponents/ProfileComponents";
 import TempFirst from "./templates/temp1/TempFirst";
 import TempSecond from "./templates/temp2/TempSecond";
-import DeleteIcon from "@mui/icons-material/Delete";
 import Form from "./Form";
 
 function TabPanel(props) {
@@ -64,6 +55,8 @@ function Profile() {
 	const {
 		position,
 		name,
+		firstName,
+		lastName,
 		about,
 		phone,
 		email,
@@ -191,7 +184,7 @@ function Profile() {
 									<Grid item p={3} sx={{ flexGrow: 0 }}>
 										<Box mt={3} sx={{ width: "100%", textAlign: "center" }}>
 											<Typography alignItems='center' color='primary' variant='h4' sx={{ fontWeight: 500 }}>
-												{name}
+												{lastName} {firstName}
 											</Typography>
 											<Typography variant='h6' color='primary'>
 												{position}
