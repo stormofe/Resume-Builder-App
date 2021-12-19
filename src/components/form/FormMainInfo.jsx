@@ -10,7 +10,7 @@ import GreenCheckIcon from "../UI/GreenCheckIcon";
 import DoneIcon from "@mui/icons-material/Done";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { FormBlock } from "../../styledComponents/ProfileComponents";
-import FormMainInfoLine from "./FormMainInfo/FormMainInfoLine";
+import FormMainInfoLine from "./FormMain/FormMainInfoLine";
 function FormMainInfo(props) {
 	const dispatch = useDispatch();
 	const { control, handleSubmit, setValue, formState } = useForm({

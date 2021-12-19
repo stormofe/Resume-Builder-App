@@ -1,3 +1,7 @@
+.MuiRating-sizeSmall {
+	font-size: 15px !important;
+}
+
 .loader,
 .loader:before,
 .loader:after {

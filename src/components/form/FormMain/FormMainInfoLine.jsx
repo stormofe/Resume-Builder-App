@@ -15,6 +15,7 @@ function FormMainInfoLine({ control, name, label, check, ...props }) {
 		<Box
 			sx={{
 				position: "relative",
+				marginBottom: 2,
 			}}>
 			<Controller
 				name={`mainInfo.${name}`}

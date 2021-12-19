@@ -7,6 +7,9 @@ import MuiAccordion from "@mui/material/Accordion";
 import MuiAccordionSummary from "@mui/material/AccordionSummary";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import FormMainInfo from "./form/FormMainInfo";
+import FormSkills from "./form/FormSkills";
+import FormSkillsUniversal from "./form/FormSkillsUniversal";
+import { FormBlock } from "../styledComponents/ProfileComponents";
 
 const Accordion = styled((props) => <MuiAccordion disableGutters elevation={0} square {...props} />)(({ theme }) => ({
 	border: `1px solid ${theme.palette.divider}`,
@@ -80,15 +83,53 @@ function Form(props) {
 					<FormMainInfo userInfo={props.userInfo} />
 				</AccordionDetails>
 			</Accordion>
-			<Accordion expanded={expanded === "panel2"} onChange={handleChangeAccord("panel2")}>
+			<Accordion expanded={expanded === "panel2"} onChange={handleChangeAccord("panel2")} sx={{ marginRight: 2 }}>
 				<AccordionSummary aria-controls='panel2d-content' id='panel2d-header'>
-					<Typography>Collapsible Group Item #2</Typography>
+					<Box sx={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
+						<Typography>Навыки</Typography>
+						<Box
+							sx={{
+								backgroundColor: `${percent > 70 ? "success.main" : "error.main"}`,
+								borderRadius: "8px",
+								color: "white",
+								fontWeight: 700,
+								padding: "5px",
+							}}>
+							{percent}%
+						</Box>
+					</Box>
 				</AccordionSummary>
 				<AccordionDetails>
-					<FormMainInfo userInfo={props.userInfo} />
+					{/*<FormSkills />*/}
+					<FormBlock>
+						<FormSkillsUniversal
+							blockName='Ваши профессиональные навыки'
+							objName='skills'
+							fetchType='FETCH_SKILLS'
+							saveType='SAVE_SKILLS'
+							deleteType='DELETE_SKILL'
+							inputName='skill'
+						/>
+						<FormSkillsUniversal
+							blockName='Ваши социальные навыки'
+							objName='langSkills'
+							fetchType='FETCH_LANG_SKILLS'
+							saveType='SAVE_LANG_SKILLS'
+							deleteType='DELETE_LANG_SKILL'
+							inputName='skill'
+						/>
+						<FormSkillsUniversal
+							blockName='Языки'
+							objName='softSkills'
+							fetchType='FETCH_SOFT_SKILLS'
+							saveType='SAVE_SOFT_SKILLS'
+							deleteType='DELETE_SOFT_SKILL'
+							inputName='skill'
+						/>
+					</FormBlock>
 				</AccordionDetails>
 			</Accordion>
-			<Accordion expanded={expanded === "panel3"} onChange={handleChangeAccord("panel3")}>
+			<Accordion expanded={expanded === "panel3"} onChange={handleChangeAccord("panel3")} sx={{ marginRight: 2 }}>
 				<AccordionSummary aria-controls='panel3d-content' id='panel3d-header'>
 					<Typography>Collapsible Group Item #3</Typography>
 				</AccordionSummary>
