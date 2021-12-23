@@ -9,7 +9,6 @@ import WarningIcon from "../UI/WarningIcon";
 import GreenCheckIcon from "../UI/GreenCheckIcon";
 import DoneIcon from "@mui/icons-material/Done";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { FormBlock } from "../../styledComponents/ProfileComponents";
 import FormMainInfoLine from "./FormMain/FormMainInfoLine";
 function FormMainInfo(props) {
 	const dispatch = useDispatch();
@@ -122,37 +121,55 @@ function FormMainInfo(props) {
 				)}
 			</Box>
 
-			<FormBlock>
-				<Box
-					component='form'
-					noValidate
-					autoComplete='off'
-					onSubmit={handleSubmit(onSubmit)}
-					sx={{ maxWidth: "600px", marginX: "auto" }}>
-					<FormMainInfoLine control={control} name='lastName' label='Фамилия' check={lastName ? true : false} />
-					<FormMainInfoLine control={control} name='firstName' label='Имя' check={firstName ? true : false} />
-					<FormMainInfoLine control={control} name='email' label='E-mail' check={email ? true : false} />
-					<FormMainInfoLine control={control} name='phone' label='Номер телефона' check={phone ? true : false} />
-					<FormMainInfoLine control={control} name='position' label='Профессия' check={position ? true : false} />
-					<FormMainInfoLine
-						control={control}
-						name='area'
-						label='Страна / область / город  проживания'
-						check={area ? true : false}
-					/>
-					<FormMainInfoLine
-						control={control}
-						name='about'
-						label='Расскажите о себе'
-						rows={2}
-						check={about ? true : false}
-					/>
-					<FormMainInfoLine control={control} name='hobbies' label='Ваши хобби' check={hobbies ? true : false} />
-					<Button type='submit' variant='contained' disabled={!isDirty || !isValid}>
-						Сохранить
-					</Button>
-				</Box>
-			</FormBlock>
+			<Box
+				component='form'
+				noValidate
+				autoComplete='off'
+				onSubmit={handleSubmit(onSubmit)}
+				sx={{ maxWidth: "600px", marginX: "auto" }}>
+				<FormMainInfoLine control={control} name='lastName' label='Фамилия' candelete check={lastName ? true : false} />
+				<FormMainInfoLine control={control} name='firstName' label='Имя' candelete check={firstName ? true : false} />
+				<FormMainInfoLine control={control} name='email' label='E-mail' candelete check={email ? true : false} />
+				<FormMainInfoLine
+					control={control}
+					name='phone'
+					label='Номер телефона'
+					candelete
+					check={phone ? true : false}
+				/>
+				<FormMainInfoLine
+					control={control}
+					name='position'
+					label='Профессия'
+					candelete
+					check={position ? true : false}
+				/>
+				<FormMainInfoLine
+					control={control}
+					name='area'
+					label='Страна / область / город  проживания'
+					check={area ? true : false}
+					candelete
+				/>
+				<FormMainInfoLine
+					control={control}
+					name='about'
+					label='Расскажите о себе'
+					rows={2}
+					check={about ? true : false}
+					candelete
+				/>
+				<FormMainInfoLine
+					control={control}
+					name='hobbies'
+					label='Ваши хобби'
+					candelete
+					check={hobbies ? true : false}
+				/>
+				<Button type='submit' variant='contained' disabled={!isDirty || !isValid}>
+					Сохранить
+				</Button>
+			</Box>
 		</div>
 	);
 }

@@ -39,7 +39,7 @@ function AddedSkillsBlock({ skills, deleteSkill, color }) {
 							{/*<Typography sx={{ pl: 1, display: "flex", alignItems: "center" }}>
 								{skill[1]} <StarIcon fontSize='small' color='warning' />
 							</Typography>*/}
-							<Rating name='read-only' value={skill[1]} readOnly size='small' />
+							<Rating name='read-only' value={Number(skill[1])} readOnly size='small' />
 							<IconButton aria-label='delete' size='small' sx={{ color: "white" }} onClick={() => deleteSkill(index)}>
 								<ClearIcon fontSize='inherit' />
 							</IconButton>

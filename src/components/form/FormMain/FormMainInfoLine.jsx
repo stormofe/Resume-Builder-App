@@ -6,7 +6,7 @@ import WarningIcon from "../../UI/WarningIcon";
 import GreenCheckIcon from "../../UI/GreenCheckIcon";
 import DeleteFromStateIcon from "../../UI/DeleteFromStateIcon";
 import { useDispatch } from "react-redux";
-function FormMainInfoLine({ control, name, label, check, ...props }) {
+function FormMainInfoLine({ control, candelete, name, label, check, ...props }) {
 	const dispatch = useDispatch();
 	const deleteLine = () => {
 		dispatch({ type: "DELETE_LINE", payload: name });
@@ -34,9 +34,8 @@ function FormMainInfoLine({ control, name, label, check, ...props }) {
 				)}
 			/>
 			{/*<SendButton onClick={handleSubmit(onSubmit)} />*/}
-			{check ? <GreenCheckIcon /> : <WarningIcon />}
-
-			<DeleteFromStateIcon onClick={deleteLine} />
+			{check ? <GreenCheckIcon /> : check !== null ? <WarningIcon /> : ""}
+			{candelete ? <DeleteFromStateIcon onClick={deleteLine} /> : ""}
 		</Box>
 	);
 }

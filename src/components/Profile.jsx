@@ -48,6 +48,7 @@ function a11yProps(index) {
 function Profile() {
 	const dispatch = useDispatch();
 	const userInfo = useSelector((state) => state.user);
+
 	const userPhoto = useSelector((state) => state.user.photoURL);
 
 	const [file, setFile] = useState(null);

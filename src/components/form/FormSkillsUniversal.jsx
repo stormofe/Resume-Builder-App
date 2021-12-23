@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Box, Button, ButtonGroup, Rating, Tooltip, Typography } from "@mui/material";
-import { FormBlock } from "../../styledComponents/ProfileComponents";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import FormSkillsLine from "./FormSkills/FormSkillsLine";
@@ -67,7 +66,7 @@ function FormSkillsUniversal({ blockName, objName, inputName, fetchType, saveTyp
 				onSubmit={handleSubmit(addSkill)}
 				sx={{ maxWidth: "600px", marginX: "auto" }}>
 				<Box sx={{ display: "flex", width: "100%", alignItems: "center" }}>
-					<FormSkillsLine control={control} name={inputName} label='Введите навык' />
+					<FormSkillsLine control={control} name={inputName} label='Введите навык' candelete='' />
 					<Tooltip title='Оцените навык' arrow>
 						<Rating
 							sx={{ mb: 2, pl: 1 }}
