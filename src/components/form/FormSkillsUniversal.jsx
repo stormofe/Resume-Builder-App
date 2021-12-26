@@ -17,7 +17,7 @@ function FormSkillsUniversal({ blockName, objName, inputName, fetchType, saveTyp
 	const [skills, setSkills] = useState([]);
 	const [gettingSkills, setGettingSkills] = useState([]);
 
-	const skillsFromState = useSelector((state) => state.forms[objName]);
+	const skillsFromState = useSelector((state) => state.fullInfo[objName]);
 
 	useEffect(() => {
 		dispatch({ type: fetchType });
@@ -25,7 +25,6 @@ function FormSkillsUniversal({ blockName, objName, inputName, fetchType, saveTyp
 
 	useEffect(() => {
 		setGettingSkills(skillsFromState);
-		console.log(skillsFromState);
 	}, [skillsFromState]);
 	useEffect(() => {}, [skills]);
 

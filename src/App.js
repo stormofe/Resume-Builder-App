@@ -25,7 +25,7 @@ let theme = createTheme({
 	},
 });
 
-function App() {
+function App(props) {
 	return (
 		<ThemeProvider theme={theme}>
 			<HashRouter>

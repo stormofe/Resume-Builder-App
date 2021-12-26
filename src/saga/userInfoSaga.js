@@ -4,9 +4,25 @@ import { CLEAN_INFO_LINE, SET_PHOTO_FROM_DB, SET_USER_INFO } from "../store/user
 
 export function* getUserInfoFromDBWorker() {
 	//const data = yield getUserInfoFromDB();
-	const data = yield getDataFromDB("info");
+	const result = yield getDataFromDB("info");
+	const edu = Object.entries(result.edu).map((item) => item[1]),
+		exp = Object.entries(result.exp).map((item) => item[1]),
+		custom = Object.entries(result.custom).map((item) => item[1]),
+		langSkills = Object.entries(result.langSkills),
+		skills = Object.entries(result.skills),
+		softSkills = Object.entries(result.softSkills),
+		socials = Object.entries(result.socials);
 
-	//yield console.log(data);
+	const data = {
+		...result,
+		edu,
+		exp,
+		custom,
+		langSkills,
+		skills,
+		softSkills,
+		socials,
+	};
 	yield put({ type: SET_USER_INFO, payload: data });
 }
 

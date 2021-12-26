@@ -96,13 +96,14 @@ export const setDataAtDB = async ({ dataName, data }) => {
 		await updateDoc(user, { socials: { ...data } });
 	}
 	if (data === "") {
-		await updateDoc(user, { [dataName]: deleteField() });
+		await updateDoc(user, { mainInfo: { [dataName]: deleteField() } });
 	}
 };
 
 export const setUserInfoAtDB = async (info) => {
 	const currentUser = await getCurrentUser();
-	await updateDoc(doc(db, "user", `${currentUser}`), info);
+	const user = doc(db, "user", `${currentUser}`);
+	await updateDoc(user, { mainInfo: { ...info } });
 };
 
 export const setStorage = async (photo) => {

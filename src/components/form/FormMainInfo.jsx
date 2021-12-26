@@ -58,8 +58,7 @@ function FormMainInfo(props) {
 		deletePhoto();
 	};
 
-	const fullUserInfo = props.userInfo;
-	const { firstName, lastName, position, phone, about, area, email, hobbies, photoURL } = fullUserInfo;
+	const { firstName, lastName, position, phone, about, area, email, hobbies, photoURL } = props.mainInfo;
 
 	return (
 		<div>

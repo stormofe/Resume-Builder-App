@@ -6,9 +6,7 @@ import { useForm } from "react-hook-form";
 import FormMainInfoLine from "./FormMain/FormMainInfoLine";
 import DatePicker from "react-datepicker";
 import { v4 as uuidv4 } from "uuid";
-import { teal } from "@mui/material/colors";
 function FormEducation(props) {
-	const accent = teal[50];
 	const dispatch = useDispatch();
 	const education = props.education;
 	const { control, handleSubmit, setValue, formState } = useForm({

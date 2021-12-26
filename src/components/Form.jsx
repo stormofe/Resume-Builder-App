@@ -47,9 +47,8 @@ function Form(props) {
 		setExpanded(newExpanded ? panel : false);
 	};
 	const dispatch = useDispatch();
-	const education = useSelector((state) => state.forms.edu);
-	const fullUserInfo = props.userInfo;
-	const { firstName, lastName, position, phone, about, area, email, hobbies, photoURL } = fullUserInfo;
+	const fullInfo = props.fullInfo;
+	const { firstName, lastName, position, phone, about, area, email, hobbies, photoURL } = fullInfo.mainInfo;
 	const formFieldsNames = [firstName, lastName, position, phone, about, area, email, hobbies, photoURL];
 
 	const valueOfFormFill = () => {
@@ -87,7 +86,7 @@ function Form(props) {
 				</AccordionSummary>
 				<AccordionDetails>
 					<FormBlock>
-						<FormMainInfo userInfo={props.userInfo} />
+						<FormMainInfo mainInfo={fullInfo.mainInfo} />
 					</FormBlock>
 				</AccordionDetails>
 			</Accordion>
@@ -141,7 +140,7 @@ function Form(props) {
 					<Typography>Образование</Typography>
 				</AccordionSummary>
 				<AccordionDetails>
-					<FormEducation education={education} />
+					<FormEducation education={fullInfo.edu} />
 				</AccordionDetails>
 			</Accordion>
 		</Grid>

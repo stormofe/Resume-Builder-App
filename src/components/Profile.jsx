@@ -47,32 +47,9 @@ function a11yProps(index) {
 
 function Profile() {
 	const dispatch = useDispatch();
-	const userInfo = useSelector((state) => state.user);
+	const fullInfo = useSelector((state) => state.fullInfo);
 
-	const userPhoto = useSelector((state) => state.user.photoURL);
-
-	const [file, setFile] = useState(null);
-
-	const {
-		position,
-		name,
-		firstName,
-		lastName,
-		about,
-		phone,
-		email,
-		website,
-		area,
-		hobbies,
-		photoUrl,
-		skills,
-		edu,
-		exp,
-		custom,
-		softSkills,
-		langSkills,
-		socials,
-	} = userInfo;
+	const { skills, softSkills, langSkills, edu, exp, custom, socials, mainInfo } = fullInfo;
 
 	useEffect(() => {
 		dispatch({ type: "GET_INFO" });
@@ -150,34 +127,36 @@ function Profile() {
 										<Grid container sx={{ display: "flex", justifyContent: "center" }}>
 											<SidebarItem item>
 												<Paper sx={{ width: "180px", height: "230px" }} elevation={3}>
-													<img style={{ width: "100%", height: "100%", objectFit: "cover" }} src={userPhoto} alt='' />
+													<img
+														style={{ width: "100%", height: "100%", objectFit: "cover" }}
+														src={mainInfo.photoURL}
+														alt=''
+													/>
 												</Paper>
 											</SidebarItem>
 											<SidebarItem item>
 												<Box>
-													<LinkRow name={""} link={email} />
-													<LinkRow name={""} link={phone} />
-													{socials
-														? Object.entries(socials).map((item) => <LinkRow name='' link={item[1]} key={item[1]} />)
+													<LinkRow name={""} link={mainInfo.email} />
+													<LinkRow name={""} link={mainInfo.phone} />
+													{socials.length > 0
+														? socials.map((item) => <LinkRow name='' link={item[1]} key={item[1]} />)
 														: ""}
 												</Box>
 											</SidebarItem>
 											<SidebarItem item>
 												<Title>Навыки</Title>
-												{skills
-													? Object.entries(skills).map((item, index) => <Skill key={index} item={item}></Skill>)
-													: ""}
+												{skills.length > 0 ? skills.map((item, index) => <Skill key={index} item={item}></Skill>) : ""}
 											</SidebarItem>
 											<SidebarItem item>
 												<Title>Мягкие навыки</Title>
-												{softSkills
-													? Object.entries(softSkills).map((item, index) => <Skill key={index} item={item}></Skill>)
+												{softSkills.length > 0
+													? softSkills.map((item, index) => <Skill key={index} item={item}></Skill>)
 													: ""}
 											</SidebarItem>
 											<SidebarItem item>
 												<Title>Языки</Title>
-												{langSkills
-													? Object.entries(langSkills).map((item, index) => <Skill key={index} item={item}></Skill>)
+												{langSkills.length > 0
+													? langSkills.map((item, index) => <Skill key={index} item={item}></Skill>)
 													: ""}
 											</SidebarItem>
 										</Grid>
@@ -185,56 +164,56 @@ function Profile() {
 									<Grid item p={3} sx={{ flexGrow: 0 }}>
 										<Box mt={3} sx={{ width: "100%", textAlign: "center" }}>
 											<Typography alignItems='center' color='primary' variant='h4' sx={{ fontWeight: 500 }}>
-												{lastName} {firstName}
+												{mainInfo.lastName} {mainInfo.firstName}
 											</Typography>
 											<Typography variant='h6' color='primary'>
-												{position}
+												{mainInfo.position}
 											</Typography>
 										</Box>
 										<Typography paragraph mt={1} fontSize='14px' color='GrayText'>
-											{about}
+											{mainInfo.about}
 										</Typography>
 										<Box mb={2}>
 											<Title>Образование</Title>
-											{edu
-												? Object.entries(edu).map((item, index) => (
+											{edu.length > 0
+												? edu.map((item, index) => (
 														<ExpBlock
 															key={index}
-															name={item[1].where}
+															name={item.where}
 															dateFrom={""}
-															dateEnd={item[1].data}
-															description={item[1].description}
-															position={item[1].profession}
+															dateEnd={item.data}
+															description={item.description}
+															position={item.profession}
 														/>
 												  ))
 												: ""}
 										</Box>
 										<Box mb={2}>
 											<Title>Опыт работы</Title>
-											{exp
-												? Object.entries(exp).map((item, index) => (
+											{exp.length > 0
+												? exp.map((item, index) => (
 														<ExpBlock
 															key={index}
-															name={item[1].where}
-															dateFrom={item[1].dateFrom}
-															dateEnd={item[1].dateEnd}
-															description={item[1].description}
-															position={item[1].profession}
+															name={item.where}
+															dateFrom={item.dateFrom}
+															dateEnd={item.dateEnd}
+															description={item.description}
+															position={item.profession}
 														/>
 												  ))
 												: ""}
 										</Box>
 										<Box mb={2}>
 											<Title>Дополнительные сведения</Title>
-											{custom
-												? Object.entries(custom).map((item, index) => (
+											{custom.length > 0
+												? custom.map((item, index) => (
 														<ExpBlock
 															key={index}
-															name={item[1].name}
-															dateFrom={item[1].dateFrom}
-															dateEnd={item[1].dateEnd}
-															description={item[1].description}
-															position={item[1].obj}
+															name={item.name}
+															dateFrom={item.dateFrom}
+															dateEnd={item.dateEnd}
+															description={item.description}
+															position={item.obj}
 														/>
 												  ))
 												: ""}
@@ -259,7 +238,7 @@ function Profile() {
 					</TabPanel>
 				</Box>
 			</Grid>
-			<Form sm={12} md={3} lg={4} userInfo={userInfo} />
+			<Form sm={12} md={3} lg={4} fullInfo={fullInfo} />
 		</Grid>
 
 		//<div className='profile'>

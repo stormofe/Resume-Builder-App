@@ -1,5 +1,4 @@
 const formsState = {
-	email: "",
 	skills: [],
 	softSkills: [],
 	langSkills: [],
@@ -7,12 +6,20 @@ const formsState = {
 	exp: [],
 	custom: [],
 	socials: [],
-	mainInfo: {},
+	mainInfo: {
+		photoURL: null,
+	},
 };
 
 export const SET_USER = "SET_USER";
 
 export const SET_MAIN_INFO = "SET_MAIN_INFO";
+
+export const SET_USER_NAME = "SET_USER_NAME";
+export const SET_USER_INFO = "SET_USER_INFO";
+export const SET_PHOTO = "SET_PHOTO";
+export const SET_PHOTO_FROM_DB = "SET_PHOTO_FROM_DB";
+export const CLEAN_INFO_LINE = "CLEAN_INFO_LINE";
 
 export const SET_SKILLS_FROM_DB = "SET_SKILLS_FROM_DB";
 export const SAVE_SKILLS_FROM_PAGE = "SAVE_SKILLS_FROM_PAGE";
@@ -45,8 +52,28 @@ export const DELETE_SOCIAL_FROM_DB = "DELETE_SOCIAL_FROM_DB";
 export const formsReducer = (state = formsState, action) => {
 	const payload = action.payload;
 	switch (action.type) {
+		case SET_USER_NAME:
+			return { ...state, mainInfo: { email: action.payload } };
+		case SET_USER_INFO:
+			//debugger;
+			return {
+				...state,
+				...action.payload,
+			};
+		case SET_PHOTO_FROM_DB:
+			return {
+				...state,
+				mainInfo: { ...state.mainInfo, photoURL: action.payload },
+			};
+		case CLEAN_INFO_LINE:
+			const name = action.payload;
+
+			return {
+				...state,
+				mainInfo: { [name]: "" },
+			};
 		case SET_USER:
-			return { ...state, email: payload };
+			return { ...state, mainInfo: { email: payload } };
 		case SET_MAIN_INFO:
 			return { ...state, mainInfo: { ...payload } };
 		case SET_SKILLS_FROM_DB:
@@ -133,5 +160,3 @@ export const formsReducer = (state = formsState, action) => {
 			return state;
 	}
 };
-
-

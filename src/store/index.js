@@ -16,6 +16,7 @@ const rootReducer = combineReducers({
 	user: userReducer,
 	login: loginReducer,
 	forms: formsReducer,
+	fullInfo: formsReducer,
 });
 export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaMiddleware)));
 
