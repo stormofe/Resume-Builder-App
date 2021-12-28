@@ -96,7 +96,8 @@ export const setDataAtDB = async ({ dataName, data }) => {
 		await updateDoc(user, { socials: { ...data } });
 	}
 	if (data === "") {
-		await updateDoc(user, { mainInfo: { [dataName]: deleteField() } });
+		const objName = `mainInfo.${[dataName]}`;
+		await updateDoc(user, { [objName]: "" });
 	}
 };
 

@@ -75,7 +75,7 @@ export const formsReducer = (state = formsState, action) => {
 		case SET_USER:
 			return { ...state, mainInfo: { email: payload } };
 		case SET_MAIN_INFO:
-			return { ...state, mainInfo: { ...payload } };
+			return { ...state, mainInfo: { ...state.mainInfo, ...payload } };
 		case SET_SKILLS_FROM_DB:
 		case DELETE_SKILL_FROM_DB:
 			return {

@@ -8,9 +8,9 @@ export function* getUserInfoFromDBWorker() {
 	const edu = Object.entries(result.edu).map((item) => item[1]),
 		exp = Object.entries(result.exp).map((item) => item[1]),
 		custom = Object.entries(result.custom).map((item) => item[1]),
-		langSkills = Object.entries(result.langSkills),
-		skills = Object.entries(result.skills),
-		softSkills = Object.entries(result.softSkills),
+		langSkills = Object.entries(result.langSkills).map((item) => item[1]),
+		skills = Object.entries(result.skills).map((item) => item[1]),
+		softSkills = Object.entries(result.softSkills).map((item) => item[1]),
 		socials = Object.entries(result.socials);
 
 	const data = {
@@ -29,8 +29,7 @@ export function* getUserInfoFromDBWorker() {
 function* cleanMainInfoLineFromDBWorker(data) {
 	const name = yield data.payload;
 	yield setDataAtDB({ dataName: name, data: "" });
-
-	yield yield put({ type: CLEAN_INFO_LINE, payload: name });
+	yield call(getUserInfoFromDBWorker);
 }
 
 export function* cleanMainInfoLineFromDB() {

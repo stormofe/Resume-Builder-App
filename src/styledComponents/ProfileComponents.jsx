@@ -23,9 +23,9 @@ export const Skill = ({ item }) => {
 	return (
 		<Paper sx={{ p: 1, width: "180px", display: "flex", justifyContent: "space-between", mb: 1 }}>
 			<Typography variant='body2' sx={{ marginRight: "5px" }}>
-				{item[1][0]}
+				{item[0]}
 			</Typography>
-			<Typography variant='body2'>{item[1][1]}⭐</Typography>
+			<Typography variant='body2'>{item[1]}⭐</Typography>
 		</Paper>
 	);
 };
@@ -40,7 +40,6 @@ export const LinkRow = ({ name, link }) => {
 	);
 };
 export const ExpBlock = ({ name, dateFrom, dateEnd, description, position }) => {
-	console.log(dateFrom);
 	return (
 		<Paper sx={{ p: 1, mt: 1 }}>
 			<Typography variant='subtitle1' sx={{ fontWeight: 500 }}>

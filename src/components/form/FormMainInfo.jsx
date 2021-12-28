@@ -33,7 +33,10 @@ function FormMainInfo(props) {
 
 	const onSubmit = (data, event) => {
 		const info = { ...data.mainInfo };
-		console.log(info);
+		const arrInfo = Object.entries(info);
+		const filteredArrInfo = arrInfo.filter(([key, value]) => value !== "");
+		const filteredObjInfo = Object.fromEntries(filteredArrInfo);
+		dispatch({ type: "SAVE_MAIN_INFO", payload: filteredObjInfo });
 		setValue("mainInfo", {
 			firstName: "",
 			lastName: "",
@@ -44,7 +47,6 @@ function FormMainInfo(props) {
 			email: "",
 			hobbies: "",
 		});
-		dispatch({ type: "SAVE_MAIN_INFO", payload: info });
 	};
 
 	const deletePhoto = () => {

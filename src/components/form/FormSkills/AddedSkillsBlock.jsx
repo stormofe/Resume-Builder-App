@@ -1,7 +1,6 @@
 import React from "react";
 import { Box, IconButton, Rating, Typography } from "@mui/material";
 import { Paper } from "@mui/material";
-import StarIcon from "@mui/icons-material/Star";
 import ClearIcon from "@mui/icons-material/Clear";
 import { v4 as uuidv4 } from "uuid";
 function AddedSkillsBlock({ skills, deleteSkill, color }) {
