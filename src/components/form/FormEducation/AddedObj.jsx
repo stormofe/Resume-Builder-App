@@ -1,7 +1,7 @@
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
 import ClearIcon from "@mui/icons-material/Clear";
-import { Box, Button, IconButton, Typography, ButtonGroup, Tooltip, Paper } from "@mui/material";
+import { Box, IconButton, Typography, Paper } from "@mui/material";
 function AddedObj({ arr, bgColor, handleDelete }) {
 	return (
 		<Box>

@@ -6,8 +6,6 @@ import Login from "./components/auth/Login";
 import Profile from "./components/Profile";
 import Forms from "./components/Forms";
 import Templates from "./components/Templates";
-import NewPage from "./components/NewPage";
-import NewPageTwo from "./components/NewPageTwo";
 import Layout from "./components/layout/Layout";
 import { createTheme } from "@mui/material/styles";
 import { ThemeProvider } from "@mui/material/styles";
@@ -43,12 +41,6 @@ function App(props) {
 						</Route>
 						<Route path='/templates'>
 							<Templates />
-						</Route>
-						<Route path='/newpage'>
-							<NewPage />
-						</Route>
-						<Route path='/newpagetwo'>
-							<NewPageTwo />
 						</Route>
 					</Switch>
 				</Layout>

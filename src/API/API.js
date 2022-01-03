@@ -1,4 +1,4 @@
-import { doc, getDoc, setDoc, updateDoc, deleteField } from "@firebase/firestore";
+import { doc, getDoc, setDoc, updateDoc } from "@firebase/firestore";
 import { db } from "../firebase";
 import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "@firebase/auth";
 import { initState } from "../store/loginReducer";

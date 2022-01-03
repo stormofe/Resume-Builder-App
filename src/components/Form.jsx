@@ -10,7 +10,6 @@ import FormMainInfo from "./form/FormMainInfo";
 import FormSkillsUniversal from "./form/FormSkillsUniversal";
 import { FormBlock } from "../styledComponents/ProfileComponents";
 import FormEducation from "./form/FormEducation";
-import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import FormExp from "./form/FormExp";
 import FormCustom from "./form/FormCustom";

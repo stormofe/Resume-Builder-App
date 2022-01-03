@@ -9,7 +9,6 @@ import AddedObj from "./FormEducation/AddedObj";
 function FormCustom(props) {
 	const dispatch = useDispatch();
 	const custom = props.custom;
-	console.log(custom);
 	const { control, handleSubmit, setValue, formState } = useForm({
 		mode: "onChange",
 		defaultValues: {

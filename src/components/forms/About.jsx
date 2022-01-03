@@ -14,7 +14,7 @@ function About() {
 	const [gettingInfo, setGettingInfo] = useState({});
 	const [photo, setPhoto] = useState(null);
 	const [gettingPhoto, setGettingPhoto] = useState(null);
-	const { about, area, email, position, name, phone, website, hobbies } = gettingInfo;
+	const { about, area, email, position, name, phone, hobbies } = gettingInfo;
 	const photoInp = useRef(null);
 
 	const saveInfo = (data, event) => {

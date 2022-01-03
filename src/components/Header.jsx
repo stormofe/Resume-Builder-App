@@ -1,13 +1,10 @@
-import { AppBar, Badge, Button, IconButton, Menu, MenuItem, Toolbar, Typography } from "@mui/material";
-import { Box, styled, typography } from "@mui/system";
-import MuiAppBar from "@mui/material/AppBar";
-import MenuIcon from "@mui/icons-material/Menu";
+import { AppBar, IconButton, Menu, MenuItem, Toolbar, Typography } from "@mui/material";
+import { Box } from "@mui/system";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MoreIcon from "@mui/icons-material/MoreVert";
 
 import React, { useContext } from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
 import { AuthContext } from "./auth/Auth";
 import { useHistory } from "react-router-dom";
 
