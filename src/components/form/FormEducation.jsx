@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Box } from "@mui/system";
-import { Button, Typography, ButtonGroup, Tooltip, Paper } from "@mui/material";
+import { Button, ButtonGroup } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import FormMainInfoLine from "./FormMain/FormMainInfoLine";
 import DatePicker from "react-datepicker";
-import { v4 as uuidv4 } from "uuid";
+import AddedObj from "./FormEducation/AddedObj";
 function FormEducation(props) {
 	const dispatch = useDispatch();
 	const education = props.education;
@@ -25,7 +25,8 @@ function FormEducation(props) {
 
 	const saveData = () => {
 		console.log(obj);
-		//dispatch({ type: "SAVE_EDU", payload: obj });
+		dispatch({ type: "SAVE_EDU", payload: obj });
+		setObj([]);
 	};
 	const addObj = (data) => {
 		const obj = {
@@ -39,6 +40,15 @@ function FormEducation(props) {
 			description: "",
 		});
 		setDateEnd(null);
+	};
+	const deleteEdu = (index) => {
+		const newEdu = obj.filter((item, i) => (i !== index ? item : false));
+		setObj(newEdu);
+	};
+
+	const deleteEduFromDB = (index) => {
+		const newEdu = education.filter((item, i) => (i !== index ? item : false));
+		dispatch({ type: "DELETE_EDU", payload: newEdu });
 	};
 
 	return (
@@ -74,9 +84,12 @@ function FormEducation(props) {
 					</Button>
 				</ButtonGroup>
 			</Box>
-			{education
-				? education.map((item) => (
-						<Paper key={uuidv4()} elevation={2} sx={{ p: 2, mt: 1, backgroundColor: "primary.main", color: "white" }}>
+			{/*{education
+				? education.map((item, index) => (
+						<Paper
+							key={uuidv4()}
+							elevation={2}
+							sx={{ p: 2, mt: 1, backgroundColor: "primary.main", color: "white", position: "relative" }}>
 							<Typography>{item.profession}</Typography>
 							<Box sx={{ display: "flex", justifyContent: "space-between" }}>
 								<Typography variant='caption'>{item.where}</Typography>
@@ -84,22 +97,18 @@ function FormEducation(props) {
 							</Box>
 
 							<Typography variant='body2'>{item.description}</Typography>
+							<IconButton
+								aria-label='delete'
+								size='small'
+								sx={{ color: "white", position: "absolute", top: 1, right: 1 }}
+								onClick={() => deleteEduFromDB(index)}>
+								<ClearIcon fontSize='inherit' />
+							</IconButton>
 						</Paper>
 				  ))
-				: ""}
-			{obj
-				? obj.map((item) => (
-						<Paper key={uuidv4()} elevation={2} sx={{ p: 2, mt: 1, backgroundColor: "grey.400", color: "white" }}>
-							<Typography>{item.profession}</Typography>
-							<Box sx={{ display: "flex", justifyContent: "space-between" }}>
-								<Typography variant='caption'>{item.where}</Typography>
-								<Typography variant='caption'>{item.date}</Typography>
-							</Box>
-
-							<Typography variant='body2'>{item.description}</Typography>
-						</Paper>
-				  ))
-				: ""}
+				: ""}*/}
+			<AddedObj arr={education} bgColor='primary.main' handleDelete={deleteEduFromDB} />
+			<AddedObj arr={obj} bgColor='grey.400' handleDelete={deleteEdu} />
 		</Box>
 	);
 }

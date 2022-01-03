@@ -15,6 +15,7 @@ import { ExpBlock, LinkRow, SidebarItem, Skill, Title } from "../styledComponent
 import TempFirst from "./templates/temp1/TempFirst";
 import TempSecond from "./templates/temp2/TempSecond";
 import Form from "./Form";
+import userIcon from "./../source/user-icon.png";
 
 function TabPanel(props) {
 	const { children, value, index, ...other } = props;
@@ -127,17 +128,26 @@ function Profile() {
 										<Grid container sx={{ display: "flex", justifyContent: "center" }}>
 											<SidebarItem item>
 												<Paper sx={{ width: "180px", height: "230px" }} elevation={3}>
-													<img
-														style={{ width: "100%", height: "100%", objectFit: "cover" }}
-														src={mainInfo.photoURL}
-														alt=''
-													/>
+													{mainInfo.photoURL ? (
+														<img
+															style={{ width: "100%", height: "100%", objectFit: "cover" }}
+															src={mainInfo.photoURL}
+															alt=''
+														/>
+													) : (
+														<img
+															style={{ width: "100%", height: "100%", objectFit: "contain" }}
+															src={userIcon}
+															alt=''
+														/>
+													)}
 												</Paper>
 											</SidebarItem>
 											<SidebarItem item>
 												<Box>
-													<LinkRow name={""} link={mainInfo.email} />
-													<LinkRow name={""} link={mainInfo.phone} />
+													{mainInfo.email ? <LinkRow name={""} link={mainInfo.email} /> : ""}
+													{mainInfo.phone ? <LinkRow name={""} link={mainInfo.phone} /> : ""}
+
 													{socials.length > 0
 														? socials.map((item) => <LinkRow name='' link={item[1]} key={item[1]} />)
 														: ""}

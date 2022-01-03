@@ -12,6 +12,8 @@ import { FormBlock } from "../styledComponents/ProfileComponents";
 import FormEducation from "./form/FormEducation";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
+import FormExp from "./form/FormExp";
+import FormCustom from "./form/FormCustom";
 
 const Accordion = styled((props) => <MuiAccordion disableGutters elevation={0} square {...props} />)(({ theme }) => ({
 	border: `1px solid ${theme.palette.divider}`,
@@ -94,16 +96,6 @@ function Form(props) {
 				<AccordionSummary aria-controls='panel2d-content' id='panel2d-header'>
 					<Box sx={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
 						<Typography>Навыки</Typography>
-						<Box
-							sx={{
-								backgroundColor: `${percent > 70 ? "success.main" : "error.main"}`,
-								borderRadius: "8px",
-								color: "white",
-								fontWeight: 700,
-								padding: "5px",
-							}}>
-							{percent}%
-						</Box>
 					</Box>
 				</AccordionSummary>
 				<AccordionDetails>
@@ -141,6 +133,22 @@ function Form(props) {
 				</AccordionSummary>
 				<AccordionDetails>
 					<FormEducation education={fullInfo.edu} />
+				</AccordionDetails>
+			</Accordion>
+			<Accordion expanded={expanded === "panel4"} onChange={handleChangeAccord("panel4")} sx={{ marginRight: 2 }}>
+				<AccordionSummary aria-controls='panel4d-content' id='panel4d-header'>
+					<Typography>Опыт работы</Typography>
+				</AccordionSummary>
+				<AccordionDetails>
+					<FormExp exp={fullInfo.exp} />
+				</AccordionDetails>
+			</Accordion>
+			<Accordion expanded={expanded === "panel5"} onChange={handleChangeAccord("panel5")} sx={{ marginRight: 2 }}>
+				<AccordionSummary aria-controls='panel5d-content' id='panel5d-header'>
+					<Typography>Дополнительная информация</Typography>
+				</AccordionSummary>
+				<AccordionDetails>
+					<FormCustom custom={fullInfo.custom} />
 				</AccordionDetails>
 			</Accordion>
 		</Grid>
