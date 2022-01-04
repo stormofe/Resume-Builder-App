@@ -16,6 +16,7 @@ import TempFirst from "./templates/temp1/TempFirst";
 import TempSecond from "./templates/temp2/TempSecond";
 import Form from "./Form";
 import userIcon from "./../source/user-icon.png";
+import { v4 as uuidv4 } from "uuid";
 
 function TabPanel(props) {
 	const { children, value, index, ...other } = props;
@@ -149,24 +150,26 @@ function Profile() {
 													{mainInfo.phone ? <LinkRow name={""} link={mainInfo.phone} /> : ""}
 
 													{socials.length > 0
-														? socials.map((item) => <LinkRow name='' link={item[1]} key={item[1]} />)
+														? socials.map((item) => <LinkRow name='' link={item[1]} key={uuidv4()} />)
 														: ""}
 												</Box>
 											</SidebarItem>
 											<SidebarItem item>
 												<Title>Навыки</Title>
-												{skills.length > 0 ? skills.map((item, index) => <Skill key={index} item={item}></Skill>) : ""}
+												{skills.length > 0
+													? skills.map((item, index) => <Skill key={uuidv4()} item={item}></Skill>)
+													: ""}
 											</SidebarItem>
 											<SidebarItem item>
 												<Title>Мягкие навыки</Title>
 												{softSkills.length > 0
-													? softSkills.map((item, index) => <Skill key={index} item={item}></Skill>)
+													? softSkills.map((item, index) => <Skill key={uuidv4()} item={item}></Skill>)
 													: ""}
 											</SidebarItem>
 											<SidebarItem item>
 												<Title>Языки</Title>
 												{langSkills.length > 0
-													? langSkills.map((item, index) => <Skill key={index} item={item}></Skill>)
+													? langSkills.map((item, index) => <Skill key={uuidv4()} item={item}></Skill>)
 													: ""}
 											</SidebarItem>
 										</Grid>
@@ -188,7 +191,7 @@ function Profile() {
 											{edu.length > 0
 												? edu.map((item, index) => (
 														<ExpBlock
-															key={index}
+															key={uuidv4()}
 															name={item.where}
 															dateFrom={""}
 															dateEnd={item.data}
@@ -203,7 +206,7 @@ function Profile() {
 											{exp.length > 0
 												? exp.map((item, index) => (
 														<ExpBlock
-															key={index}
+															key={uuidv4()}
 															name={item.where}
 															dateFrom={item.dateFrom}
 															dateEnd={item.dateEnd}
@@ -218,7 +221,7 @@ function Profile() {
 											{custom.length > 0
 												? custom.map((item, index) => (
 														<ExpBlock
-															key={index}
+															key={uuidv4()}
 															name={item.name}
 															dateFrom={item.dateFrom}
 															dateEnd={item.dateEnd}

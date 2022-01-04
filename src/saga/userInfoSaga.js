@@ -11,7 +11,7 @@ export function* getUserInfoFromDBWorker() {
 		langSkills = Object.entries(result.langSkills).map((item) => item[1]),
 		skills = Object.entries(result.skills).map((item) => item[1]),
 		softSkills = Object.entries(result.softSkills).map((item) => item[1]),
-		socials = Object.entries(result.socials);
+		socials = result.socials;
 
 	const data = {
 		...result,

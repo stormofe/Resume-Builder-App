@@ -93,7 +93,7 @@ export const setDataAtDB = async ({ dataName, data }) => {
 		await updateDoc(user, { custom: { ...data } });
 	}
 	if (dataName === "socials") {
-		await updateDoc(user, { socials: { ...data } });
+		await updateDoc(user, { socials: [...data] });
 	}
 	if (data === "") {
 		const objName = `mainInfo.${[dataName]}`;

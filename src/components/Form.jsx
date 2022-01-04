@@ -87,7 +87,7 @@ function Form(props) {
 				</AccordionSummary>
 				<AccordionDetails>
 					<FormBlock>
-						<FormMainInfo mainInfo={fullInfo.mainInfo} />
+						<FormMainInfo mainInfo={fullInfo.mainInfo} socials={fullInfo.socials} />
 					</FormBlock>
 				</AccordionDetails>
 			</Accordion>

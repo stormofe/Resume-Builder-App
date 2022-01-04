@@ -119,7 +119,7 @@ export const formsReducer = (state = formsState, action) => {
 		case SAVE_SOCIALS_FROM_PAGE:
 			return {
 				...state,
-				socials: [...state.socials, ...payload],
+				socials: [...state.socials, payload],
 			};
 		case SET_EDU_FROM_DB:
 		case DELETE_EDU_FROM_DB:

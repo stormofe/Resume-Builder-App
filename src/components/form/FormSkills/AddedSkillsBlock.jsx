@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, IconButton, Rating, Typography } from "@mui/material";
+import { Box, IconButton, Rating, Tooltip, Typography } from "@mui/material";
 import { Paper } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
 import { v4 as uuidv4 } from "uuid";
@@ -22,19 +22,21 @@ function AddedSkillsBlock({ skills, deleteSkill, color }) {
 								mr: 1,
 								mb: 1,
 							}}>
-							<Typography
-								variant='body2'
-								fontWeight={500}
-								sx={{
-									letterSpacing: 1.2,
-									overflow: "hidden",
-									maxWidth: "90px",
-									whiteSpace: "nowrap",
-									textOverflow: "ellipsis",
-									mr: 1,
-								}}>
-								{skill[0]}
-							</Typography>
+							<Tooltip title={skill[0]} arrow>
+								<Typography
+									variant='body2'
+									fontWeight={500}
+									sx={{
+										letterSpacing: 1.2,
+										overflow: "hidden",
+										maxWidth: "90px",
+										whiteSpace: "nowrap",
+										textOverflow: "ellipsis",
+										mr: 1,
+									}}>
+									{skill[0]}
+								</Typography>
+							</Tooltip>
 							{/*<Typography sx={{ pl: 1, display: "flex", alignItems: "center" }}>
 								{skill[1]} <StarIcon fontSize='small' color='warning' />
 							</Typography>*/}
