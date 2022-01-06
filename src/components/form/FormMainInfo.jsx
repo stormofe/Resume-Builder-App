@@ -1,6 +1,6 @@
 import React from "react";
 import { Box } from "@mui/system";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import FormMainInfoLine from "./FormMain/FormMainInfoLine";
@@ -99,6 +99,7 @@ function FormMainInfo(props) {
 					Сохранить
 				</Button>
 			</Box>
+			<Typography sx={{ mt: 2, color: "primary.main" }}>Ваши соцсети</Typography>
 			<SocialsBlock socials={props.socials} />
 		</Box>
 	);

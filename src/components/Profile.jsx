@@ -15,7 +15,7 @@ import { ExpBlock, LinkRow, SidebarItem, Skill, Title } from "../styledComponent
 import TempFirst from "./templates/temp1/TempFirst";
 import TempSecond from "./templates/temp2/TempSecond";
 import Form from "./Form";
-import userIcon from "./../source/user-icon.png";
+import userIcon from "./../source/user.png";
 import { v4 as uuidv4 } from "uuid";
 
 function TabPanel(props) {
