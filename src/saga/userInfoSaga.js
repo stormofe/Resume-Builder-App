@@ -1,6 +1,6 @@
 import { takeEvery, put, call } from "redux-saga/effects";
 import { getDataFromDB, getPhoto, setDataAtDB, setStorage, setUserInfoAtDB } from "../API/API";
-import { SET_PHOTO_FROM_DB, SET_USER_INFO } from "../store/userReducer";
+import { SET_ERROR_PHOTO, SET_PHOTO_FROM_DB, SET_USER_INFO } from "../store/userReducer";
 
 export function* getUserInfoFromDBWorker() {
 	//const data = yield getUserInfoFromDB();
@@ -62,10 +62,16 @@ export function* getPhotoFromDBWatcher() {
 }
 
 function* saveUserPhotoWorker(data) {
-	const photo = data.payload;
-	yield setStorage(photo);
-	const newPhoto = yield getPhoto();
-	yield put({ type: SET_PHOTO_FROM_DB, payload: newPhoto });
+	try {
+		const photo = data.payload;
+		yield setStorage(photo);
+		const newPhoto = yield getPhoto();
+		yield put({ type: SET_PHOTO_FROM_DB, payload: newPhoto });
+	} catch (err) {
+		const error = err["message"];
+		yield put({ type: SET_ERROR_PHOTO, payload: error });
+		return;
+	}
 }
 export function* saveUserPhotoWatcher() {
 	yield takeEvery("SAVE_PHOTO", saveUserPhotoWorker);

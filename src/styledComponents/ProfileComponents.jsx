@@ -1,4 +1,4 @@
-import { Grid, Typography, Box, Paper, Link, TextField, IconButton } from "@mui/material";
+import { Grid, Typography, Box, Paper, Link, TextField, IconButton, Tooltip } from "@mui/material";
 import { styled } from "@mui/system";
 
 import AddCircleIcon from "@mui/icons-material/AddCircle";
@@ -33,9 +33,17 @@ export const LinkRow = ({ name, link }) => {
 	return (
 		<Paper sx={{ p: 1, width: "180px", display: "flex", mb: 1 }}>
 			{name ? <Typography sx={{ marginRight: "5px", textTransform: "lowercase" }}>{name}</Typography> : ""}
-			<Link href={link} underline='hover' color='primary' variant='body1'>
+			{/*<Tooltip title={link} arrow>*/}
+			<Link
+				target='_blank'
+				href={link}
+				underline='hover'
+				color='primary'
+				variant='body1'
+				sx={{ maxWidth: "170px", overflow: "hidden", textOverflow: "ellipsis" }}>
 				{link}
 			</Link>
+			{/*</Tooltip>*/}
 		</Paper>
 	);
 };

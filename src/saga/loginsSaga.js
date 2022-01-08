@@ -6,9 +6,7 @@ import { register } from "./../API/API";
 function* loginLogicWorker(data) {
 	const { email, password } = data;
 	const result = yield login(email, password);
-	console.log(result);
 	if (result.err) {
-		console.log(result.err.message);
 		yield put({ type: "SET_ERROR_LOGIN", payload: result.err.message });
 		return;
 	}

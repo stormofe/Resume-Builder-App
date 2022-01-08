@@ -9,6 +9,7 @@ const formsState = {
 	mainInfo: {
 		photoURL: null,
 	},
+	error: false,
 };
 
 export const SET_USER = "SET_USER";
@@ -49,9 +50,14 @@ export const SET_SOCIALS_FROM_DB = "SET_SOCIALS_FROM_DB";
 export const SAVE_SOCIALS_FROM_PAGE = "SAVE_SOCIALS_FROM_PAGE";
 export const DELETE_SOCIAL_FROM_DB = "DELETE_SOCIAL_FROM_DB";
 
+export const SET_ERROR = "SET_ERROR";
+
 export const formsReducer = (state = formsState, action) => {
 	const payload = action.payload;
 	switch (action.type) {
+		case SET_ERROR:
+			debugger;
+			return { ...state, error: payload };
 		case SET_USER_NAME:
 			return { ...state, mainInfo: { email: action.payload } };
 		case SET_USER_INFO:

@@ -67,8 +67,8 @@ export const getDataFromDB = (dataName) => {
 			}
 			return undefined;
 		})
-		.catch((e) => console.log(e))
-		.finally(() => console.log("finish"));
+		.catch((e) => console.log(e));
+	//.finally(() => console.log("finish"));
 };
 
 export const setDataAtDB = async ({ dataName, data }) => {
@@ -102,9 +102,13 @@ export const setDataAtDB = async ({ dataName, data }) => {
 };
 
 export const setUserInfoAtDB = async (info) => {
-	const currentUser = await getCurrentUser();
-	const user = doc(db, "user", `${currentUser}`);
-	await updateDoc(user, { mainInfo: { ...info } });
+	try {
+		const currentUser = await getCurrentUser();
+		const user = doc(db, "user", `${currentUser}`);
+		await updateDoc(user, { mainInfo: { ...info } });
+	} catch (err) {
+		return err["message"];
+	}
 };
 
 export const setStorage = async (photo) => {
@@ -115,27 +119,44 @@ export const setStorage = async (photo) => {
 	//		console.log("Uploaded a blob or file!");
 	//	});
 	//});
-	const user = await getCurrentUser();
-	const storage = await getStorage();
-	const storageRef = await ref(storage, user);
+	//const user = await getCurrentUser();
+	//const storage = await getStorage();
+	//const storageRef = await ref(storage, user);
 
-	await uploadBytes(storageRef, photo)
-		.then((snapshot) => {
-			console.log("Uploaded a blob or file!");
-		})
-		.catch((e) => {
-			console.log(e);
-		});
+	//await uploadBytes(storageRef, photo)
+	//	.then((snapshot) => {
+	//		console.log("Uploaded a blob or file!");
+	//	})
+	//	.catch((e) => {
+	//		console.log(e);
+	//	});
+	try {
+		const user = await getCurrentUser();
+		const storage = await getStorage();
+		const storageRef = await ref(storage, user);
+		await uploadBytes(storageRef, photo);
+	} catch (err) {
+		console.log(err["message"]);
+		//return err["message"];
+	}
 };
 export const getPhoto = async () => {
-	const user = await getCurrentUser();
-	const storage = await getStorage();
-	const storageRef = await ref(storage, user);
-	return getDownloadURL(storageRef)
-		.then((url) => {
-			return url;
-		})
-		.catch((error) => {
-			console.log(error);
-		});
+	//const user = await getCurrentUser();
+	//const storage = await getStorage();
+	//const storageRef = await ref(storage, user);
+	//return getDownloadURL(storageRef)
+	//	.then((url) => {
+	//		return url;
+	//	})
+	//	.catch((error) => {
+	//		console.log(error);
+	//	});
+	try {
+		const user = await getCurrentUser();
+		const storage = await getStorage();
+		const storageRef = await ref(storage, user);
+		return await getDownloadURL(storageRef);
+	} catch (err) {
+		return err;
+	}
 };

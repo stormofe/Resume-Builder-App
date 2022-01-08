@@ -18,6 +18,7 @@ import {
 	SAVE_SOFT_SKILLS_FROM_PAGE,
 	SET_CUST_BLOCK_FROM_DB,
 	SET_EDU_FROM_DB,
+	SET_ERROR,
 	SET_EXP_FROM_DB,
 	SET_LANG_SKILLS_FROM_DB,
 	SET_MAIN_INFO,
@@ -43,7 +44,11 @@ function* saveMainInfoAtDBWorker(data) {
 	const arrInfo = yield Object.entries(fullMainInfoObj);
 	const filteredArrInfo = yield arrInfo.filter(([key, value]) => value !== "");
 	const filteredObjInfo = yield Object.fromEntries(filteredArrInfo);
-	yield setUserInfoAtDB(filteredObjInfo);
+	const result = yield setUserInfoAtDB(filteredObjInfo);
+	if (result) {
+		yield put({ type: SET_ERROR, payload: result });
+		return;
+	}
 	yield call(getUserInfoFromDBWorker);
 }
 

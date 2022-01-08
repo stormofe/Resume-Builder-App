@@ -52,14 +52,11 @@ function Profile() {
 	const fullInfo = useSelector((state) => state.fullInfo);
 
 	const { skills, softSkills, langSkills, edu, exp, custom, socials, mainInfo } = fullInfo;
-
 	useEffect(() => {
 		dispatch({ type: "GET_INFO" });
 		dispatch({ type: "GET_PHOTO" });
 	}, []);
-
 	const [value, setValue] = React.useState(0);
-
 	const handleChange = (event, newValue) => {
 		setValue(newValue);
 	};
@@ -146,11 +143,11 @@ function Profile() {
 											</SidebarItem>
 											<SidebarItem item>
 												<Box>
-													{mainInfo.email ? <LinkRow name={""} link={mainInfo.email} /> : ""}
-													{mainInfo.phone ? <LinkRow name={""} link={mainInfo.phone} /> : ""}
+													{mainInfo.email && <LinkRow name={""} link={mainInfo.email} />}
+													{mainInfo.phone && <LinkRow name={""} link={mainInfo.phone} />}
 
 													{socials.length > 0
-														? socials.map((item) => <LinkRow name='' link={item[1]} key={uuidv4()} />)
+														? socials.map((item) => <LinkRow name='' link={item} key={uuidv4()} />)
 														: ""}
 												</Box>
 											</SidebarItem>
