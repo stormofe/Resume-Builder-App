@@ -109,18 +109,18 @@ function Form(props) {
 						/>
 						<FormSkillsUniversal
 							blockName='Ваши социальные навыки'
-							objName='langSkills'
-							fetchType='FETCH_LANG_SKILLS'
-							saveType='SAVE_LANG_SKILLS'
-							deleteType='DELETE_LANG_SKILL'
-							inputName='skill'
-						/>
-						<FormSkillsUniversal
-							blockName='Языки'
 							objName='softSkills'
 							fetchType='FETCH_SOFT_SKILLS'
 							saveType='SAVE_SOFT_SKILLS'
 							deleteType='DELETE_SOFT_SKILL'
+							inputName='skill'
+						/>
+						<FormSkillsUniversal
+							blockName='Языки'
+							objName='langSkills'
+							fetchType='FETCH_LANG_SKILLS'
+							saveType='SAVE_LANG_SKILLS'
+							deleteType='DELETE_LANG_SKILL'
 							inputName='skill'
 						/>
 					</FormBlock>

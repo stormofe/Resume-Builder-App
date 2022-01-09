@@ -9,6 +9,8 @@ import Templates from "./components/Templates";
 import Layout from "./components/layout/Layout";
 import { createTheme } from "@mui/material/styles";
 import { ThemeProvider } from "@mui/material/styles";
+import SnackbarError from "./styledComponents/SnackbarError";
+import SnackbarSuccess from "./styledComponents/SnackbarSuccess";
 let theme = createTheme({
 	palette: {
 		primary: {
@@ -28,6 +30,8 @@ function App(props) {
 		<ThemeProvider theme={theme}>
 			<HashRouter>
 				<Header />
+				<SnackbarError />
+				<SnackbarSuccess />
 				<Layout>
 					<Switch>
 						<Route path='/login'>

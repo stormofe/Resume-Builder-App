@@ -74,11 +74,17 @@ export const getDataFromDB = (dataName) => {
 export const setDataAtDB = async ({ dataName, data }) => {
 	const currentUser = await getCurrentUser();
 	const user = doc(db, "user", `${currentUser}`);
+	//for debug
+	//const user = doc(db, "user", `currentUser`);
 	if (dataName === "softSkills") {
 		await updateDoc(user, { softSkills: { ...data } });
 	}
 	if (dataName === "skills") {
-		await updateDoc(user, { skills: { ...data } });
+		try {
+			await updateDoc(user, { skills: { ...data } });
+		} catch (e) {
+			return e.message;
+		}
 	}
 	if (dataName === "langSkills") {
 		await updateDoc(user, { langSkills: { ...data } });
@@ -93,7 +99,11 @@ export const setDataAtDB = async ({ dataName, data }) => {
 		await updateDoc(user, { custom: { ...data } });
 	}
 	if (dataName === "socials") {
-		await updateDoc(user, { socials: [...data] });
+		try {
+			await updateDoc(user, { socials: [...data] });
+		} catch (e) {
+			return e.message;
+		}
 	}
 	if (data === "") {
 		const objName = `mainInfo.${[dataName]}`;
@@ -105,6 +115,7 @@ export const setUserInfoAtDB = async (info) => {
 	try {
 		const currentUser = await getCurrentUser();
 		const user = doc(db, "user", `${currentUser}`);
+		//const user = doc(db, "user", `currentUser`);
 		await updateDoc(user, { mainInfo: { ...info } });
 	} catch (err) {
 		return err["message"];

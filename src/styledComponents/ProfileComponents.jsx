@@ -1,7 +1,9 @@
-import { Grid, Typography, Box, Paper, Link, TextField, IconButton, Tooltip } from "@mui/material";
+import { Grid, Typography, Box, Paper, Link, TextField, IconButton } from "@mui/material";
 import { styled } from "@mui/system";
+import MuiAlert from "@mui/material/Alert";
 
 import AddCircleIcon from "@mui/icons-material/AddCircle";
+import { forwardRef } from "react";
 
 export const SidebarItem = styled(Grid)(({ theme }) => ({
 	marginTop: theme.spacing(2),
@@ -92,3 +94,7 @@ export const SendButton = (props) => {
 		</IconButton>
 	);
 };
+
+export const Alert = forwardRef(function Alert(props, ref) {
+	return <MuiAlert elevation={6} ref={ref} variant='filled' {...props} />;
+});

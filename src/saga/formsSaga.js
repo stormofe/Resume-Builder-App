@@ -19,14 +19,17 @@ import {
 	SET_CUST_BLOCK_FROM_DB,
 	SET_EDU_FROM_DB,
 	SET_ERROR,
+	SET_ERROR_FALSE,
 	SET_EXP_FROM_DB,
 	SET_LANG_SKILLS_FROM_DB,
 	SET_MAIN_INFO,
 	SET_SKILLS_FROM_DB,
 	SET_SOCIALS_FROM_DB,
 	SET_SOFT_SKILLS_FROM_DB,
+	SET_SUCCESS_FALSE,
 } from "../store/formsReducer";
 import { getUserInfoFromDBWorker } from "./userInfoSaga";
+import { SET_SUCCESS } from "./../store/formsReducer";
 
 const stateSkills = (state) => state.forms.skills;
 const stateSoftSkills = (state) => state.forms.softSkills;
@@ -37,6 +40,7 @@ const stateCustom = (state) => state.forms.custom;
 const stateSocials = (state) => state.forms.socials;
 const stateMainInfo = (state) => state.forms.mainInfo;
 
+//ok
 function* saveMainInfoAtDBWorker(data) {
 	const mainInfoObj = data.payload;
 	yield put({ type: SET_MAIN_INFO, payload: mainInfoObj });
@@ -47,15 +51,16 @@ function* saveMainInfoAtDBWorker(data) {
 	const result = yield setUserInfoAtDB(filteredObjInfo);
 	if (result) {
 		yield put({ type: SET_ERROR, payload: result });
+		yield call(getUserInfoFromDBWorker);
 		return;
 	}
+	yield put({ type: SET_SUCCESS });
 	yield call(getUserInfoFromDBWorker);
 }
 
 export function* saveMainInfoAtDBWatcher() {
 	yield takeEvery("SAVE_MAIN_INFO", saveMainInfoAtDBWorker);
 }
-
 
 function* getSkillsFromDBWorker() {
 	//const objSkills = yield call(getSkillsFromBD);
@@ -72,9 +77,13 @@ function* saveSkillsWorker(data) {
 	const skills = data.payload;
 	yield put({ type: SAVE_SKILLS_FROM_PAGE, payload: skills });
 	const allSkills = yield select(stateSkills);
-	//const result = yield setSkillsAtDB(allSkills);
-	//console.log(result);
-	yield setDataAtDB({ dataName: "skills", data: allSkills });
+	const result = yield setDataAtDB({ dataName: "skills", data: allSkills });
+	if (result) {
+		yield put({ type: SET_ERROR, payload: result });
+		yield call(getSkillsFromDBWorker);
+		return;
+	}
+	yield put({ type: SET_SUCCESS });
 }
 export function* saveSkillsAtAllWatcher() {
 	yield takeEvery("SAVE_SKILLS", saveSkillsWorker);
@@ -263,13 +272,21 @@ function* getSocialsFromDBWorker() {
 export function* getSocialsFromDBWatcher() {
 	yield takeEvery("FETCH_SOCIALS", getSocialsFromDBWorker);
 }
-
+//ok
 function* saveSocialsWorker(data) {
 	const socials = data.payload;
+	//yield put({ type: SAVE_SOCIALS_FROM_PAGE, payload: socials });
+	//const allSocials = yield select(stateSocials);
+	//yield setSocialsAtDB(allSocials);
 	yield put({ type: SAVE_SOCIALS_FROM_PAGE, payload: socials });
 	const allSocials = yield select(stateSocials);
-	//yield setSocialsAtDB(allSocials);
-	yield setDataAtDB({ dataName: "socials", data: allSocials });
+	const result = yield setDataAtDB({ dataName: "socials", data: allSocials });
+	if (result) {
+		yield put({ type: SET_ERROR, payload: result });
+		yield call(getSocialsFromDBWorker);
+		return;
+	}
+	yield put({ type: SET_SUCCESS });
 }
 export function* saveSocialsAtAllWatcher() {
 	yield takeEvery("SAVE_SOCIALS", saveSocialsWorker);
@@ -283,4 +300,20 @@ function* deleteSocialFromDBWorker(data) {
 }
 export function* deleteSocialsFromDBWatcher() {
 	yield takeEvery("DELETE_SOCIAL", deleteSocialFromDBWorker);
+}
+
+function* setErrorFalseWorker() {
+	yield put({ type: SET_ERROR_FALSE });
+}
+
+export function* setErrorFalseWatcher() {
+	yield takeEvery("ERROR_FALSE", setErrorFalseWorker);
+}
+
+function* setSuccessFalseWorker() {
+	yield put({ type: SET_SUCCESS_FALSE });
+}
+
+export function* setSuccessFalseWatcher() {
+	yield takeEvery("SUCCESS_FALSE", setSuccessFalseWorker);
 }

@@ -119,7 +119,7 @@ function FormMainInfo(props) {
 					Сохранить
 				</Button>
 			</Box>
-			<Typography sx={{ mt: 2, color: "primary.main" }}>Ваши соцсети</Typography>
+			<Typography sx={{ mt: 3, color: "primary.main" }}>Ваши соцсети</Typography>
 			<SocialsBlock socials={props.socials} />
 		</Box>
 	);

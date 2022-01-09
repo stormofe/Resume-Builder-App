@@ -26,7 +26,7 @@ function SocialsBlock({ socials }) {
 		dispatch({ type: "DELETE_SOCIAL", payload: newSocials });
 	};
 	return (
-		<Box sx={{ mt: 3 }}>
+		<Box sx={{ mt: 2 }}>
 			{socials.length > 0
 				? socials.map((item, index) => (
 						<Paper
@@ -73,7 +73,7 @@ function SocialsBlock({ socials }) {
 				noValidate
 				autoComplete='off'
 				onSubmit={handleSubmit(onSubmit)}
-				sx={{ maxWidth: "600px", marginX: "auto" }}>
+				sx={{ maxWidth: "600px", marginX: "auto", mt: 1 }}>
 				<FormMainInfoLine
 					control={control}
 					name='social'
