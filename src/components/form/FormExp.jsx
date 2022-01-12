@@ -1,13 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box } from "@mui/system";
 import { Button, ButtonGroup } from "@mui/material";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import FormMainInfoLine from "./FormMain/FormMainInfoLine";
 import DatePicker from "react-datepicker";
 import AddedObj from "./FormEducation/AddedObj";
+import SmallPreloader from "../UI/SmallPreloader";
 function FormExp(props) {
 	const dispatch = useDispatch();
+	const [isLoading, setIsLoading] = useState(false);
+	const loading = useSelector((state) => state.forms.loading.exp);
+	useEffect(() => {
+		setIsLoading(loading);
+	}, [loading]);
 	const exp = props.exp;
 	const { control, handleSubmit, setValue, formState } = useForm({
 		mode: "onChange",
@@ -78,14 +84,17 @@ function FormExp(props) {
 					onChange={(date) => setDateEnd(date)}
 				/>
 				<FormMainInfoLine candelete='' control={control} name='description' label='Обязанности' check={null} />
-				<ButtonGroup variant='contained' aria-label='outlined primary button group'>
-					<Button type='submit' variant='contained' disabled={!isDirty || !isValid}>
-						Добавить опыт
-					</Button>
-					<Button variant='contained' disabled={!isDirty || !isValid || !obj} onClick={saveData}>
-						Сохранить
-					</Button>
-				</ButtonGroup>
+				<Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+					<ButtonGroup variant='contained' aria-label='outlined primary button group'>
+						<Button type='submit' variant='contained' disabled={!isDirty || !isValid}>
+							Добавить образование
+						</Button>
+						<Button variant='contained' disabled={!isDirty || !isValid || !obj} onClick={saveData}>
+							Сохранить
+						</Button>
+					</ButtonGroup>
+					{isLoading && <SmallPreloader />}
+				</Box>
 			</Box>
 			<AddedObj arr={exp} bgColor='primary.main' handleDelete={deleteExpFromDB} />
 			<AddedObj arr={obj} bgColor='grey.400' handleDelete={deleteExp} />

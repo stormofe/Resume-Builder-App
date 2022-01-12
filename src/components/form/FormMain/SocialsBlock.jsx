@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Button, IconButton, Link, Paper, Tooltip, Typography } from "@mui/material";
 import { v4 as uuidv4 } from "uuid";
 import FormMainInfoLine from "./FormMainInfoLine";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ClearIcon from "@mui/icons-material/Clear";
+import SmallPreloader from "../../UI/SmallPreloader";
 function SocialsBlock({ socials }) {
 	const dispatch = useDispatch();
+	const [isLoading, setIsLoading] = useState(false);
+	const loading = useSelector((state) => state.forms.loading.socials);
+	useEffect(() => {
+		setIsLoading(loading);
+	}, [loading]);
 	const { control, handleSubmit, setValue, formState } = useForm({
 		mode: "onChange",
 		defaultValues: {
@@ -81,9 +87,13 @@ function SocialsBlock({ socials }) {
 					check={null}
 					candelete={false}
 				/>
-				<Button type='submit' variant='contained' disabled={!isDirty || !isValid}>
-					Сохранить
-				</Button>
+
+				<Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+					<Button type='submit' variant='contained' disabled={!isDirty || !isValid}>
+						Сохранить
+					</Button>
+					{isLoading && <SmallPreloader />}
+				</Box>
 			</Box>
 		</Box>
 	);

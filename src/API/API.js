@@ -67,7 +67,7 @@ export const getDataFromDB = (dataName) => {
 			}
 			return undefined;
 		})
-		.catch((e) => console.log(e));
+		.catch((e) => e.message);
 	//.finally(() => console.log("finish"));
 };
 
@@ -77,7 +77,11 @@ export const setDataAtDB = async ({ dataName, data }) => {
 	//for debug
 	//const user = doc(db, "user", `currentUser`);
 	if (dataName === "softSkills") {
-		await updateDoc(user, { softSkills: { ...data } });
+		try {
+			await updateDoc(user, { softSkills: { ...data } });
+		} catch (e) {
+			return e.message;
+		}
 	}
 	if (dataName === "skills") {
 		try {
@@ -87,16 +91,32 @@ export const setDataAtDB = async ({ dataName, data }) => {
 		}
 	}
 	if (dataName === "langSkills") {
-		await updateDoc(user, { langSkills: { ...data } });
+		try {
+			await updateDoc(user, { langSkills: { ...data } });
+		} catch (e) {
+			return e.message;
+		}
 	}
 	if (dataName === "edu") {
-		await updateDoc(user, { edu: { ...data } });
+		try {
+			await updateDoc(user, { edu: { ...data } });
+		} catch (e) {
+			return e.message;
+		}
 	}
 	if (dataName === "exp") {
-		await updateDoc(user, { exp: { ...data } });
+		try {
+			await updateDoc(user, { exp: { ...data } });
+		} catch (e) {
+			return e.message;
+		}
 	}
 	if (dataName === "custom") {
-		await updateDoc(user, { custom: { ...data } });
+		try {
+			await updateDoc(user, { custom: { ...data } });
+		} catch (e) {
+			return e.message;
+		}
 	}
 	if (dataName === "socials") {
 		try {
@@ -109,18 +129,15 @@ export const setDataAtDB = async ({ dataName, data }) => {
 		const objName = `mainInfo.${[dataName]}`;
 		await updateDoc(user, { [objName]: "" });
 	}
-};
-
-export const setUserInfoAtDB = async (info) => {
-	try {
-		const currentUser = await getCurrentUser();
-		const user = doc(db, "user", `${currentUser}`);
-		//const user = doc(db, "user", `currentUser`);
-		await updateDoc(user, { mainInfo: { ...info } });
-	} catch (err) {
-		return err["message"];
+	if (dataName === "mainInfo") {
+		try {
+			await updateDoc(user, { mainInfo: { ...data } });
+		} catch (e) {
+			return e.message;
+		}
 	}
 };
+
 
 export const setStorage = async (photo) => {
 	//const storage = await getStorage();

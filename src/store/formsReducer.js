@@ -11,6 +11,17 @@ const formsState = {
 	},
 	error: "",
 	success: false,
+	loading: {
+		mainInfo: false,
+		skills: false,
+		softSkills: false,
+		langSkills: false,
+		socials: false,
+		photo: false,
+		edu: false,
+		exp: false,
+		custom: false,
+	},
 };
 
 export const SET_USER = "SET_USER";
@@ -57,9 +68,13 @@ export const SET_ERROR_FALSE = "SET_ERROR_FALSE";
 export const SET_SUCCESS = "SET_SUCCESS";
 export const SET_SUCCESS_FALSE = "SET_SUCCESS_FALSE";
 
+export const SET_LOADING = "SET_LOADING";
+
 export const formsReducer = (state = formsState, action) => {
 	const payload = action.payload;
 	switch (action.type) {
+		case SET_LOADING:
+			return { ...state, loading: { ...state.loading, [action.name]: action.activity } };
 		case SET_ERROR:
 			return { ...state, error: payload };
 		case SET_ERROR_FALSE:
@@ -110,7 +125,6 @@ export const formsReducer = (state = formsState, action) => {
 				softSkills: [...payload],
 			};
 		case SAVE_SOFT_SKILLS_FROM_PAGE:
-			debugger;
 			return {
 				...state,
 				softSkills: [...state.softSkills, ...payload],

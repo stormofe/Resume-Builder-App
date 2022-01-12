@@ -1,13 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box } from "@mui/system";
 import { Button, ButtonGroup } from "@mui/material";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import FormMainInfoLine from "./FormMain/FormMainInfoLine";
 import DatePicker from "react-datepicker";
 import AddedObj from "./FormEducation/AddedObj";
+import SmallPreloader from "./../UI/SmallPreloader";
 function FormEducation(props) {
 	const dispatch = useDispatch();
+	const [isLoading, setIsLoading] = useState(false);
+	const loading = useSelector((state) => state.forms.loading.edu);
+	useEffect(() => {
+		setIsLoading(loading);
+	}, [loading]);
 	const education = props.education;
 	const { control, handleSubmit, setValue, formState } = useForm({
 		mode: "onChange",
@@ -75,38 +81,19 @@ function FormEducation(props) {
 					onChange={(date) => setDateEnd(date)}
 				/>
 				<FormMainInfoLine candelete='' control={control} name='description' label='Описание' check={null} />
-				<ButtonGroup variant='contained' aria-label='outlined primary button group'>
-					<Button type='submit' variant='contained' disabled={!isDirty || !isValid}>
-						Добавить образование
-					</Button>
-					<Button variant='contained' disabled={!isDirty || !isValid || !obj} onClick={saveData}>
-						Сохранить
-					</Button>
-				</ButtonGroup>
-			</Box>
-			{/*{education
-				? education.map((item, index) => (
-						<Paper
-							key={uuidv4()}
-							elevation={2}
-							sx={{ p: 2, mt: 1, backgroundColor: "primary.main", color: "white", position: "relative" }}>
-							<Typography>{item.profession}</Typography>
-							<Box sx={{ display: "flex", justifyContent: "space-between" }}>
-								<Typography variant='caption'>{item.where}</Typography>
-								<Typography variant='caption'>{item.date}</Typography>
-							</Box>
 
-							<Typography variant='body2'>{item.description}</Typography>
-							<IconButton
-								aria-label='delete'
-								size='small'
-								sx={{ color: "white", position: "absolute", top: 1, right: 1 }}
-								onClick={() => deleteEduFromDB(index)}>
-								<ClearIcon fontSize='inherit' />
-							</IconButton>
-						</Paper>
-				  ))
-				: ""}*/}
+				<Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+					<ButtonGroup variant='contained' aria-label='outlined primary button group'>
+						<Button type='submit' variant='contained' disabled={!isDirty || !isValid}>
+							Добавить образование
+						</Button>
+						<Button variant='contained' disabled={!isDirty || !isValid || !obj} onClick={saveData}>
+							Сохранить
+						</Button>
+					</ButtonGroup>
+					{isLoading && <SmallPreloader />}
+				</Box>
+			</Box>
 			<AddedObj arr={education} bgColor='primary.main' handleDelete={deleteEduFromDB} />
 			<AddedObj arr={obj} bgColor='grey.400' handleDelete={deleteEdu} />
 		</Box>

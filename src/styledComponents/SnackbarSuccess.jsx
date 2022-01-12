@@ -32,7 +32,7 @@ function SnackbarSuccess() {
 	return (
 		<div>
 			<Stack spacing={2} sx={{ maxWidth: "350px" }}>
-				<Snackbar open={openSuc} autoHideDuration={6000} onClose={handleClose}>
+				<Snackbar open={openSuc} autoHideDuration={3000} onClose={handleClose}>
 					<Alert onClose={handleClose} severity='success' sx={{ width: "100%" }}>
 						Сохранено успешно
 					</Alert>

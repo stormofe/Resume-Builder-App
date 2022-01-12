@@ -1,14 +1,21 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Box, Typography, ButtonGroup, Tooltip } from "@mui/material";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import WarningIcon from "./../../UI/WarningIcon";
 import GreenCheckIcon from "./../../UI/GreenCheckIcon";
 import DoneIcon from "@mui/icons-material/Done";
 import DeleteIcon from "@mui/icons-material/Delete";
+import SmallPreloader from "../../UI/SmallPreloader";
 function PhotoBlock({ photoURL }) {
 	const dispatch = useDispatch();
+	const [isLoading, setIsLoading] = useState(false);
+	const loading = useSelector((state) => state.forms.loading.photo);
+	useEffect(() => {
+		setIsLoading(loading);
+	}, [loading]);
+
 	const photoInp = useRef(null);
 	const [photo, setPhoto] = useState(null);
 	const deletePhoto = () => {
@@ -26,23 +33,26 @@ function PhotoBlock({ photoURL }) {
 			<Typography variant='body1' color='primary' mb={1}>
 				Выберите фото
 			</Typography>
+			<Box sx={{ display: "flex", alignItems: "center" }}>
+				<label htmlFor='icon-button-file'>
+					<input
+						accept='image/*'
+						id='icon-button-file'
+						type='file'
+						style={{ display: "none" }}
+						ref={photoInp}
+						onChange={(e) => setPhoto(e.target.files[0])}
+					/>
+					<IconButton color='primary' aria-label='upload picture' component='span'>
+						<Tooltip title='Добавить фото' arrow>
+							<PhotoCamera fontSize='large' />
+						</Tooltip>
+					</IconButton>
+				</label>
+				{isLoading && <SmallPreloader />}
+			</Box>
 
-			<label htmlFor='icon-button-file'>
-				<input
-					accept='image/*'
-					id='icon-button-file'
-					type='file'
-					style={{ display: "none" }}
-					ref={photoInp}
-					onChange={(e) => setPhoto(e.target.files[0])}
-				/>
-				<IconButton color='primary' aria-label='upload picture' component='span'>
-					<Tooltip title='Добавить фото' arrow>
-						<PhotoCamera fontSize='large' />
-					</Tooltip>
-				</IconButton>
-			</label>
-			{photoURL === "" && photoURL === undefined ? <WarningIcon /> : <GreenCheckIcon />}
+			{photoURL === "" || photoURL === null ? <WarningIcon /> : <GreenCheckIcon />}
 
 			{photo ? (
 				<Box sx={{ display: "flex", justifyContent: "space-between", mb: 2 }}>

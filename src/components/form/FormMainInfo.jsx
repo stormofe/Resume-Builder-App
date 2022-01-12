@@ -6,11 +6,15 @@ import { useForm } from "react-hook-form";
 import FormMainInfoLine from "./FormMain/FormMainInfoLine";
 import PhotoBlock from "./FormMain/PhotoBlock";
 import SocialsBlock from "./FormMain/SocialsBlock";
+import SmallPreloader from "../UI/SmallPreloader";
 
 function FormMainInfo(props) {
 	const dispatch = useDispatch();
-	let err = useSelector((state) => state.forms.error);
-	const photoErr = useSelector((state) => state.user.error);
+	const [isLoading, setIsLoading] = useState(false);
+	const loading = useSelector((state) => state.forms.loading.mainInfo);
+	useEffect(() => {
+		setIsLoading(loading);
+	}, [loading]);
 	const { control, handleSubmit, setValue, formState } = useForm({
 		mode: "onChange",
 		defaultValues: {
@@ -48,22 +52,9 @@ function FormMainInfo(props) {
 
 	const { firstName, lastName, position, phone, about, area, email, hobbies, photoURL } = props.mainInfo;
 
-	const [error, setError] = useState("");
-	useEffect(() => {
-		setError(err);
-		setTimeout(() => {
-			setError("");
-		}, 8000);
-	}, [err]);
-
 	return (
 		<Box>
 			<PhotoBlock photoURL={photoURL} />
-			{photoErr && (
-				<Typography sx={{ color: "error.main", display: "inline-block", marginY: 1 }}>
-					Что-то пошло не так. Попробуйте сохранить позднее. <br /> {photoErr}
-				</Typography>
-			)}
 
 			<Box
 				component='form'
@@ -110,14 +101,13 @@ function FormMainInfo(props) {
 					candelete
 					check={hobbies ? true : false}
 				/>
-				{error && (
-					<Typography sx={{ color: "error.main", display: "inline-block", marginY: 1 }}>
-						Что-то пошло не так. Попробуйте сохранить позднее. <br /> {error}
-					</Typography>
-				)}
-				<Button type='submit' variant='contained' disabled={!isDirty || !isValid}>
-					Сохранить
-				</Button>
+
+				<Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+					<Button type='submit' variant='contained' disabled={!isDirty || !isValid}>
+						Сохранить
+					</Button>
+					{isLoading && <SmallPreloader />}
+				</Box>
 			</Box>
 			<Typography sx={{ mt: 3, color: "primary.main" }}>Ваши соцсети</Typography>
 			<SocialsBlock socials={props.socials} />

@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import FormSkillsLine from "./FormSkills/FormSkillsLine";
 import AddedSkillsBlock from "./FormSkills/AddedSkillsBlock";
+import SmallPreloader from "../UI/SmallPreloader";
 
 function FormSkillsUniversal({ blockName, objName, inputName, fetchType, saveType, deleteType }) {
 	const dispatch = useDispatch();
@@ -16,8 +17,10 @@ function FormSkillsUniversal({ blockName, objName, inputName, fetchType, saveTyp
 	const { isDirty, isValid } = formState;
 	const [skills, setSkills] = useState([]);
 	const [gettingSkills, setGettingSkills] = useState([]);
+	const [isLoading, setIsLoading] = useState(false);
 
 	const skillsFromState = useSelector((state) => state.fullInfo[objName]);
+	const loading = useSelector((state) => state.forms.loading[objName]);
 
 	useEffect(() => {
 		dispatch({ type: fetchType });
@@ -27,6 +30,9 @@ function FormSkillsUniversal({ blockName, objName, inputName, fetchType, saveTyp
 		setGettingSkills(skillsFromState);
 	}, [skillsFromState]);
 	useEffect(() => {}, [skills]);
+	useEffect(() => {
+		setIsLoading(loading);
+	}, [loading]);
 
 	const addSkill = async (data) => {
 		const skill = [data.skill, ratingValue];
@@ -57,6 +63,7 @@ function FormSkillsUniversal({ blockName, objName, inputName, fetchType, saveTyp
 			</Typography>
 			<AddedSkillsBlock skills={gettingSkills} deleteSkill={deleteSkillFromDB} color='primary.main' />
 			<AddedSkillsBlock skills={skills} deleteSkill={deleteSkillFromState} color='grey.400' />
+			{isLoading && <SmallPreloader />}
 
 			<Box
 				component='form'
