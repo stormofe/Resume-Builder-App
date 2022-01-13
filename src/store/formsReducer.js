@@ -21,6 +21,7 @@ const formsState = {
 		edu: false,
 		exp: false,
 		custom: false,
+		login: false,
 	},
 };
 

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "./Auth";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
@@ -9,11 +9,18 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-
+import SmallPreloader from "../UI/SmallPreloader";
 function Login() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [inputError, setInputError] = useState(false);
+	const [loginError, setLoginError] = useState("");
 	const [open, setOpen] = React.useState(false);
+	const [isLoading, setIsLoading] = useState(false);
+	const loading = useSelector((state) => state.forms.loading.login);
+	useEffect(() => {
+		setIsLoading(loading);
+	}, [loading]);
 	const { currentUser } = useContext(AuthContext);
 	const dispatch = useDispatch();
 	const error = useSelector((store) => store.login.error);
@@ -33,9 +40,20 @@ function Login() {
 		setEmail("");
 	};
 
+	useEffect(() => {
+		setLoginError(error);
+		setTimeout(() => {
+			setLoginError("");
+		}, 5000);
+	}, [error]);
 	const logIn = () => {
-		dispatch({ type: "LOG_IN", email, password });
-		resetInput();
+		if (email !== "" && password !== "") {
+			setInputError(false);
+			dispatch({ type: "LOG_IN", email, password });
+			resetInput();
+			return;
+		}
+		setInputError(true);
 	};
 	const getLogOut = () => {
 		dispatch({ type: "LOG_OUT" });
@@ -60,6 +78,9 @@ function Login() {
 				</Typography>
 				<TextField
 					fullWidth
+					required
+					error={email === "" && inputError}
+					helperText={email === "" && inputError && "Поле не заполнено"}
 					type='email'
 					value={email}
 					label='Логин'
@@ -70,6 +91,9 @@ function Login() {
 				/>
 				<TextField
 					fullWidth
+					required
+					error={password === "" && inputError}
+					helperText={password === "" && inputError && "Поле не заполнено"}
 					type='password'
 					value={password}
 					label='Пароль'
@@ -78,6 +102,8 @@ function Login() {
 					size='small'
 					sx={{ mb: 1 }}
 				/>
+				<Box sx={{ display: "flex", justifyContent: "center" }}>{isLoading && <SmallPreloader />}</Box>
+
 				{currentUser ? (
 					<Button variant='contained' sx={{ width: "100%" }} onClick={getLogOut}>
 						Выйти
@@ -87,13 +113,14 @@ function Login() {
 						Войти
 					</Button>
 				)}
-				{error && error == "EMAIL_EXISTS" ? (
+
+				{loginError && loginError == "EMAIL_EXISTS" ? (
 					<Box>
 						<Typography sx={{ color: "error.main", mb: 2 }}>Этот эл. адрес уже занят</Typography>
 					</Box>
 				) : (
 					<Box>
-						<Typography sx={{ color: "error.main", mb: 2 }}>{error}</Typography>
+						<Typography sx={{ color: "error.main", mb: 2 }}>{loginError}</Typography>
 					</Box>
 				)}
 
@@ -116,6 +143,9 @@ function Login() {
 						<TextField
 							fullWidth
 							type='email'
+							required
+							error={email === "" && inputError}
+							helperText={email === "" && inputError && "Поле не заполнено"}
 							value={email}
 							label='Логин'
 							placeholder='Логин'
@@ -126,6 +156,9 @@ function Login() {
 						<TextField
 							fullWidth
 							type='password'
+							required
+							error={password === "" && inputError}
+							helperText={password === "" && inputError && "Поле не заполнено"}
 							value={password}
 							label='Пароль'
 							placeholder='Пароль'
@@ -133,14 +166,15 @@ function Login() {
 							size='small'
 							sx={{ marginY: 1 }}
 						/>
+						<Box sx={{ display: "flex", justifyContent: "center" }}>{isLoading && <SmallPreloader />}</Box>
 
-						{error && error == "EMAIL_EXISTS" ? (
+						{loginError && loginError == "EMAIL_EXISTS" ? (
 							<Box>
 								<Typography sx={{ color: "error.main", mb: 2 }}>Этот эл. адрес уже занят</Typography>
 							</Box>
 						) : (
 							<Box>
-								<Typography sx={{ color: "error.main", mb: 2 }}>{error}</Typography>
+								<Typography sx={{ color: "error.main", mb: 2 }}>{loginError}</Typography>
 							</Box>
 						)}
 

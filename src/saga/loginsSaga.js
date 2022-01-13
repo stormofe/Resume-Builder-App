@@ -1,16 +1,20 @@
 import { put, takeEvery } from "redux-saga/effects";
 import { login, logOut } from "../API/API";
+import { SET_LOADING } from "../store/formsReducer";
 import { SET_USER_LOGIN } from "../store/loginReducer";
 import { register } from "./../API/API";
 
 function* loginLogicWorker(data) {
+	yield put({ type: SET_LOADING, name: "login", activity: true });
 	const { email, password } = data;
 	const result = yield login(email, password);
 	if (result.err) {
 		yield put({ type: "SET_ERROR_LOGIN", payload: result.err.message });
+		yield put({ type: SET_LOADING, name: "login", activity: false });
 		return;
 	}
 	yield put({ type: SET_USER_LOGIN, email, isLogin: true, error: false });
+	yield put({ type: SET_LOADING, name: "login", activity: false });
 }
 export function* loginLogicWatcher() {
 	yield takeEvery("LOG_IN", loginLogicWorker);
@@ -26,13 +30,17 @@ export function* logoutLogicWatcher() {
 }
 
 function* registerLogicWorker(data) {
+	yield put({ type: SET_LOADING, name: "login", activity: true });
 	const { email, password } = data;
 	const result = yield register(email, password);
 	yield put({ type: "SET_ERROR_LOGIN", payload: false });
 	if (result) {
 		const error = result.customData._tokenResponse.error.message;
 		yield put({ type: "SET_ERROR_LOGIN", payload: error });
+		yield put({ type: SET_LOADING, name: "login", activity: false });
+		return;
 	}
+	yield put({ type: SET_LOADING, name: "login", activity: false });
 }
 
 export function* registerLogicWatcher() {
