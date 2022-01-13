@@ -31,9 +31,10 @@ function FormExp(props) {
 	const [obj, setObj] = useState([]);
 
 	const saveData = () => {
-		console.log(obj);
-		dispatch({ type: "SAVE_EXP", payload: obj });
-		setObj([]);
+		if (obj.length !== 0) {
+			dispatch({ type: "SAVE_EXP", payload: obj });
+			setObj([]);
+		}
 	};
 	const addObj = (data) => {
 		const obj = {
@@ -47,6 +48,7 @@ function FormExp(props) {
 			profession: "",
 			description: "",
 		});
+		setDateStart(null);
 		setDateEnd(null);
 	};
 	const deleteExp = (index) => {
@@ -89,7 +91,7 @@ function FormExp(props) {
 						<Button type='submit' variant='contained' disabled={!isDirty || !isValid}>
 							Добавить образование
 						</Button>
-						<Button variant='contained' disabled={!isDirty || !isValid || !obj} onClick={saveData}>
+						<Button variant='contained' disabled={!isDirty || !isValid || obj.length === 0} onClick={saveData}>
 							Сохранить
 						</Button>
 					</ButtonGroup>

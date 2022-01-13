@@ -30,9 +30,10 @@ function FormEducation(props) {
 	const [dateEnd, setDateEnd] = useState(null);
 
 	const saveData = () => {
-		console.log(obj);
-		dispatch({ type: "SAVE_EDU", payload: obj });
-		setObj([]);
+		if (obj.length !== 0) {
+			dispatch({ type: "SAVE_EDU", payload: obj });
+			setObj([]);
+		}
 	};
 	const addObj = (data) => {
 		const obj = {
@@ -87,7 +88,7 @@ function FormEducation(props) {
 						<Button type='submit' variant='contained' disabled={!isDirty || !isValid}>
 							Добавить образование
 						</Button>
-						<Button variant='contained' disabled={!isDirty || !isValid || !obj} onClick={saveData}>
+						<Button variant='contained' disabled={!isDirty || !isValid || obj.length === 0} onClick={saveData}>
 							Сохранить
 						</Button>
 					</ButtonGroup>

@@ -31,9 +31,10 @@ function FormCustom(props) {
 	const [obj, setObj] = useState([]);
 
 	const saveData = () => {
-		console.log(obj);
-		dispatch({ type: "SAVE_CUST_BLOCK", payload: obj });
-		setObj([]);
+		if (obj.length !== 0) {
+			dispatch({ type: "SAVE_CUST_BLOCK", payload: obj });
+			setObj([]);
+		}
 	};
 	const addObj = (data) => {
 		const obj = {
@@ -47,6 +48,7 @@ function FormCustom(props) {
 			profession: "",
 			description: "",
 		});
+		setDateStart(null);
 		setDateEnd(null);
 	};
 	const deleteCustomBlock = (index) => {
@@ -89,7 +91,7 @@ function FormCustom(props) {
 						<Button type='submit' variant='contained' disabled={!isDirty || !isValid}>
 							Добавить образование
 						</Button>
-						<Button variant='contained' disabled={!isDirty || !isValid || !obj} onClick={saveData}>
+						<Button variant='contained' disabled={!isDirty || !isValid || obj.length === 0} onClick={saveData}>
 							Сохранить
 						</Button>
 					</ButtonGroup>

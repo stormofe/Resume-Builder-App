@@ -7,27 +7,12 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import ReactToPrint from "react-to-print";
 
-function TempFirst() {
-	const info = useSelector((s) => s.user);
-	const {
-		name,
-		phone,
-		email,
-		area,
-		position,
-		about,
-		skills,
-		hobbies,
-		edu,
-		exp,
-		langSkills,
-		softSkills,
-		custom,
-		photoURL,
-		socials,
-	} = info;
+function TempFirst(props) {
+	const info = props.info;
+	const { skills, softSkills, langSkills, edu, exp, custom, socials, mainInfo } = info;
+	const { photoURL, firstName, lastName, email, about, phone, hobbies, area, position } = mainInfo;
 	const dispatch = useDispatch();
-
+	console.log(softSkills);
 	useEffect(() => {
 		dispatch({ type: "GET_INFO" });
 		dispatch({ type: "GET_PHOTO" });
@@ -55,9 +40,9 @@ function TempFirst() {
 			<div ref={componentRef} className='template templateFirst'>
 				<aside className='sidebar'>
 					<div className='sidebar__info info'>
-						<div className='info__img'>{photoURL ? <img src={photoURL} alt='' /> : ""}</div>
+						<div className='info__img'>{photoURL && <img src={photoURL} alt='' />}</div>
 						<div className='info__wrapper'>
-							{phone ? (
+							{phone && (
 								<div className='info__line'>
 									<div className='info__icon'>
 										<img src={phoneIcon} alt='' />
@@ -67,11 +52,9 @@ function TempFirst() {
 										<p>{phone}</p>
 									</div>
 								</div>
-							) : (
-								""
 							)}
 
-							{email ? (
+							{email && (
 								<div className='info__line'>
 									<div className='info__icon'>
 										<img src={letter} alt='' />
@@ -81,29 +64,25 @@ function TempFirst() {
 										<p>{email}</p>
 									</div>
 								</div>
-							) : (
-								""
 							)}
-							{socials && Object.keys(socials).length !== 0 ? (
+							{socials && socials.length !== 0 && (
 								<div className='info__line'>
 									<div className='info__icon'>
 										<img src={world} alt='' />
 									</div>
 									<div className='info__descr'>
 										<h3>Websites</h3>
-										{Object.entries(socials).map((soc, index) => (
+										{socials.map((soc, index) => (
 											<div key={index}>
-												<a target='_blank' href={`${soc[1]}`} rel='noreferrer'>
-													{soc[1]}
+												<a target='_blank' href={`${soc}`} rel='noreferrer'>
+													{soc}
 												</a>{" "}
 											</div>
 										))}
 									</div>
 								</div>
-							) : (
-								""
 							)}
-							{area ? (
+							{area && (
 								<div className='info__line'>
 									<div className='info__icon'>
 										<img src={areaIcon} alt='' />
@@ -113,63 +92,50 @@ function TempFirst() {
 										<p>{area}</p>
 									</div>
 								</div>
-							) : (
-								""
 							)}
 						</div>
 					</div>
 					{skills || softSkills || langSkills ? (
 						<div className='sidebar__skills skills'>
 							<div className='skills__wrapper'>
-								{Object.keys(skills).length !== 0 || Object.keys(softSkills).length !== 0 ? <h2>Skills</h2> : ""}
+								{skills.length !== 0 || softSkills.length !== 0 ? <h2>Skills</h2> : ""}
 
-								{Object.keys(skills).length !== 0
-									? Object.entries(skills).map((skill, index) => (
-											<div key={index} className='skills__line'>
-												<div className='skills__name'>{skill[1][0]}</div>
-												<div className='skills__value'>
-													<div
-														className='skills__range'
-														style={{ width: `${Math.floor(Number(skill[1][1]) * 20)}%` }}></div>
-												</div>
+								{skills.length !== 0 &&
+									skills.map((skill, index) => (
+										<div key={index} className='skills__line'>
+											<div className='skills__name'>{skill[0]}</div>
+											<div className='skills__value'>
+												<div className='skills__range' style={{ width: `${Math.floor(Number(skill[1]) * 20)}%` }}></div>
 											</div>
-									  ))
-									: ""}
-								{Object.keys(softSkills).length !== 0
-									? Object.entries(softSkills).map((skill, index) => (
-											<div key={index} className='skills__line'>
-												<div className='skills__name'>{skill[1][0]}</div>
-												<div className='skills__value'>
-													<div
-														className='skills__range'
-														style={{ width: `${Math.floor(Number(skill[1][1]) * 20)}%` }}></div>
-												</div>
+										</div>
+									))}
+								{softSkills.length !== 0 &&
+									softSkills.map((skill, index) => (
+										<div key={index} className='skills__line'>
+											<div className='skills__name'>{skill[0]}</div>
+											<div className='skills__value'>
+												<div className='skills__range' style={{ width: `${Math.floor(Number(skill[1]) * 20)}%` }}></div>
 											</div>
-									  ))
-									: ""}
+										</div>
+									))}
 							</div>
 							<div className='skills__wrapper'>
-								{Object.keys(langSkills).length !== 0 ? <h2>Languages</h2> : ""}
-								{Object.keys(langSkills).length !== 0
-									? Object.entries(langSkills).map((skill, index) => (
-											<div key={index} className='skills__line'>
-												<div className='skills__name'>{skill[1][0]}</div>
-												<div className='skills__value'>
-													<div
-														className='skills__range'
-														style={{ width: `${Math.floor(Number(skill[1][1]) * 20)}%` }}></div>
-												</div>
+								{langSkills.length !== 0 && <h2>Languages</h2>}
+								{langSkills.length !== 0 &&
+									langSkills.map((skill, index) => (
+										<div key={index} className='skills__line'>
+											<div className='skills__name'>{skill[0]}</div>
+											<div className='skills__value'>
+												<div className='skills__range' style={{ width: `${Math.floor(Number(skill[1]) * 20)}%` }}></div>
 											</div>
-									  ))
-									: ""}
+										</div>
+									))}
 							</div>
-							{hobbies ? (
+							{hobbies && (
 								<div className='skills__wrapper'>
 									<h2>Hobbies</h2>
 									<p>{hobbies} </p>
 								</div>
-							) : (
-								""
 							)}
 						</div>
 					) : (
@@ -179,71 +145,73 @@ function TempFirst() {
 				<main className='main'>
 					<div className='main__box'>
 						<h1 className='main__name'>
-							{/*<span>Justin</span> Nguen*/}
-							{name}
+							<span>{lastName} </span>
+							{firstName}
 						</h1>
 						<p className='main__prof'>{position}</p>
 					</div>
-
+					{about && (
+						<div className='main__block block'>
+							<h2>About me</h2>
+							<article className='block__descr'>{about}</article>
+						</div>
+					)}
 					<div className='main__block block'>
-						<h2>About me</h2>
-						<article className='block__descr'>{about}</article>
+						{exp && exp.length !== 0 && <h2>EXPERIENCE</h2>}
+						{exp &&
+							exp.length !== 0 &&
+							exp.map((exp, index) => (
+								<div key={index} className='block__column column'>
+									<h3>{exp.profession}</h3>
+									<div className='column__line'>
+										<p>{exp.where}</p>
+										<p>
+											<span>
+												{exp.dateStart && `${exp.dateStart} -`}
+												{exp.dateEnd}
+											</span>
+										</p>
+									</div>
+									<p className='column__descr'>{exp.description}</p>
+								</div>
+							))}
 					</div>
 					<div className='main__block block'>
-						{exp && Object.keys(exp).length !== 0 ? <h2>EXPERIENCE</h2> : ""}
-						{exp && Object.keys(exp).length !== 0
-							? Object.entries(exp).map((exp, index) => (
-									<div key={index} className='block__column column'>
-										<h3>{exp[1].profession}</h3>
-										<div className='column__line'>
-											<p>{exp[1].where}</p>
-											<p>
-												<span>
-													{exp[1].dateFrom} - {exp[1].dateEnd}
-												</span>
-											</p>
-										</div>
-										<p className='column__descr'>{exp[1].description}</p>
+						{edu && edu.length !== 0 && <h2>Education</h2>}
+						{edu &&
+							edu.length !== 0 &&
+							edu.map((edu, index) => (
+								<div key={index} className='block__column column'>
+									<h3>{edu.profession}</h3>
+									<div className='column__line'>
+										<p>{edu.where}</p>
+										<p>
+											<span>{edu.date}</span>
+										</p>
 									</div>
-							  ))
-							: ""}
+									<p className='column__descr'>{edu.description}</p>
+								</div>
+							))}
 					</div>
 					<div className='main__block block'>
-						{edu && Object.keys(edu).length !== 0 ? <h2>Education</h2> : ""}
-						{edu && Object.keys(edu).length !== 0
-							? Object.entries(edu).map((edu, index) => (
-									<div key={index} className='block__column column'>
-										<h3>{edu[1].profession}</h3>
-										<div className='column__line'>
-											<p>{edu[1].where}</p>
-											<p>
-												<span>{edu[1].data}</span>
-											</p>
-										</div>
-										<p className='column__descr'>{edu[1].description}</p>
+						{custom && custom.length !== 0 && <h2>Additional Information</h2>}
+						{custom &&
+							custom.length !== 0 &&
+							custom.map((block, index) => (
+								<div key={index} className='block__column column'>
+									<h3>{block.profession}</h3>
+									<div className='column__line'>
+										<p>{block.where}</p>
+										<p>
+											<span>
+												{block.dateStart && `${block.dateStart} -`}
+												{block.dateEnd}
+											</span>
+										</p>
 									</div>
-							  ))
-							: ""}
-					</div>
-					<div className='main__block block'>
-						{custom && Object.keys(custom).length !== 0 ? <h2>Additional Information</h2> : ""}
-						{custom && Object.keys(custom).length !== 0
-							? Object.entries(custom).map((block, index) => (
-									<div key={index} className='block__column column'>
-										<h3>{block[1].name}</h3>
-										<div className='column__line'>
-											<p>{block[1].obj}</p>
-											<p>
-												<span>{block[1].dateFrom}</span>
-											</p>
-											<p>
-												<span>{block[1].dateEnd}</span>
-											</p>
-										</div>
-										<p className='column__descr'>{block[1].description}</p>
-									</div>
-							  ))
-							: ""}
+									<p className='column__descr'>{block.description}</p>
+								</div>
+							))}
 					</div>
 				</main>
 			</div>
