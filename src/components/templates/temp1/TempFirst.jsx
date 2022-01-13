@@ -12,7 +12,6 @@ function TempFirst(props) {
 	const { skills, softSkills, langSkills, edu, exp, custom, socials, mainInfo } = info;
 	const { photoURL, firstName, lastName, email, about, phone, hobbies, area, position } = mainInfo;
 	const dispatch = useDispatch();
-	console.log(softSkills);
 	useEffect(() => {
 		dispatch({ type: "GET_INFO" });
 		dispatch({ type: "GET_PHOTO" });

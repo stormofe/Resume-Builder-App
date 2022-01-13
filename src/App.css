@@ -493,7 +493,7 @@ select {
 	margin: 0px 0px 13px 0px;
 }
 .templateFirst .info__icon {
-	width: 37px;
+	min-width: 37px;
 	height: 13px;
 	object-fit: contain;
 	z-index: 2;
@@ -512,6 +512,9 @@ select {
 }
 .templateFirst .info__descr h3 {
 	margin: 0px 0px 4px 0px;
+}
+.templateFirst .info__descr p {
+	max-width: 100%;
 }
 .templateFirst .skills {
 	padding: 0px 0px 0px 37px;
@@ -579,25 +582,26 @@ select {
 }
 .templateFirst .main__name {
 	font-family: 'Roboto', sans-serif;
-	font-weight: 400;
 	font-size: 22px;
 	letter-spacing: 0.15em;
 	color: #242732;
 	text-transform: uppercase;
+	margin-bottom: 5px;
 }
 .templateFirst .main__name span {
 	font-weight: 700;
 }
 .templateFirst .main__prof {
-	position: absolute;
+	/*position: absolute;*/
 	display: inline-block;
-	white-space: nowrap;
+	word-wrap: normal;
 	padding: 0 5px;
 	background-color: white;
-	bottom: -5px;
-	right: 50%;
-	transform: translateX(50%);
+	/*bottom: -5px;*/
+	/*right: 50%;*/
+	/*transform: translateX(50%);*/
 	font-size: 10px;
+	margin-bottom: 0;
 }
 .templateFirst .block {
 	margin: 25px 0px 0px 0px;
@@ -643,7 +647,10 @@ select {
 }
 .templateFirst .column__line p > span {
 	color: inherit;
+	display: inline-block;
+	text-align: end;
 	margin: 0px 0px 0px 3px;
+	min-width: 75px;
 }
 .templateFirst .column__descr {
 	margin: 6px 0px 0px 0px;
