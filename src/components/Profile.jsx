@@ -1,5 +1,5 @@
 import { Grid, Paper } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import Box from "@mui/material/Box";
@@ -17,6 +17,9 @@ import TempSecond from "./templates/temp2/TempSecond";
 import Form from "./Form";
 import userIcon from "./../source/user.png";
 import { v4 as uuidv4 } from "uuid";
+import ReactToPrint from "react-to-print";
+import PrintIcon from "@mui/icons-material/Print";
+import { IconButton } from "@mui/material";
 
 function TabPanel(props) {
 	const { children, value, index, ...other } = props;
@@ -60,7 +63,21 @@ function Profile() {
 	const handleChange = (event, newValue) => {
 		setValue(newValue);
 	};
+	const componentRef = useRef();
+	const pageStyle = `
+	.MuiPaper-elevation {
+		box-shadow: none !important;
+	}
+	p {
+		orphans: 3;
+	}
 
+	
+
+.css-1vsk7cc-MuiGrid-root, .MuiPaper-root {
+		page-break-inside: avoid !important;
+	}
+`;
 	return (
 		<Grid container>
 			<Grid item sm={12} md={9} lg={8}>
@@ -105,22 +122,10 @@ function Profile() {
 							label='Шаблон 2'
 							{...a11yProps(2)}
 						/>
-
-						<Tab
-							icon={<CreateIcon />}
-							sx={{
-								padding: 1,
-								minWidth: "48px",
-								pl: 0,
-								fontSize: { xs: 0, md: 0, lg: "14px" },
-							}}
-							label=''
-							{...a11yProps(3)}
-						/>
 					</Tabs>
 					<TabPanel value={value} index={0}>
-						<Box sx={{ display: "flex", gap: 3, maxWidth: "650px" }}>
-							<Paper sx={{ minHeight: "877px", flexGrow: 0, flexShrink: 0, flexBasis: "620px" }}>
+						<Box sx={{ display: "flex", gap: 3, maxWidth: "650px", position: "relative" }}>
+							<Paper ref={componentRef} sx={{ minHeight: "877px", flexGrow: 0, flexShrink: 0, flexBasis: "620px" }}>
 								<Grid container sx={{ minHeight: "100%", maxWidth: "650px" }} columns={2} wrap='nowrap'>
 									<Grid item p={2} sx={{ width: "240px", borderRight: "2px solid #fdfdfd" }}>
 										<Grid container sx={{ display: "flex", justifyContent: "center" }}>
@@ -146,28 +151,22 @@ function Profile() {
 													{mainInfo.email && <LinkRow name={""} link={mainInfo.email} />}
 													{mainInfo.phone && <LinkRow name={""} link={mainInfo.phone} />}
 
-													{socials.length > 0
-														? socials.map((item) => <LinkRow name='' link={item} key={uuidv4()} />)
-														: ""}
+													{socials.length > 0 && socials.map((item) => <LinkRow name='' link={item} key={uuidv4()} />)}
 												</Box>
 											</SidebarItem>
 											<SidebarItem item>
-												<Title>Навыки</Title>
-												{skills.length > 0
-													? skills.map((item, index) => <Skill key={uuidv4()} item={item}></Skill>)
-													: ""}
+												{skills.length > 0 && <Title>Навыки</Title>}
+												{skills.length > 0 && skills.map((item, index) => <Skill key={uuidv4()} item={item}></Skill>)}
 											</SidebarItem>
 											<SidebarItem item>
-												<Title>Мягкие навыки</Title>
-												{softSkills.length > 0
-													? softSkills.map((item, index) => <Skill key={uuidv4()} item={item}></Skill>)
-													: ""}
+												{softSkills.length > 0 && <Title>Мягкие навыки</Title>}
+												{softSkills.length > 0 &&
+													softSkills.map((item, index) => <Skill key={uuidv4()} item={item}></Skill>)}
 											</SidebarItem>
 											<SidebarItem item>
-												<Title>Языки</Title>
-												{langSkills.length > 0
-													? langSkills.map((item, index) => <Skill key={uuidv4()} item={item}></Skill>)
-													: ""}
+												{langSkills.length > 0 && <Title>Языки</Title>}
+												{langSkills.length > 0 &&
+													langSkills.map((item, index) => <Skill key={uuidv4()} item={item}></Skill>)}
 											</SidebarItem>
 										</Grid>
 									</Grid>
@@ -184,57 +183,65 @@ function Profile() {
 											{mainInfo.about}
 										</Typography>
 										<Box mb={2} sx={{ maxWidth: "100%" }}>
-											<Title>Образование</Title>
-											{edu.length > 0
-												? edu.map((item, index) => (
-														<ExpBlock
-															key={uuidv4()}
-															name={item.where}
-															dateFrom={""}
-															dateEnd={item.data}
-															description={item.description}
-															position={item.profession}
-														/>
-												  ))
-												: ""}
+											{edu.length > 0 && <Title>Образование</Title>}
+											{edu.length > 0 &&
+												edu.map((item, index) => (
+													<ExpBlock
+														key={uuidv4()}
+														name={item.where}
+														dateFrom={""}
+														dateEnd={item.data}
+														description={item.description}
+														position={item.profession}
+													/>
+												))}
 										</Box>
 										<Box mb={2}>
-											<Title>Опыт работы</Title>
-											{exp.length > 0
-												? exp.map((item, index) => (
-														<ExpBlock
-															key={uuidv4()}
-															name={item.where}
-															dateFrom={item.dateFrom}
-															dateEnd={item.dateEnd}
-															description={item.description}
-															position={item.profession}
-														/>
-												  ))
-												: ""}
+											{exp.length > 0 && <Title>Опыт работы</Title>}
+											{exp.length > 0 &&
+												exp.map((item, index) => (
+													<ExpBlock
+														key={uuidv4()}
+														name={item.where}
+														dateFrom={item.dateFrom}
+														dateEnd={item.dateEnd}
+														description={item.description}
+														position={item.profession}
+													/>
+												))}
 										</Box>
 										<Box mb={2}>
-											<Title>Дополнительные сведения</Title>
-											{custom.length > 0
-												? custom.map((item, index) => (
-														<ExpBlock
-															key={uuidv4()}
-															name={item.name}
-															dateFrom={item.dateFrom}
-															dateEnd={item.dateEnd}
-															description={item.description}
-															position={item.obj}
-														/>
-												  ))
-												: ""}
+											{custom.length > 0 && <Title>Дополнительные сведения</Title>}
+											{custom.length > 0 &&
+												custom.map((item, index) => (
+													<ExpBlock
+														key={uuidv4()}
+														name={item.name}
+														dateFrom={item.dateFrom}
+														dateEnd={item.dateEnd}
+														description={item.description}
+														position={item.obj}
+													/>
+												))}
 										</Box>
 									</Grid>
 								</Grid>
 							</Paper>
+							<div style={{ position: "absolute", top: "10px", right: "30px" }}>
+								<ReactToPrint
+									trigger={() => (
+										<IconButton aria-label='print' size='large'>
+											<PrintIcon />
+										</IconButton>
+									)}
+									content={() => componentRef.current}
+									pageStyle={pageStyle}
+								/>
+							</div>
 						</Box>
 					</TabPanel>
 					<TabPanel value={value} index={1}>
-						<Box sx={{ display: "flex", gap: 3, maxWidth: "650px" }}>
+						<Box sx={{ display: "flex", gap: 3, maxWidth: "650px", position: "relative" }}>
 							<TempFirst info={fullInfo} />
 						</Box>
 					</TabPanel>
@@ -242,9 +249,6 @@ function Profile() {
 						<Box sx={{ display: "flex", gap: 3, maxWidth: "595px" }}>
 							<TempSecond />
 						</Box>
-					</TabPanel>
-					<TabPanel value={value} index={3}>
-						<Form sm={12} />
 					</TabPanel>
 				</Box>
 			</Grid>

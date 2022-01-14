@@ -6,6 +6,8 @@ import phoneIcon from "./icons/phone.svg";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import ReactToPrint from "react-to-print";
+import PrintIcon from "@mui/icons-material/Print";
+import { IconButton } from "@mui/material";
 
 function TempFirst(props) {
 	const info = props.info;
@@ -19,18 +21,9 @@ function TempFirst(props) {
 
 	const componentRef = useRef();
 	const pageStyle = `
-	@page {
-		padding: 1cm;
-		margin: 0;
+	h2, h3, .column__line, .main__block .block, .skills__wrapper {
+		page-break-inside: avoid !important;
 	}
-	#pageborder {
-      position:fixed;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      border-bottom: 16px solid #EFB815;
-    }
 
 `;
 
@@ -215,11 +208,17 @@ function TempFirst(props) {
 				</main>
 			</div>
 			<div id='pageborder'></div>
-			{/*<ReactToPrint
-				trigger={() => <button>Print this out!</button>}
-				content={() => componentRef.current}
-				pageStyle={pageStyle}
-			/>*/}
+			<div style={{ position: "absolute", top: "10px", right: "30px" }}>
+				<ReactToPrint
+					trigger={() => (
+						<IconButton aria-label='print' size='large'>
+							<PrintIcon />
+						</IconButton>
+					)}
+					content={() => componentRef.current}
+					pageStyle={pageStyle}
+				/>
+			</div>
 		</>
 	);
 }

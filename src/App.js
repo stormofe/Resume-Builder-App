@@ -11,6 +11,8 @@ import { createTheme } from "@mui/material/styles";
 import { ThemeProvider } from "@mui/material/styles";
 import SnackbarError from "./styledComponents/SnackbarError";
 import SnackbarSuccess from "./styledComponents/SnackbarSuccess";
+import TempFirst from "./components/templates/temp1/TempFirst";
+import { useSelector } from "react-redux";
 let theme = createTheme({
 	palette: {
 		primary: {
@@ -25,7 +27,8 @@ let theme = createTheme({
 	},
 });
 
-function App(props) {
+function App() {
+	const fullInfo = useSelector((state) => state.fullInfo);
 	return (
 		<ThemeProvider theme={theme}>
 			<HashRouter>
@@ -45,6 +48,9 @@ function App(props) {
 						</Route>
 						<Route path='/templates'>
 							<Templates />
+						</Route>
+						<Route path='/template'>
+							<TempFirst info={fullInfo} />
 						</Route>
 					</Switch>
 				</Layout>

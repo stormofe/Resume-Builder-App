@@ -420,7 +420,7 @@ select {
 	min-height: 800px;
 	height: 100%;
 	background-color: white;
-	overflow: hidden;
+	/*overflow: hidden;*/
 	word-break: break-word;
 	
 }
@@ -660,9 +660,6 @@ select {
 	letter-spacing: 0.03em;
 }
 @media print {
-	.template {
-		width: 100% !important;
-	}
 	.column, .skills__line, .block__wrapper {
 		page-break-inside: avoid !important;
 	}
