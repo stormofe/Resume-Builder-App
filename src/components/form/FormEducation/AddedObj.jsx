@@ -10,7 +10,14 @@ function AddedObj({ arr, bgColor, handleDelete }) {
 						<Paper
 							key={uuidv4()}
 							elevation={2}
-							sx={{ p: 2, mt: 1, position: "relative", backgroundColor: `${bgColor}`, color: "white" }}>
+							sx={{
+								p: 2,
+								mt: 1,
+								position: "relative",
+								backgroundColor: `${bgColor}`,
+								color: "white",
+								wordBreak: "break-word",
+							}}>
 							<Typography>{item.profession}</Typography>
 							<Box sx={{ display: "flex", justifyContent: "space-between" }}>
 								<Typography variant='caption'>{item.where}</Typography>

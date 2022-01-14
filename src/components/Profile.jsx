@@ -121,7 +121,7 @@ function Profile() {
 					<TabPanel value={value} index={0}>
 						<Box sx={{ display: "flex", gap: 3, maxWidth: "650px" }}>
 							<Paper sx={{ minHeight: "877px", flexGrow: 0, flexShrink: 0, flexBasis: "620px" }}>
-								<Grid container sx={{ minHeight: "100%" }} columns={2} wrap='nowrap'>
+								<Grid container sx={{ minHeight: "100%", maxWidth: "650px" }} columns={2} wrap='nowrap'>
 									<Grid item p={2} sx={{ width: "240px", borderRight: "2px solid #fdfdfd" }}>
 										<Grid container sx={{ display: "flex", justifyContent: "center" }}>
 											<SidebarItem item>
@@ -180,10 +180,10 @@ function Profile() {
 												{mainInfo.position}
 											</Typography>
 										</Box>
-										<Typography paragraph mt={1} fontSize='14px' color='GrayText'>
+										<Typography paragraph mt={1} fontSize='14px' color='GrayText' sx={{ maxWidth: "100%" }}>
 											{mainInfo.about}
 										</Typography>
-										<Box mb={2}>
+										<Box mb={2} sx={{ maxWidth: "100%" }}>
 											<Title>Образование</Title>
 											{edu.length > 0
 												? edu.map((item, index) => (

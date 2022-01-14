@@ -14,6 +14,7 @@ export const FormBlock = styled(Box)(({ theme }) => ({
 	padding: theme.spacing(0),
 	paddingTop: 0,
 	maxWidth: "600px",
+	wordBreak: "break-word",
 }));
 export const Title = styled(Typography)(({ theme }) => ({
 	marginBottom: theme.spacing(2),
@@ -51,18 +52,18 @@ export const LinkRow = ({ name, link }) => {
 };
 export const ExpBlock = ({ name, dateFrom, dateEnd, description, position }) => {
 	return (
-		<Paper sx={{ p: 1, mt: 1 }}>
-			<Typography variant='subtitle1' sx={{ fontWeight: 500 }}>
+		<Paper sx={{ p: 1, mt: 1, maxWidth: "100%", wordWrap: "break-word", whiteSpace: "break-spaces" }}>
+			<Typography variant='subtitle1' sx={{ fontWeight: 500 }} sx={{ wordBreak: "break-word" }}>
 				{position}
 			</Typography>
-			<Typography variant='caption' color='GrayText'>
+			<Typography variant='caption' color='GrayText' sx={{ wordBreak: "break-word" }}>
 				{name}
 			</Typography>
-			<Typography variant='caption' ml={1}>
+			<Typography variant='caption' ml={1} sx={{ wordBreak: "break-word" }}>
 				{dateFrom ? `${dateFrom} - ` : ""}
 				{dateEnd}
 			</Typography>
-			<Typography variant='body2' color='InfoText'>
+			<Typography variant='body2' color='InfoText' sx={{ wordBreak: "break-word" }}>
 				{description}
 			</Typography>
 		</Paper>
