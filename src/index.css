@@ -31,3 +31,9 @@ body {
 		page-break-inside: avoid !important;
 	}
 }*/
+@media (max-width: 680px){
+	.css-1ykdma4 {
+		max-width: calc(100vw - 60px) !important;
+		overflow: scroll;
+	}
+}

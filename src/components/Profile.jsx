@@ -128,7 +128,14 @@ function Profile() {
 						/>
 					</Tabs>
 					<TabPanel value={value} index={0}>
-						<Box sx={{ display: "flex", gap: 3, maxWidth: "650px", width: "100%", position: "relative" }}>
+						<Box
+							sx={{
+								display: "flex",
+								gap: 3,
+								maxWidth: "650px",
+								width: "100%",
+								position: "relative",
+							}}>
 							<Paper ref={componentRef} sx={{ minHeight: "877px", flexGrow: 0, flexShrink: 0, flexBasis: "620px" }}>
 								<Grid container sx={{ minHeight: "100%", maxWidth: "650px" }} columns={2} wrap='nowrap'>
 									<Grid item p={2} sx={{ width: "240px", borderRight: "2px solid #fdfdfd" }}>
@@ -244,7 +251,7 @@ function Profile() {
 							</div>
 						</Box>
 					</TabPanel>
-					<TabPanel value={value} index={1}>
+					{/*<TabPanel value={value} index={1}>
 						<Box sx={{ display: "flex", gap: 3, maxWidth: "650px", width: "100%", position: "relative" }}>
 							<TempFirst info={fullInfo} />
 						</Box>
@@ -253,7 +260,7 @@ function Profile() {
 						<Box sx={{ display: "flex", gap: 3, maxWidth: "595px", width: "100%" }}>
 							<TempSecond />
 						</Box>
-					</TabPanel>
+					</TabPanel>*/}
 				</Box>
 			</Grid>
 			<Form sm={12} md={3} lg={4} fullInfo={fullInfo} />
