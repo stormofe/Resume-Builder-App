@@ -3,7 +3,7 @@ import { db } from "../firebase";
 import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "@firebase/auth";
 import { initState } from "../store/loginReducer";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-
+import userIcon from "./../source/user.png";
 const auth = getAuth();
 
 const createDocInDB = async (email) => {

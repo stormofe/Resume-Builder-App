@@ -3,7 +3,7 @@ import { Box } from "@mui/system";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MoreIcon from "@mui/icons-material/MoreVert";
 
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { AuthContext } from "./auth/Auth";
 import { useHistory } from "react-router-dom";
@@ -19,6 +19,12 @@ function Header() {
 
 	const isMenuOpen = Boolean(anchorEl);
 	const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+	useEffect(() => {
+		if (!currentUser) {
+			history.push("/login");
+		}
+	}, [currentUser]);
 
 	const handleProfileMenuOpen = (event) => {
 		setAnchorEl(event.currentTarget);
@@ -45,6 +51,7 @@ function Header() {
 	const logIn = () => {
 		handleMenuClose("/login");
 	};
+
 	const menuId = "primary-search-account-menu";
 	const renderMenu = (
 		<Menu
@@ -101,20 +108,6 @@ function Header() {
 	);
 
 	return (
-		//<div className='header'>
-		//	<h1>Создай свое резюме</h1>
-		//	<nav className='header__nav'>
-		//		<Link to='/newpage'>NewPage</Link>
-		//		<Link to='/newpagetwo'>NewPageTwo</Link>
-
-		//		<Link to='/profile'>{currentUserEmail}</Link>
-		//		<Link to='/templates'>Шаблоны</Link>
-		//		<Link to='/forms/about'>Форма</Link>
-		//		<Link onClick={() => dispatch({ type: "LOG_OUT" })} to='/login'>
-		//			{currentUser ? "LogOut" : "SignIn"}
-		//		</Link>
-		//	</nav>
-		//</div>
 		<Box sx={{ flexGrow: 1 }}>
 			<AppBar position='static' color='primary'>
 				<Toolbar>

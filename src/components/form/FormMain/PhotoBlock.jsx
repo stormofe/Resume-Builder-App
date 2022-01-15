@@ -25,13 +25,12 @@ function PhotoBlock({ photoURL }) {
 	const savePhoto = (e) => {
 		e.preventDefault();
 		dispatch({ type: "SAVE_PHOTO", payload: photo });
-		//setPhoto(null);
 		deletePhoto();
 	};
 	return (
 		<Box mb={1} sx={{ position: "relative" }}>
 			<Typography variant='body1' color='primary' mb={1}>
-				Выберите фото
+				Выберите фото (до 1MB)
 			</Typography>
 			<Box sx={{ display: "flex", alignItems: "center" }}>
 				<label htmlFor='icon-button-file'>

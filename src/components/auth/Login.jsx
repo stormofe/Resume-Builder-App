@@ -10,6 +10,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import SmallPreloader from "../UI/SmallPreloader";
+import { useHistory } from "react-router-dom";
 function Login() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -23,10 +24,24 @@ function Login() {
 	}, [loading]);
 	const { currentUser } = useContext(AuthContext);
 	const dispatch = useDispatch();
+	const history = useHistory();
 	const error = useSelector((store) => store.login.error);
 	const theme = useTheme();
 	const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
+	const successRegister = useSelector((store) => store.login.register);
 
+	useEffect(() => {
+		if (currentUser) {
+			history.push("/startpage");
+		} else {
+			history.push("/login");
+		}
+	}, []);
+	useEffect(() => {
+		if (successRegister) {
+			history.push("/startpage");
+		}
+	}, [successRegister]);
 	const handleClickOpen = () => {
 		setOpen(true);
 	};
@@ -51,6 +66,7 @@ function Login() {
 			setInputError(false);
 			dispatch({ type: "LOG_IN", email, password });
 			resetInput();
+			history.push("/startpage");
 			return;
 		}
 		setInputError(true);
@@ -63,6 +79,7 @@ function Login() {
 		dispatch({ type: "REGISTER", email, password });
 		resetInput();
 	};
+
 	return (
 		<Box
 			sx={{

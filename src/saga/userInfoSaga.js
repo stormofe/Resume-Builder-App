@@ -95,12 +95,16 @@ export function* getPhotoFromDBWatcher() {
 
 function* saveUserPhotoWorker(data) {
 	try {
-		yield put({ type: SET_LOADING, name: "photo", activity: true });
-		const photo = data.payload;
-		yield setStorage(photo);
-		const newPhoto = yield getPhoto();
-		yield put({ type: SET_PHOTO_FROM_DB, payload: newPhoto });
-		yield put({ type: SET_LOADING, name: "photo", activity: false });
+		if(data.payload.size < 1000000) {
+			yield put({ type: SET_LOADING, name: "photo", activity: true });
+			const photo = data.payload;
+			yield setStorage(photo);
+			const newPhoto = yield getPhoto();
+			yield put({ type: SET_PHOTO_FROM_DB, payload: newPhoto });
+			yield put({ type: SET_LOADING, name: "photo", activity: false });
+		} else {
+			yield put({ type: SET_ERROR, payload: 'Размер выбранного файла привышает 1MB ' });
+		}
 	} catch (err) {
 		const error = err["message"];
 		yield put({ type: SET_ERROR_PHOTO, payload: error });

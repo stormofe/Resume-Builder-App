@@ -13,8 +13,10 @@ const loginState = {
 	isLogin: false,
 	login: [],
 	error: false,
+	register: false,
 };
 export const SET_USER_LOGIN = "SET_USER_LOGIN";
+export const SUCCESS_REGISTER = "SUCCESS_REGISTER";
 
 export const loginReducer = (state = loginState, action) => {
 	const payload = action.payload;
@@ -35,6 +37,11 @@ export const loginReducer = (state = loginState, action) => {
 			return {
 				...state,
 				error: payload,
+			};
+		case SUCCESS_REGISTER:
+			return {
+				...state,
+				register: payload,
 			};
 		default:
 			return state;

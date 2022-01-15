@@ -1,5 +1,5 @@
 import { Grid, Paper } from "@mui/material";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import Box from "@mui/material/Box";
@@ -10,7 +10,6 @@ import Typography from "@mui/material/Typography";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import LooksOneIcon from "@mui/icons-material/LooksOne";
 import LooksTwoIcon from "@mui/icons-material/LooksTwo";
-import CreateIcon from "@mui/icons-material/Create";
 import { ExpBlock, LinkRow, SidebarItem, Skill, Title } from "../styledComponents/ProfileComponents";
 import TempFirst from "./templates/temp1/TempFirst";
 import TempSecond from "./templates/temp2/TempSecond";
@@ -20,6 +19,7 @@ import { v4 as uuidv4 } from "uuid";
 import ReactToPrint from "react-to-print";
 import PrintIcon from "@mui/icons-material/Print";
 import { IconButton } from "@mui/material";
+import Preloader from "./UI/Preloader";
 
 function TabPanel(props) {
 	const { children, value, index, ...other } = props;
@@ -54,6 +54,12 @@ function Profile() {
 	const dispatch = useDispatch();
 	const fullInfo = useSelector((state) => state.fullInfo);
 
+	//const [isLoading, setIsLoading] = useState(false);
+	//const loading = useSelector((state) => state.forms.loading.mainInfo);
+	//useEffect(() => {
+	//	setIsLoading(loading);
+	//}, [loading]);
+
 	const { skills, softSkills, langSkills, edu, exp, custom, socials, mainInfo } = fullInfo;
 	useEffect(() => {
 		dispatch({ type: "GET_INFO" });
@@ -71,12 +77,10 @@ function Profile() {
 	p {
 		orphans: 3;
 	}
-
-	
-
-.css-1vsk7cc-MuiGrid-root, .MuiPaper-root {
+	.css-1vsk7cc-MuiGrid-root, .MuiPaper-root {
 		page-break-inside: avoid !important;
-	}
+	}import Preloader from './UI/Preloader';
+
 `;
 	return (
 		<Grid container>
@@ -124,7 +128,7 @@ function Profile() {
 						/>
 					</Tabs>
 					<TabPanel value={value} index={0}>
-						<Box sx={{ display: "flex", gap: 3, maxWidth: "650px", position: "relative" }}>
+						<Box sx={{ display: "flex", gap: 3, maxWidth: "650px", width: "100%", position: "relative" }}>
 							<Paper ref={componentRef} sx={{ minHeight: "877px", flexGrow: 0, flexShrink: 0, flexBasis: "620px" }}>
 								<Grid container sx={{ minHeight: "100%", maxWidth: "650px" }} columns={2} wrap='nowrap'>
 									<Grid item p={2} sx={{ width: "240px", borderRight: "2px solid #fdfdfd" }}>
@@ -241,12 +245,12 @@ function Profile() {
 						</Box>
 					</TabPanel>
 					<TabPanel value={value} index={1}>
-						<Box sx={{ display: "flex", gap: 3, maxWidth: "650px", position: "relative" }}>
+						<Box sx={{ display: "flex", gap: 3, maxWidth: "650px", width: "100%", position: "relative" }}>
 							<TempFirst info={fullInfo} />
 						</Box>
 					</TabPanel>
 					<TabPanel value={value} index={2}>
-						<Box sx={{ display: "flex", gap: 3, maxWidth: "595px" }}>
+						<Box sx={{ display: "flex", gap: 3, maxWidth: "595px", width: "100%" }}>
 							<TempSecond />
 						</Box>
 					</TabPanel>

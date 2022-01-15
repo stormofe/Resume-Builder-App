@@ -1,7 +1,7 @@
 import { put, takeEvery } from "redux-saga/effects";
 import { login, logOut } from "../API/API";
 import { SET_LOADING } from "../store/formsReducer";
-import { SET_USER_LOGIN } from "../store/loginReducer";
+import { SET_USER_LOGIN, SUCCESS_REGISTER } from "../store/loginReducer";
 import { register } from "./../API/API";
 
 function* loginLogicWorker(data) {
@@ -40,7 +40,9 @@ function* registerLogicWorker(data) {
 		yield put({ type: SET_LOADING, name: "login", activity: false });
 		return;
 	}
+	yield put({ type: SUCCESS_REGISTER, payload: true });
 	yield put({ type: SET_LOADING, name: "login", activity: false });
+	yield put({ type: SUCCESS_REGISTER, payload: false });
 }
 
 export function* registerLogicWatcher() {
