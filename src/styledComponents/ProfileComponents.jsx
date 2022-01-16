@@ -11,8 +11,6 @@ export const SidebarItem = styled(Grid)(({ theme }) => ({
 }));
 
 export const FormBlock = styled(Box)(({ theme }) => ({
-	padding: theme.spacing(0),
-	paddingTop: 0,
 	maxWidth: "600px",
 	wordBreak: "break-word",
 }));
@@ -53,7 +51,7 @@ export const LinkRow = ({ name, link }) => {
 export const ExpBlock = ({ name, dateFrom, dateEnd, description, position }) => {
 	return (
 		<Paper sx={{ p: 1, mt: 1, maxWidth: "100%", wordWrap: "break-word", whiteSpace: "break-spaces" }}>
-			<Typography variant='subtitle1' sx={{ fontWeight: 500 }} sx={{ wordBreak: "break-word" }}>
+			<Typography variant='subtitle1' sx={{ fontWeight: 500, wordBreak: "break-word" }}>
 				{position}
 			</Typography>
 			<Typography variant='caption' color='GrayText' sx={{ wordBreak: "break-word" }}>

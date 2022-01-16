@@ -66,90 +66,97 @@ function Form(props) {
 	}, []);
 	return (
 		<Grid item sm={props.sm} md={props.md} lg={props.lg}>
-			<Typography variant='h5' color='primary' mb={2}>
-				Заполните поля резюме
-			</Typography>
-			<Accordion expanded={expanded === "panel1"} onChange={handleChangeAccord("panel1")} sx={{ marginRight: 2 }}>
-				<AccordionSummary aria-controls='panel1d-content' id='panel1d-header'>
-					<Box sx={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
-						<Typography>Основная информация</Typography>
-						<Box
-							sx={{
-								backgroundColor: `${percent > 70 ? "success.main" : "error.main"}`,
-								borderRadius: "8px",
-								color: "white",
-								fontWeight: 700,
-								padding: "5px",
-							}}>
-							{percent}%
+			<Box
+				sx={{
+					maxWidth: "635px",
+					marginX: { sx: 1, sm: "auto", md: "auto", lg: "auto" },
+					marginTop: { lg: 0, md: 5, sm: 2, sx: 1 },
+				}}>
+				<Typography variant='h5' color='primary' mb={2} sx={{ textAlign: "center", p: 2 }}>
+					Заполните поля резюме
+				</Typography>
+				<Accordion expanded={expanded === "panel1"} onChange={handleChangeAccord("panel1")}>
+					<AccordionSummary aria-controls='panel1d-content' id='panel1d-header'>
+						<Box sx={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
+							<Typography>Основная информация</Typography>
+							<Box
+								sx={{
+									backgroundColor: `${percent > 70 ? "success.main" : "error.main"}`,
+									borderRadius: "8px",
+									color: "white",
+									fontWeight: 700,
+									padding: "5px",
+								}}>
+								{percent}%
+							</Box>
 						</Box>
-					</Box>
-				</AccordionSummary>
-				<AccordionDetails>
-					<FormBlock>
-						<FormMainInfo mainInfo={fullInfo.mainInfo} socials={fullInfo.socials} />
-					</FormBlock>
-				</AccordionDetails>
-			</Accordion>
-			<Accordion expanded={expanded === "panel2"} onChange={handleChangeAccord("panel2")} sx={{ marginRight: 2 }}>
-				<AccordionSummary aria-controls='panel2d-content' id='panel2d-header'>
-					<Box sx={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
-						<Typography>Навыки</Typography>
-					</Box>
-				</AccordionSummary>
-				<AccordionDetails>
-					<FormBlock>
-						<FormSkillsUniversal
-							blockName='Ваши профессиональные навыки'
-							objName='skills'
-							fetchType='FETCH_SKILLS'
-							saveType='SAVE_SKILLS'
-							deleteType='DELETE_SKILL'
-							inputName='skill'
-						/>
-						<FormSkillsUniversal
-							blockName='Ваши социальные навыки'
-							objName='softSkills'
-							fetchType='FETCH_SOFT_SKILLS'
-							saveType='SAVE_SOFT_SKILLS'
-							deleteType='DELETE_SOFT_SKILL'
-							inputName='skill'
-						/>
-						<FormSkillsUniversal
-							blockName='Языки'
-							objName='langSkills'
-							fetchType='FETCH_LANG_SKILLS'
-							saveType='SAVE_LANG_SKILLS'
-							deleteType='DELETE_LANG_SKILL'
-							inputName='skill'
-						/>
-					</FormBlock>
-				</AccordionDetails>
-			</Accordion>
-			<Accordion expanded={expanded === "panel3"} onChange={handleChangeAccord("panel3")} sx={{ marginRight: 2 }}>
-				<AccordionSummary aria-controls='panel3d-content' id='panel3d-header'>
-					<Typography>Образование</Typography>
-				</AccordionSummary>
-				<AccordionDetails>
-					<FormEducation education={fullInfo.edu} />
-				</AccordionDetails>
-			</Accordion>
-			<Accordion expanded={expanded === "panel4"} onChange={handleChangeAccord("panel4")} sx={{ marginRight: 2 }}>
-				<AccordionSummary aria-controls='panel4d-content' id='panel4d-header'>
-					<Typography>Опыт работы</Typography>
-				</AccordionSummary>
-				<AccordionDetails>
-					<FormExp exp={fullInfo.exp} />
-				</AccordionDetails>
-			</Accordion>
-			<Accordion expanded={expanded === "panel5"} onChange={handleChangeAccord("panel5")} sx={{ marginRight: 2 }}>
-				<AccordionSummary aria-controls='panel5d-content' id='panel5d-header'>
-					<Typography>Дополнительная информация</Typography>
-				</AccordionSummary>
-				<AccordionDetails>
-					<FormCustom custom={fullInfo.custom} />
-				</AccordionDetails>
-			</Accordion>
+					</AccordionSummary>
+					<AccordionDetails>
+						<FormBlock>
+							<FormMainInfo mainInfo={fullInfo.mainInfo} socials={fullInfo.socials} />
+						</FormBlock>
+					</AccordionDetails>
+				</Accordion>
+				<Accordion expanded={expanded === "panel2"} onChange={handleChangeAccord("panel2")}>
+					<AccordionSummary aria-controls='panel2d-content' id='panel2d-header'>
+						<Box sx={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
+							<Typography>Навыки</Typography>
+						</Box>
+					</AccordionSummary>
+					<AccordionDetails>
+						<FormBlock>
+							<FormSkillsUniversal
+								blockName='Ваши профессиональные навыки'
+								objName='skills'
+								fetchType='FETCH_SKILLS'
+								saveType='SAVE_SKILLS'
+								deleteType='DELETE_SKILL'
+								inputName='skill'
+							/>
+							<FormSkillsUniversal
+								blockName='Ваши социальные навыки'
+								objName='softSkills'
+								fetchType='FETCH_SOFT_SKILLS'
+								saveType='SAVE_SOFT_SKILLS'
+								deleteType='DELETE_SOFT_SKILL'
+								inputName='skill'
+							/>
+							<FormSkillsUniversal
+								blockName='Языки'
+								objName='langSkills'
+								fetchType='FETCH_LANG_SKILLS'
+								saveType='SAVE_LANG_SKILLS'
+								deleteType='DELETE_LANG_SKILL'
+								inputName='skill'
+							/>
+						</FormBlock>
+					</AccordionDetails>
+				</Accordion>
+				<Accordion expanded={expanded === "panel3"} onChange={handleChangeAccord("panel3")}>
+					<AccordionSummary aria-controls='panel3d-content' id='panel3d-header'>
+						<Typography>Образование</Typography>
+					</AccordionSummary>
+					<AccordionDetails>
+						<FormEducation education={fullInfo.edu} />
+					</AccordionDetails>
+				</Accordion>
+				<Accordion expanded={expanded === "panel4"} onChange={handleChangeAccord("panel4")}>
+					<AccordionSummary aria-controls='panel4d-content' id='panel4d-header'>
+						<Typography>Опыт работы</Typography>
+					</AccordionSummary>
+					<AccordionDetails>
+						<FormExp exp={fullInfo.exp} />
+					</AccordionDetails>
+				</Accordion>
+				<Accordion expanded={expanded === "panel5"} onChange={handleChangeAccord("panel5")}>
+					<AccordionSummary aria-controls='panel5d-content' id='panel5d-header'>
+						<Typography>Дополнительная информация</Typography>
+					</AccordionSummary>
+					<AccordionDetails>
+						<FormCustom custom={fullInfo.custom} />
+					</AccordionDetails>
+				</Accordion>
+			</Box>
 		</Grid>
 	);
 }

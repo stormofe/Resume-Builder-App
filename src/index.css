@@ -1,18 +1,14 @@
 
-/* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	font-family: "Inter", sans-serif;
-	text-decoration: none;
-	color: #333;
-	word-break: break-word;
-}*/
 body {
 	margin: 0;	
+	padding: 0 !important;
 }
-@import url(https://fonts.googleapis.com/css?family=Inter:100,200,300,regular,500,600,700,800,900);
-
+.css-mhc70k-MuiGrid-root>.MuiGrid-item {
+	padding: 0 !important;
+}
+.css-1brxjso-MuiGrid-root {
+	overflow: hidden;
+}
 /*@media print {
 
 	@page {

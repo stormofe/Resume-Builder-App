@@ -12,7 +12,6 @@ import LooksOneIcon from "@mui/icons-material/LooksOne";
 import LooksTwoIcon from "@mui/icons-material/LooksTwo";
 import { ExpBlock, LinkRow, SidebarItem, Skill, Title } from "../styledComponents/ProfileComponents";
 import TempFirst from "./templates/temp1/TempFirst";
-import TempSecond from "./templates/temp2/TempSecond";
 import Form from "./Form";
 import userIcon from "./../source/user.png";
 import { v4 as uuidv4 } from "uuid";
@@ -54,12 +53,6 @@ function Profile() {
 	const dispatch = useDispatch();
 	const fullInfo = useSelector((state) => state.fullInfo);
 
-	//const [isLoading, setIsLoading] = useState(false);
-	//const loading = useSelector((state) => state.forms.loading.mainInfo);
-	//useEffect(() => {
-	//	setIsLoading(loading);
-	//}, [loading]);
-
 	const { skills, softSkills, langSkills, edu, exp, custom, socials, mainInfo } = fullInfo;
 	useEffect(() => {
 		dispatch({ type: "GET_INFO" });
@@ -83,8 +76,8 @@ function Profile() {
 
 `;
 	return (
-		<Grid container>
-			<Grid item sm={12} md={9} lg={8}>
+		<Grid container spacing={2}>
+			<Grid item sm={12} md={12} lg={7}>
 				<Box sx={{ flexGrow: 1, display: "flex", width: "100%" }}>
 					<Tabs
 						orientation='vertical'
@@ -114,17 +107,6 @@ function Profile() {
 							}}
 							label='Шаблон 1'
 							{...a11yProps(1)}
-						/>
-						<Tab
-							icon={<LooksTwoIcon />}
-							sx={{
-								padding: 1,
-								minWidth: "48px",
-								pl: 0,
-								fontSize: { xs: 0, md: 0, lg: "14px" },
-							}}
-							label='Шаблон 2'
-							{...a11yProps(2)}
 						/>
 					</Tabs>
 					<TabPanel value={value} index={0}>
@@ -251,19 +233,14 @@ function Profile() {
 							</div>
 						</Box>
 					</TabPanel>
-					{/*<TabPanel value={value} index={1}>
+					<TabPanel value={value} index={1}>
 						<Box sx={{ display: "flex", gap: 3, maxWidth: "650px", width: "100%", position: "relative" }}>
 							<TempFirst info={fullInfo} />
 						</Box>
 					</TabPanel>
-					<TabPanel value={value} index={2}>
-						<Box sx={{ display: "flex", gap: 3, maxWidth: "595px", width: "100%" }}>
-							<TempSecond />
-						</Box>
-					</TabPanel>*/}
 				</Box>
 			</Grid>
-			<Form sm={12} md={3} lg={4} fullInfo={fullInfo} />
+			<Form sm={12} md={12} lg={5} fullInfo={fullInfo} />
 		</Grid>
 	);
 }
