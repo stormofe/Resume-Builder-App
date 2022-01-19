@@ -22,10 +22,14 @@ function AddedObj({ arr, bgColor, handleDelete }) {
 							<Box sx={{ display: "flex", justifyContent: "space-between" }}>
 								<Typography variant='caption'>{item.where}</Typography>
 								<Typography variant='caption'>{item.date}</Typography>
-								<Box>
-									{item.dateStart ? <Typography variant='caption'>{item.dateStart} - </Typography> : ""}
-									{item.dateEnd ? <Typography variant='caption'>{item.dateEnd}</Typography> : ""}
-								</Box>
+								{item.dateStart || item.dateEnd ? (
+									<Box>
+										{item.dateStart ? <Typography variant='caption'>{item.dateStart} - </Typography> : ""}
+										{item.dateEnd ? <Typography variant='caption'>{item.dateEnd}</Typography> : ""}
+									</Box>
+								) : (
+									""
+								)}
 							</Box>
 
 							<Typography variant='body2'>{item.description}</Typography>

@@ -10,6 +10,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import Logout from "@mui/icons-material/Logout";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ArticleIcon from "@mui/icons-material/Article";
+import logo from "./../source/logo.svg";
 function Header() {
 	const { currentUser } = useContext(AuthContext);
 	const currentUserEmail = currentUser ? currentUser.email : "";
@@ -133,9 +134,7 @@ function Header() {
 		<Box sx={{ flexGrow: 1 }}>
 			<AppBar position='static' color='primary'>
 				<Toolbar>
-					<Typography variant='h4' component='h1' sx={{ flexGrow: 1 }} color='white'>
-						Ваше резюме
-					</Typography>
+					<img src={logo} alt='Твое идеальное резюме' style={{ maxWidth: "200px", objectFit: "contain" }} />
 					<Box sx={{ flexGrow: 1 }} />
 					{/*<Typography sx={{ color: "white" }}>{currentUserEmail}</Typography>*/}
 					<Box sx={{ display: { xs: "none", md: "flex" } }}>

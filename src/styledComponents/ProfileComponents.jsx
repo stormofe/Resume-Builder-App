@@ -54,13 +54,15 @@ export const ExpBlock = ({ name, dateFrom, dateEnd, description, position }) => 
 			<Typography variant='subtitle1' sx={{ fontWeight: 500, wordBreak: "break-word" }}>
 				{position}
 			</Typography>
-			<Typography variant='caption' color='GrayText' sx={{ wordBreak: "break-word" }}>
-				{name}
-			</Typography>
-			<Typography variant='caption' ml={1} sx={{ wordBreak: "break-word" }}>
-				{dateFrom ? `${dateFrom} - ` : ""}
-				{dateEnd}
-			</Typography>
+			<Box sx={{ display: "flex", justifyContent: "space-between" }}>
+				<Typography variant='caption' color='GrayText' sx={{ wordBreak: "break-word" }}>
+					{name}
+				</Typography>
+				<Typography variant='caption' ml={1} sx={{ wordBreak: "break-word", display: "inline-block", marginLeft: 1 }}>
+					{dateFrom ? `${dateFrom} - ` : ""}
+					{dateEnd}
+				</Typography>
+			</Box>
 			<Typography variant='body2' color='InfoText' sx={{ wordBreak: "break-word" }}>
 				{description}
 			</Typography>

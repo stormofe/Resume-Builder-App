@@ -89,7 +89,7 @@ function FormExp(props) {
 				<Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
 					<ButtonGroup variant='contained' aria-label='outlined primary button group'>
 						<Button type='submit' variant='contained' disabled={!isDirty || !isValid}>
-							Добавить образование
+							Добавить опыт работы
 						</Button>
 						<Button variant='contained' disabled={!isDirty || !isValid || obj.length === 0} onClick={saveData}>
 							Сохранить
