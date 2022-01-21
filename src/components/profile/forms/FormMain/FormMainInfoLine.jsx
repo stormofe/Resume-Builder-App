@@ -2,9 +2,9 @@ import { Box } from "@mui/material";
 import React from "react";
 import { Controller } from "react-hook-form";
 import { FormField } from "../../../styledComponents/ProfileComponents";
-import WarningIcon from "../../UI/WarningIcon";
-import GreenCheckIcon from "../../UI/GreenCheckIcon";
-import DeleteFromStateIcon from "../../UI/DeleteFromStateIcon";
+import WarningIcon from "../../../UI/WarningIcon";
+import GreenCheckIcon from "../../../UI/GreenCheckIcon";
+import DeleteFromStateIcon from "../../../UI/DeleteFromStateIcon";
 import { useDispatch } from "react-redux";
 function FormMainInfoLine({ control, candelete, name, label, check, ...props }) {
 	const dispatch = useDispatch();

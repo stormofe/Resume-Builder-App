@@ -6,15 +6,15 @@ import { useForm } from "react-hook-form";
 import FormMainInfoLine from "./FormMain/FormMainInfoLine";
 import DatePicker from "react-datepicker";
 import AddedObj from "./FormEducation/AddedObj";
-import SmallPreloader from "../UI/SmallPreloader";
-function FormCustom(props) {
+import SmallPreloader from "../../UI/SmallPreloader";
+function FormExp(props) {
 	const dispatch = useDispatch();
 	const [isLoading, setIsLoading] = useState(false);
-	const loading = useSelector((state) => state.forms.loading.custom);
+	const loading = useSelector((state) => state.forms.loading.exp);
 	useEffect(() => {
 		setIsLoading(loading);
 	}, [loading]);
-	const custom = props.custom;
+	const exp = props.exp;
 	const { control, handleSubmit, setValue, formState } = useForm({
 		mode: "onChange",
 		defaultValues: {
@@ -32,7 +32,7 @@ function FormCustom(props) {
 
 	const saveData = () => {
 		if (obj.length !== 0) {
-			dispatch({ type: "SAVE_CUST_BLOCK", payload: obj });
+			dispatch({ type: "SAVE_EXP", payload: obj });
 			setObj([]);
 		}
 	};
@@ -51,14 +51,14 @@ function FormCustom(props) {
 		setDateStart(null);
 		setDateEnd(null);
 	};
-	const deleteCustomBlock = (index) => {
-		const newCustomBlock = obj.filter((item, i) => (i !== index ? item : false));
-		setObj(newCustomBlock);
+	const deleteExp = (index) => {
+		const newExp = obj.filter((item, i) => (i !== index ? item : false));
+		setObj(newExp);
 	};
 
-	const deleteCustomBlockFromDB = (index) => {
-		const newCustomBlocks = custom.filter((item, i) => (i !== index ? item : false));
-		dispatch({ type: "DELETE_CUST_BLOCK", payload: newCustomBlocks });
+	const deleteExpFromDB = (index) => {
+		const newExp = exp.filter((item, i) => (i !== index ? item : false));
+		dispatch({ type: "DELETE_EXP", payload: newExp });
 	};
 
 	return (
@@ -69,8 +69,8 @@ function FormCustom(props) {
 				autoComplete='off'
 				onSubmit={handleSubmit(addObj)}
 				sx={{ maxWidth: "600px", marginX: "auto" }}>
-				<FormMainInfoLine candelete='' control={control} name='profession' label='Заголовок' check={null} />
-				<FormMainInfoLine candelete='' control={control} name='where' label='Место' check={null} />
+				<FormMainInfoLine candelete='' control={control} name='profession' label='Должность' check={null} />
+				<FormMainInfoLine candelete='' control={control} name='where' label='Место работы' check={null} />
 				<DatePicker
 					dateFormat='MM/yyyy'
 					showMonthYearPicker
@@ -85,11 +85,11 @@ function FormCustom(props) {
 					selected={dateEnd}
 					onChange={(date) => setDateEnd(date)}
 				/>
-				<FormMainInfoLine candelete='' control={control} name='description' label='Описание' check={null} />
+				<FormMainInfoLine candelete='' control={control} name='description' label='Обязанности' check={null} />
 				<Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
 					<ButtonGroup variant='contained' aria-label='outlined primary button group'>
 						<Button type='submit' variant='contained' disabled={!isDirty || !isValid}>
-							Добавить блок
+							Добавить опыт работы
 						</Button>
 						<Button variant='contained' disabled={!isDirty || !isValid || obj.length === 0} onClick={saveData}>
 							Сохранить
@@ -98,10 +98,10 @@ function FormCustom(props) {
 					{isLoading && <SmallPreloader />}
 				</Box>
 			</Box>
-			<AddedObj arr={custom} bgColor='primary.main' handleDelete={deleteCustomBlockFromDB} />
-			<AddedObj arr={obj} bgColor='grey.400' handleDelete={deleteCustomBlock} />
+			<AddedObj arr={exp} bgColor='primary.main' handleDelete={deleteExpFromDB} />
+			<AddedObj arr={obj} bgColor='grey.400' handleDelete={deleteExp} />
 		</Box>
 	);
 }
 
-export default FormCustom;
+export default FormExp;

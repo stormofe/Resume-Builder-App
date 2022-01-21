@@ -3,11 +3,11 @@ import { Box, Typography, ButtonGroup, Tooltip } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
-import WarningIcon from "./../../UI/WarningIcon";
-import GreenCheckIcon from "./../../UI/GreenCheckIcon";
+import WarningIcon from "../../../UI/WarningIcon";
+import GreenCheckIcon from "../../../UI/GreenCheckIcon";
 import DoneIcon from "@mui/icons-material/Done";
 import DeleteIcon from "@mui/icons-material/Delete";
-import SmallPreloader from "../../UI/SmallPreloader";
+import SmallPreloader from "../../../UI/SmallPreloader";
 function PhotoBlock({ photoURL }) {
 	const dispatch = useDispatch();
 	const [isLoading, setIsLoading] = useState(false);

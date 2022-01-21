@@ -9,9 +9,9 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import LooksOneIcon from "@mui/icons-material/LooksOne";
-import { ExpBlock, LinkRow, SidebarItem, Skill, Title } from "../styledComponents/ProfileComponents";
-import TempFirst from "./templates/temp1/TempFirst";
-import Form from "./Form";
+import { ExpBlock, LinkRow, SidebarItem, Skill, Title } from "./styledComponents/ProfileComponents";
+import TempFirst from "./profile/templates/temp1/TempFirst";
+import Forms from "./profile/Forms";
 import userIcon from "./../source/user.png";
 import { v4 as uuidv4 } from "uuid";
 import ReactToPrint from "react-to-print";
@@ -258,7 +258,7 @@ function Profile() {
 					</TabPanel>
 				</Box>
 			</Grid>
-			<Form sm={12} md={12} lg={5} fullInfo={fullInfo} />
+			<Forms sm={12} md={12} lg={5} fullInfo={fullInfo} />
 		</Grid>
 	);
 }

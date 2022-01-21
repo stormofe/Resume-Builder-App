@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Box, Button, IconButton, Link, Paper, Tooltip, Typography } from "@mui/material";
+import { Box, Button, IconButton, Link, Paper, Tooltip } from "@mui/material";
 import { v4 as uuidv4 } from "uuid";
 import FormMainInfoLine from "./FormMainInfoLine";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import ClearIcon from "@mui/icons-material/Clear";
-import SmallPreloader from "../../UI/SmallPreloader";
+import SmallPreloader from "../../../UI/SmallPreloader";
 function SocialsBlock({ socials }) {
 	const dispatch = useDispatch();
 	const [isLoading, setIsLoading] = useState(false);

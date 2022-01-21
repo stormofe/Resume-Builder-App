@@ -7,10 +7,8 @@ import Profile from "./components/Profile";
 import Layout from "./components/layout/Layout";
 import { createTheme } from "@mui/material/styles";
 import { ThemeProvider } from "@mui/material/styles";
-import SnackbarError from "./styledComponents/SnackbarError";
-import SnackbarSuccess from "./styledComponents/SnackbarSuccess";
-import TempFirst from "./components/templates/temp1/TempFirst";
-import { useSelector } from "react-redux";
+import SnackbarError from "./components/styledComponents/SnackbarError";
+import SnackbarSuccess from "./components/styledComponents/SnackbarSuccess";
 import StartPage from "./components/StartPage";
 
 let theme = createTheme({
@@ -28,8 +26,6 @@ let theme = createTheme({
 });
 
 function App() {
-	const fullInfo = useSelector((state) => state.fullInfo);
-
 	return (
 		<ThemeProvider theme={theme}>
 			<HashRouter>
@@ -43,9 +39,6 @@ function App() {
 						</Route>
 						<Route path='/profile'>
 							<Profile />
-						</Route>
-						<Route path='/template'>
-							<TempFirst info={fullInfo} />
 						</Route>
 						<Route path='/startpage'>
 							<StartPage />

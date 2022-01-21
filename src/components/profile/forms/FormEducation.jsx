@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import FormMainInfoLine from "./FormMain/FormMainInfoLine";
 import DatePicker from "react-datepicker";
 import AddedObj from "./FormEducation/AddedObj";
-import SmallPreloader from "./../UI/SmallPreloader";
+import SmallPreloader from "../../UI/SmallPreloader";
 function FormEducation(props) {
 	const dispatch = useDispatch();
 	const [isLoading, setIsLoading] = useState(false);

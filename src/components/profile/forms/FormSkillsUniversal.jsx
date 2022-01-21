@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import FormSkillsLine from "./FormSkills/FormSkillsLine";
 import AddedSkillsBlock from "./FormSkills/AddedSkillsBlock";
-import SmallPreloader from "../UI/SmallPreloader";
+import SmallPreloader from "../../UI/SmallPreloader";
 
 function FormSkillsUniversal({ blockName, objName, inputName, fetchType, saveType, deleteType }) {
 	const dispatch = useDispatch();

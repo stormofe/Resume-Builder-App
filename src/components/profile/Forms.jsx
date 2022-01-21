@@ -6,13 +6,13 @@ import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
 import MuiAccordion from "@mui/material/Accordion";
 import MuiAccordionSummary from "@mui/material/AccordionSummary";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
-import FormMainInfo from "./form/FormMainInfo";
-import FormSkillsUniversal from "./form/FormSkillsUniversal";
+import FormMainInfo from "./forms/FormMainInfo";
+import FormSkillsUniversal from "./forms/FormSkillsUniversal";
 import { FormBlock } from "../styledComponents/ProfileComponents";
-import FormEducation from "./form/FormEducation";
+import FormEducation from "./forms/FormEducation";
 import { useDispatch } from "react-redux";
-import FormExp from "./form/FormExp";
-import FormCustom from "./form/FormCustom";
+import FormExp from "./forms/FormExp";
+import FormCustom from "./forms/FormCustom";
 
 const Accordion = styled((props) => <MuiAccordion disableGutters elevation={0} square {...props} />)(({ theme }) => ({
 	border: `1px solid ${theme.palette.divider}`,
@@ -42,7 +42,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 	borderTop: "1px solid rgba(0, 0, 0, .125)",
 }));
 
-function Form(props) {
+function Forms(props) {
 	const [expanded, setExpanded] = React.useState("panel1");
 	const handleChangeAccord = (panel) => (event, newExpanded) => {
 		setExpanded(newExpanded ? panel : false);
@@ -161,4 +161,4 @@ function Form(props) {
 	);
 }
 
-export default Form;
+export default Forms;

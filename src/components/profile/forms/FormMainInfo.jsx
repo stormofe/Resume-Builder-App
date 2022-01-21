@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import FormMainInfoLine from "./FormMain/FormMainInfoLine";
 import PhotoBlock from "./FormMain/PhotoBlock";
 import SocialsBlock from "./FormMain/SocialsBlock";
-import SmallPreloader from "../UI/SmallPreloader";
+import SmallPreloader from "../../UI/SmallPreloader";
 
 function FormMainInfo(props) {
 	const dispatch = useDispatch();

@@ -3,7 +3,6 @@ import letter from "./icons/letter.svg";
 import world from "./icons/world.svg";
 import areaIcon from "./icons/area.svg";
 import phoneIcon from "./icons/phone.svg";
-import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import ReactToPrint from "react-to-print";
 import PrintIcon from "@mui/icons-material/Print";
