@@ -32,14 +32,14 @@ function Login() {
 
 	useEffect(() => {
 		if (currentUser) {
-			history.push("/startpage");
+			history.push("/");
 		} else {
 			history.push("/login");
 		}
 	}, []);
 	useEffect(() => {
 		if (successRegister) {
-			history.push("/startpage");
+			history.push("/");
 		}
 	}, [successRegister]);
 	const handleClickOpen = () => {
@@ -66,7 +66,7 @@ function Login() {
 			setInputError(false);
 			dispatch({ type: "LOG_IN", email, password });
 			resetInput();
-			history.push("/startpage");
+			history.push("/");
 			return;
 		}
 		setInputError(true);

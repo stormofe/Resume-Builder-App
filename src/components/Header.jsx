@@ -61,7 +61,7 @@ function Header() {
 			onClose={handleMenuClose}>
 			{currentUser ? (
 				<Box>
-					<MenuItem onClick={() => handleMenuClose("/startpage")}>
+					<MenuItem onClick={() => handleMenuClose("/")}>
 						<ListItemIcon>
 							<ArticleIcon fontSize='small' />
 						</ListItemIcon>
@@ -105,7 +105,7 @@ function Header() {
 			sx={{ mt: 3 }}>
 			{currentUser ? (
 				<Box>
-					<MenuItem onClick={() => handleMenuClose("/startpage")}>
+					<MenuItem onClick={() => handleMenuClose("/")}>
 						<ListItemIcon>
 							<ArticleIcon fontSize='small' />
 						</ListItemIcon>
