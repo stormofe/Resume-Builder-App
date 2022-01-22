@@ -5,6 +5,7 @@ import LooksOneIcon from "@mui/icons-material/LooksOne";
 import LooksTwoIcon from "@mui/icons-material/LooksTwo";
 import Looks3Icon from "@mui/icons-material/Looks3";
 import Looks4Icon from "@mui/icons-material/Looks4";
+import FmdBadIcon from "@mui/icons-material/FmdBad";
 function StartPage() {
 	return (
 		<Paper sx={{ maxWidth: "1200px", width: "100%", marginX: "auto", paddingY: 3 }}>
@@ -18,29 +19,29 @@ function StartPage() {
 					</Grid>
 
 					<Grid item xs={12} md={3}>
-						<Grid container spacing={4}>
+						<Grid container spacing={2}>
 							<Grid item xs={12}>
 								<LooksOneIcon color='error' />
-								<Typography>
-									Это твой профиль, где <br />
-								</Typography>
+								<Typography>Это профиль, где</Typography>
 							</Grid>
 							<Grid item xs={12}>
 								<LooksTwoIcon color='error' />
-								<Typography>
-									ты можешь выбрать и заполнить любой понравившийся тебе шаблон. <br />
-								</Typography>
+								<Typography> можешь выбрать и заполнить любой понравившийся шаблон.</Typography>
+							</Grid>
+							<Grid item xs={12}>
 								<Looks3Icon color='error' />
 								<Typography>
-									Здесь тебе предстоит ввести и сохранить необходимые данные. Не забудь пройтись по каждой вкладке.
+									Здесь предстоит ввести и сохранить необходимые данные. Не забудь пройтись по каждой вкладке.
 								</Typography>
 							</Grid>
-
 							<Grid item xs={12}>
 								<Looks4Icon color='error' />
-								<Typography>
-									Нажав на эту кнопку ты сохранишь получившееся резюме себе в формате PDF. <br /> Не забудь побаловаться
-									с настройками отображения, чтобы шаблон выглядел красиво в формате А4
+								<Typography>Нажав на эту кнопку сохранишь получившееся резюме себе в формате PDF.</Typography>
+							</Grid>
+							<Grid item xs={12}>
+								<FmdBadIcon color='error' />
+								<Typography variant='body2'>
+									Не забудь побаловаться с настройками отображения, чтобы шаблон выглядел красиво в формате А4
 								</Typography>
 							</Grid>
 						</Grid>

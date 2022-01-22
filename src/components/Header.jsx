@@ -1,4 +1,4 @@
-import { AppBar, IconButton, Menu, MenuItem, Toolbar, Typography } from "@mui/material";
+import { AppBar, IconButton, Menu, MenuItem, Toolbar } from "@mui/material";
 import { Box } from "@mui/system";
 import Avatar from "@mui/material/Avatar";
 import React, { useContext } from "react";

@@ -62,10 +62,25 @@ function FormMainInfo(props) {
 				autoComplete='off'
 				onSubmit={handleSubmit(onSubmit)}
 				sx={{ maxWidth: "600px", marginX: "auto" }}>
-				<FormMainInfoLine control={control} name='lastName' label='Фамилия' candelete check={lastName ? true : false} />
-				<FormMainInfoLine control={control} name='firstName' label='Имя' candelete check={firstName ? true : false} />
+				<FormMainInfoLine
+					className='maininfo-line'
+					control={control}
+					name='lastName'
+					label='Фамилия'
+					candelete
+					check={lastName ? true : false}
+				/>
+				<FormMainInfoLine
+					className='maininfo-line'
+					control={control}
+					name='firstName'
+					label='Имя'
+					candelete
+					check={firstName ? true : false}
+				/>
 				<FormMainInfoLine control={control} name='email' label='E-mail' candelete check={email ? true : false} />
 				<FormMainInfoLine
+					className='maininfo-line'
 					control={control}
 					name='phone'
 					label='Номер телефона'
@@ -73,6 +88,7 @@ function FormMainInfo(props) {
 					check={phone ? true : false}
 				/>
 				<FormMainInfoLine
+					className='maininfo-line'
 					control={control}
 					name='position'
 					label='Профессия'
@@ -80,6 +96,7 @@ function FormMainInfo(props) {
 					check={position ? true : false}
 				/>
 				<FormMainInfoLine
+					className='maininfo-line'
 					control={control}
 					name='area'
 					label='Страна / область / город  проживания'
@@ -87,6 +104,7 @@ function FormMainInfo(props) {
 					candelete
 				/>
 				<FormMainInfoLine
+					className='maininfo-line'
 					control={control}
 					name='about'
 					label='Расскажите о себе'
@@ -95,6 +113,7 @@ function FormMainInfo(props) {
 					candelete
 				/>
 				<FormMainInfoLine
+					className='maininfo-line'
 					control={control}
 					name='hobbies'
 					label='Ваши хобби'
