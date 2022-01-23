@@ -48,7 +48,11 @@ function StartPage() {
 					</Grid>
 					<Grid item xs={12} md={9}>
 						<Box sx={{ maxWidth: "100%" }}>
-							<img src={profile} style={{ objectFit: "contain", width: "100%", height: "100%" }} />
+							<img
+								src={profile}
+								alt='screen profile page'
+								style={{ objectFit: "contain", width: "100%", height: "100%" }}
+							/>
 						</Box>
 					</Grid>
 				</Grid>

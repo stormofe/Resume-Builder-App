@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "./Auth";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";

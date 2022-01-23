@@ -27,7 +27,6 @@ function LoginForm({
 	getRegister = false,
 }) {
 	const {
-		register,
 		control,
 		handleSubmit,
 		formState: { errors },
