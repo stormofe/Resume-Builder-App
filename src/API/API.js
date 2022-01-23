@@ -3,7 +3,6 @@ import { db } from "../firebase";
 import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "@firebase/auth";
 import { initState } from "../store/loginReducer";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import userIcon from "./../source/user.png";
 const auth = getAuth();
 
 const createDocInDB = async (email) => {
@@ -16,7 +15,7 @@ export const register = (email, password) => {
 			createDocInDB(email);
 		})
 		.catch((err) => {
-			return err;
+			return err.message;
 		});
 };
 
@@ -68,7 +67,6 @@ export const getDataFromDB = (dataName) => {
 			return undefined;
 		})
 		.catch((e) => e.message);
-	//.finally(() => console.log("finish"));
 };
 
 export const setDataAtDB = async ({ dataName, data }) => {
@@ -138,26 +136,7 @@ export const setDataAtDB = async ({ dataName, data }) => {
 	}
 };
 
-
 export const setStorage = async (photo) => {
-	//const storage = await getStorage();
-	//return getCurrentUser().then((user) => {
-	//	debugger;
-	//	return uploadBytes(ref(storage, user), photo).then((snapshot) => {
-	//		console.log("Uploaded a blob or file!");
-	//	});
-	//});
-	//const user = await getCurrentUser();
-	//const storage = await getStorage();
-	//const storageRef = await ref(storage, user);
-
-	//await uploadBytes(storageRef, photo)
-	//	.then((snapshot) => {
-	//		console.log("Uploaded a blob or file!");
-	//	})
-	//	.catch((e) => {
-	//		console.log(e);
-	//	});
 	try {
 		const user = await getCurrentUser();
 		const storage = await getStorage();
@@ -169,16 +148,6 @@ export const setStorage = async (photo) => {
 	}
 };
 export const getPhoto = async () => {
-	//const user = await getCurrentUser();
-	//const storage = await getStorage();
-	//const storageRef = await ref(storage, user);
-	//return getDownloadURL(storageRef)
-	//	.then((url) => {
-	//		return url;
-	//	})
-	//	.catch((error) => {
-	//		console.log(error);
-	//	});
 	try {
 		const user = await getCurrentUser();
 		const storage = await getStorage();

@@ -25,7 +25,7 @@ import {
 	setErrorFalseWatcher,
 	setSuccessFalseWatcher,
 } from "./formsSaga";
-import { loginLogicWatcher, logoutLogicWatcher, registerLogicWatcher } from "./loginsSaga";
+import { errorLoginWatcher, loginLogicWatcher, logoutLogicWatcher, registerLogicWatcher } from "./loginsSaga";
 import {
 	cleanMainInfoLineFromDB,
 	getPhotoFromDBWatcher,
@@ -68,6 +68,7 @@ export function* rootWatcher() {
 		cleanMainInfoLineFromDB,
 		setErrorFalseWatcher,
 		setSuccessFalseWatcher,
+		errorLoginWatcher,
 	];
 
 	//yield all([getUserWithAuth(), setSkillsFromDBWatcher()]);
