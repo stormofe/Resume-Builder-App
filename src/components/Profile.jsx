@@ -18,6 +18,7 @@ import ReactToPrint from "react-to-print";
 import PrintIcon from "@mui/icons-material/Print";
 import { IconButton } from "@mui/material";
 import exampleBlur from "./../source/ExampleBlur.jpg";
+import TempTwo from "./profile/templates/temp2/TempTwo";
 
 function TabPanel(props) {
 	const { children, value, index, ...other } = props;
@@ -111,6 +112,17 @@ function Profile() {
 							}}
 							label='Шаблон 1'
 							{...a11yProps(1)}
+						/>
+						<Tab
+							icon={<LooksOneIcon />}
+							sx={{
+								padding: 1,
+								minWidth: "48px",
+								pl: 0,
+								fontSize: { xs: 0, md: 0, lg: "14px" },
+							}}
+							label='Шаблон 1'
+							{...a11yProps(2)}
 						/>
 					</Tabs>
 					<TabPanel value={value} index={0}>
@@ -254,6 +266,19 @@ function Profile() {
 					<TabPanel value={value} index={1}>
 						<Box sx={{ display: "flex", gap: 3, maxWidth: "650px", width: "100%", position: "relative" }}>
 							<TempFirst info={fullInfo} />
+						</Box>
+					</TabPanel>
+					<TabPanel value={value} index={2}>
+						<Box
+							sx={{
+								display: "flex",
+								gap: 3,
+								maxWidth: "650px",
+								width: "100%",
+								position: "relative",
+								overflow: "hidden",
+							}}>
+							<TempTwo />
 						</Box>
 					</TabPanel>
 				</Box>
