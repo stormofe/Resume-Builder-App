@@ -7,16 +7,17 @@ import { useDispatch } from "react-redux";
 import ReactToPrint from "react-to-print";
 import PrintIcon from "@mui/icons-material/Print";
 import { IconButton } from "@mui/material";
+import { v4 as uuidv4 } from "uuid";
 
 function TempFirst(props) {
 	const info = props.info;
 	const { skills, softSkills, langSkills, edu, exp, custom, socials, mainInfo } = info;
 	const { photoURL, firstName, lastName, email, about, phone, hobbies, area, position } = mainInfo;
-	const dispatch = useDispatch();
-	useEffect(() => {
-		dispatch({ type: "GET_INFO" });
-		dispatch({ type: "GET_PHOTO" });
-	}, []);
+	//const dispatch = useDispatch();
+	//useEffect(() => {
+	//	dispatch({ type: "GET_INFO" });
+	//	dispatch({ type: "GET_PHOTO" });
+	//}, []);
 
 	const componentRef = useRef();
 	const pageStyle = `
@@ -31,7 +32,7 @@ function TempFirst(props) {
 			<div ref={componentRef} className='template templateFirst'>
 				<aside className='sidebar'>
 					<div className='sidebar__info info'>
-						<div className='info__img'>{photoURL && <img src={photoURL} alt='' />}</div>
+						<div className='info__img'>{photoURL && <img src={photoURL} alt='Portrait' />}</div>
 						<div className='info__wrapper'>
 							{phone && (
 								<div className='info__line'>
@@ -65,7 +66,7 @@ function TempFirst(props) {
 										<h3>Websites</h3>
 										{socials.map((soc, index) => (
 											<div key={index}>
-												<a target='_blank' href={`${soc}`} rel='noreferrer'>
+												<a target='_blank' href={soc} rel='noreferrer'>
 													{soc}
 												</a>{" "}
 											</div>
@@ -152,7 +153,7 @@ function TempFirst(props) {
 						{exp &&
 							exp.length !== 0 &&
 							exp.map((exp, index) => (
-								<div key={index} className='block__column column'>
+								<div key={uuidv4()} className='block__column column'>
 									<h3>{exp.profession}</h3>
 									<div className='column__line'>
 										<p>{exp.where}</p>
@@ -207,7 +208,7 @@ function TempFirst(props) {
 				</main>
 			</div>
 			<div id='pageborder'></div>
-			<div style={{ position: "absolute", top: "10px", right: "30px" }}>
+			<div className='printButton'>
 				<ReactToPrint
 					trigger={() => (
 						<IconButton aria-label='print' size='large'>

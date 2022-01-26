@@ -238,7 +238,7 @@ function Profile() {
 										</Grid>
 									</Grid>
 								</Paper>
-								<div style={{ position: "absolute", top: "10px", right: "30px" }}>
+								<div className='printButton'>
 									<ReactToPrint
 										trigger={() => (
 											<IconButton aria-label='print' size='large'>
@@ -255,7 +255,7 @@ function Profile() {
 								sx={{
 									display: "flex",
 									gap: 3,
-									maxWidth: "650px",
+									maxWidth: "620px",
 									width: "100%",
 									position: "relative",
 								}}>
@@ -264,7 +264,7 @@ function Profile() {
 						)}
 					</TabPanel>
 					<TabPanel value={value} index={1}>
-						<Box sx={{ display: "flex", gap: 3, maxWidth: "650px", width: "100%", position: "relative" }}>
+						<Box sx={{ display: "flex", gap: 3, maxWidth: "620px", width: "100%", position: "relative" }}>
 							<TempFirst info={fullInfo} />
 						</Box>
 					</TabPanel>
@@ -273,12 +273,12 @@ function Profile() {
 							sx={{
 								display: "flex",
 								gap: 3,
-								maxWidth: "650px",
+								maxWidth: "620px",
 								width: "100%",
 								position: "relative",
 								overflow: "hidden",
 							}}>
-							<TempTwo />
+							<TempTwo info={fullInfo} />
 						</Box>
 					</TabPanel>
 				</Box>

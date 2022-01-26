@@ -2,6 +2,11 @@
 	font-size: 15px !important;
 }
 
+.printButton {
+	position: absolute;
+	top: 10px;
+	right: 30px;
+}
 /*_______________________________________________________________________________*/
 /*TEMPLATES*/
 
@@ -20,7 +25,7 @@
 .template {
 	position: relative;
 	margin: 0px auto 0px auto;
-	width: 595px;
+	width: 620px;
 	min-height: 800px;
 	height: 100%;
 	background-color: white;
@@ -38,7 +43,7 @@
 	font-family: "Inter", sans-serif;
 	position: relative;
 	padding-bottom: 1cm;
-	min-width: 595px;
+	min-width: 620px;
 }
 
 
@@ -53,7 +58,7 @@
 .templateFirst .sidebar__info::before {
 	position: absolute;
 	content: '';
-	top: 0;
+	top: -10px;
 	left: 0;
 	width: 37px;
 	height: 100%;
@@ -258,6 +263,12 @@
 	.column, .skills__line, .block__wrapper {
 		page-break-inside: avoid !important;
 	}
+	.css-1vsk7cc-MuiGrid-root, .MuiPaper-root {
+		page-break-inside: avoid !important;
+	}
+	.printButton {
+		display: none !important;
+	}
 }
 /*templateTwo*/
 /*______________________________________________________*/
@@ -290,63 +301,73 @@
 	font-weight: 400;
 	text-transform: uppercase;
 }
-.main {
+.templateTwo .main {
+	flex-grow: 0;
+	flex-shrink: 0;
 	max-width: 380px;
 	flex-basis: 340px;
+	overflow: hidden;
 	padding: 25px 15px 25px 25px;
 	color: #666;
 }
-.main__info {
+.templateTwo .main__info {
 	display: flex;
 	justify-content: space-between;
 	margin: 0px 0px 25px 0px;
 }
-.main__info-photo {
+.templateTwo .main__info-photo {
 	margin: 0px 15px 0px 0px;
-	min-width: 140px;
+	width: 100%;
+	max-width: 140px;
 	height: 140px;
 	border-radius: 50%;
 	object-fit: cover;
 	overflow: hidden;
 }
-.main__info-photo img {
+.templateTwo .main__info-photo img {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
 }
-.main__info-contacts {
+.templateTwo .main__info-contacts {
 	margin: 25px 0px 0px 0px;
 }
-.contacts__line {
+.templateTwo .contacts__line {
 	margin: 0px 0px 5px 0px;
 	display: flex;
 	align-items: center;
 }
-.contacts__line a, .socials__line a {
+.templateTwo .contacts__line a, .socials__line a {
 	font-size: 12px;
 	color: #666;
 	margin: 0px 0px 0px 5px;
 	text-decoration: none;
 }
-.title {
-	margin: 0px 0px 15px 30px;
+.templateTwo .title {
+	margin: 0px 0px 15px 35px;
 	font-size: 14px;
 	text-transform: uppercase;
 	color: #42489E;
 }
-.block {
+.templateTwo .block {
 	display: flex;
 	margin: 0px 0px 25px 0px;
 }
-.block__date {
+.templateTwo .block__date {
 	position: relative;
 	margin: 0px 30px 0px 0px;
-	max-width: 30px;
+	max-width: 35px;
+	text-align: center;
 	word-wrap: break-word;
 	color: #999;
 	font-size: 9px;
 }
-.block__date::after {
+.templateTwo .block__date > span {
+	display: block;
+	margin: 0 auto;
+	text-align: center;
+}
+.templateTwo .block__date::after {
 	position: absolute;
 	content: '';
 	width: 10px;
@@ -357,7 +378,7 @@
 	background: radial-gradient(circle, rgba(66,72,158,1) 40%, rgba(234,231,231,1) 40%);
 	border-radius: 50%;
 }
-.info__title {
+.templateTwo .info__title {
 	font-size: 12px;
 	margin: 0px 0px 5px 0px;
 	color: #000;
@@ -365,33 +386,36 @@
 	letter-spacing: 0.03em;
 	text-transform: uppercase;
 }
-.info__subtitle {
+.templateTwo .info__subtitle {
 	color: #9B9B9B;
 	font-size: 10px;
 	margin: 0px 0px 3px 0px;
 }
-.info__descr, .hobbies__descr, .aside__about {
+.templateTwo .info__descr,.templateTwo .hobbies__descr, .templateTwo .aside__about {
 	font-size: 11px;
 	line-height: 170%;
 	margin: 0px 0px 0px 0px;
 }
-.hobbies__descr {
+.templateTwo .hobbies__descr {
 	margin: 0px 0px 0px 30px;
 }
 
-.aside {
+.templateTwo .aside {
+	flex-grow: 0;
+	flex-shrink: 0;
+	flex-basis: 200px;
 	padding: 25px 25px 25px 15px;
 	width: 100%;
-	max-width: 200px;
+	overflow: hidden;
 	background: linear-gradient(180deg, #6D5DA8 0%, #43479E 100%);
 	color: #fff;
 }
-.aside__about {
+.templateTwo .aside__about {
 	position: relative;
 	padding: 15px 0px 0px 0px;
 	margin: 0px 0px 20px 0px;
 }
-.aside__about::before {
+.templateTwo .aside__about::before {
 	position: absolute;
 	content: '"';
 	font-size: 30px;
@@ -402,41 +426,48 @@
 	left: 0;
 }
 
-.aside .title {
+.templateTwo .aside .title {
 	color: #fff;
 	margin: 0px 0px 20px 0px;
 }
-.skills {
+.templateTwo .skills {
 	margin: 0px 0px 25px 0px;
 }
 
-.skill {
+.templateTwo .skill {
 	margin: 0px 0px 15px 0px;
 }
-.skill__title {
+.templateTwo .skill__title {
 	margin: 0px 0px 5px 10px;
 	font-size: 11px;
+	max-width: 180px;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
-.skill__bar {
+.templateTwo .skill__bar {
 	position: relative;
 	width: 100%;
 	height: 5px;
 	background: #877DBA;
 }
-.skill__bar::before {
+.templateTwo .skill__range {
 	position: absolute;
 	content: '';
 	width: 50%;
 	height: 100%;
 	background-color: #BBB5DB;
 }
-.socials__line {
+.templateTwo .socials__line {
 	display: flex;
 	align-items: center;
 	margin: 0px 0px 5px 0px;
+
 }
-.socials__line a {
+.templateTwo .socials__line a {
 	color: #fff;
+	max-width: 180px;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 /*datepicker*/
 /*______________________________________________________*/
