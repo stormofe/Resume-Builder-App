@@ -1,27 +1,29 @@
 {
   "files": {
     "main.css": "/Resume-Builder-App/static/css/main.1c714c25.chunk.css",
-    "main.js": "/Resume-Builder-App/static/js/main.2c46214e.chunk.js",
-    "main.js.map": "/Resume-Builder-App/static/js/main.2c46214e.chunk.js.map",
+    "main.js": "/Resume-Builder-App/static/js/main.a1a40e85.chunk.js",
+    "main.js.map": "/Resume-Builder-App/static/js/main.a1a40e85.chunk.js.map",
     "runtime-main.js": "/Resume-Builder-App/static/js/runtime-main.366abc5c.js",
     "runtime-main.js.map": "/Resume-Builder-App/static/js/runtime-main.366abc5c.js.map",
-    "static/js/2.6a889d5e.chunk.js": "/Resume-Builder-App/static/js/2.6a889d5e.chunk.js",
-    "static/js/2.6a889d5e.chunk.js.map": "/Resume-Builder-App/static/js/2.6a889d5e.chunk.js.map",
+    "static/js/2.f8a1dfd2.chunk.js": "/Resume-Builder-App/static/js/2.f8a1dfd2.chunk.js",
+    "static/js/2.f8a1dfd2.chunk.js.map": "/Resume-Builder-App/static/js/2.f8a1dfd2.chunk.js.map",
     "index.html": "/Resume-Builder-App/index.html",
     "static/css/main.1c714c25.chunk.css.map": "/Resume-Builder-App/static/css/main.1c714c25.chunk.css.map",
-    "static/js/2.6a889d5e.chunk.js.LICENSE.txt": "/Resume-Builder-App/static/js/2.6a889d5e.chunk.js.LICENSE.txt",
+    "static/js/2.f8a1dfd2.chunk.js.LICENSE.txt": "/Resume-Builder-App/static/js/2.f8a1dfd2.chunk.js.LICENSE.txt",
     "static/media/ExampleBlur.862b94f8.jpg": "/Resume-Builder-App/static/media/ExampleBlur.862b94f8.jpg",
     "static/media/area.05302503.svg": "/Resume-Builder-App/static/media/area.05302503.svg",
     "static/media/letter.de8f8353.svg": "/Resume-Builder-App/static/media/letter.de8f8353.svg",
     "static/media/logo.f835df80.svg": "/Resume-Builder-App/static/media/logo.f835df80.svg",
     "static/media/phone.06df7280.svg": "/Resume-Builder-App/static/media/phone.06df7280.svg",
     "static/media/profile.48ab5b10.jpg": "/Resume-Builder-App/static/media/profile.48ab5b10.jpg",
+    "static/media/temp1.88b9e503.jpg": "/Resume-Builder-App/static/media/temp1.88b9e503.jpg",
+    "static/media/temp2.f17a0578.jpg": "/Resume-Builder-App/static/media/temp2.f17a0578.jpg",
     "static/media/world.57baef93.svg": "/Resume-Builder-App/static/media/world.57baef93.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.366abc5c.js",
-    "static/js/2.6a889d5e.chunk.js",
+    "static/js/2.f8a1dfd2.chunk.js",
     "static/css/main.1c714c25.chunk.css",
-    "static/js/main.2c46214e.chunk.js"
+    "static/js/main.a1a40e85.chunk.js"
   ]
 }
