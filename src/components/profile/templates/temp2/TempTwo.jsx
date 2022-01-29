@@ -131,7 +131,7 @@ function TempTwo(props) {
 							{custom &&
 								custom.length !== 0 &&
 								custom.map((custom) => (
-									<div className='exp__block block' key={uuidv4()}>
+									<div className='exp__block block block_custom' key={uuidv4()}>
 										{custom.dateStart ? (
 											<div className='block__date'>
 												{custom.dateStart}
