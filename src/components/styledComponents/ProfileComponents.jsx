@@ -72,14 +72,7 @@ export const ExpBlock = ({ name, dateFrom, dateEnd, description, position }) => 
 
 export const FormField = (props) => {
 	return (
-		<TextField
-			sx={{ bgcolor: "secondary.main", paddingRight: "75px !important" }}
-			variant='outlined'
-			fullWidth
-			size='small'
-			multiline
-			{...props}
-		/>
+		<TextField sx={{ bgcolor: "secondary.main" }} variant='outlined' fullWidth size='small' multiline {...props} />
 	);
 };
 

@@ -140,8 +140,10 @@ function TempTwo(props) {
 												</span>
 												{custom.dateEnd}
 											</div>
-										) : (
+										) : custom.dateEnd ? (
 											<div className='block__date'>{custom.dateEnd}</div>
+										) : (
+											<div className='block__date' style={{ display: "none" }}></div>
 										)}
 										<div className='block__info info'>
 											<h4 className='info__title'>{custom.profession}</h4>
