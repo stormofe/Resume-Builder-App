@@ -8,6 +8,8 @@
 
 <img src='https://github.com/stormofe/stormofe/blob/main/assets/main.jpg' width='100%' />
 
+[Готовый результат можно посмотреть тут](https://drive.google.com/file/d/1SefcuZwAjrEAzgWaxJUmH9sfb_84yzwZ/view?usp=sharing) 
+
 ### Инструкция по использованию 
  1. Зарегистрируйся с любым email. Проверки на почту не будет. Запомни
     свои email/пароль. Восстановить их нельзя
