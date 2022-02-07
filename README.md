@@ -6,6 +6,8 @@
 
 [Ссылка на GHpages](https://stormofe.github.io/Resume-Builder-App/)
 
+<img src='https://github.com/stormofe/stormofe/blob/main/assets/main.jpg' width='100%' />
+
 ### Инструкция по использованию 
  1. Зарегистрируйся с любым email. Проверки на почту не будет. Запомни
     свои email/пароль. Восстановить их нельзя
