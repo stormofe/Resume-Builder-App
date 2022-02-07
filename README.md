@@ -13,7 +13,7 @@ Technologies used: <br />
  2. Fill in your profile by following the instructions on the "Главная".
  3. Сlick the "⎙" button at the top of any template you like
  4. Adjust the image proportions so that your resume looks good on A4
- 5. Save to PDF or print the finished result
+ 5. Save to PDF or print the finished result <br />
  **Done! You're ready to go job hunting!**
 
 [You can see the finished result here](https://drive.google.com/file/d/1SefcuZwAjrEAzgWaxJUmH9sfb_84yzwZ/view?usp=sharing) 
