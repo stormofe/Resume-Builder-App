@@ -10,7 +10,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import Logout from "@mui/icons-material/Logout";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ArticleIcon from "@mui/icons-material/Article";
-import logo from "./../source/logo.svg";
+import logo from "./../assets/logo.svg";
 function Header() {
 	const { currentUser } = useContext(AuthContext);
 	const currentUserEmail = currentUser ? currentUser.email : "";

@@ -1,9 +1,8 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import letter from "./icons/letter.svg";
 import world from "./icons/world.svg";
 import areaIcon from "./icons/area.svg";
 import phoneIcon from "./icons/phone.svg";
-import { useDispatch } from "react-redux";
 import ReactToPrint from "react-to-print";
 import PrintIcon from "@mui/icons-material/Print";
 import { IconButton } from "@mui/material";
@@ -13,11 +12,6 @@ function TempFirst(props) {
 	const info = props.info;
 	const { skills, softSkills, langSkills, edu, exp, custom, socials, mainInfo } = info;
 	const { photoURL, firstName, lastName, email, about, phone, hobbies, area, position } = mainInfo;
-	//const dispatch = useDispatch();
-	//useEffect(() => {
-	//	dispatch({ type: "GET_INFO" });
-	//	dispatch({ type: "GET_PHOTO" });
-	//}, []);
 
 	const componentRef = useRef();
 	const pageStyle = `

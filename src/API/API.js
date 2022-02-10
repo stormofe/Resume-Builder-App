@@ -1,7 +1,7 @@
 import { doc, getDoc, setDoc, updateDoc } from "@firebase/firestore";
 import { db } from "../firebase";
 import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "@firebase/auth";
-import { initState } from "../store/loginReducer";
+import { initState } from "../redux/store/loginReducer";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 const auth = getAuth();
 

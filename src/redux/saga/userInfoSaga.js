@@ -1,5 +1,5 @@
 import { takeEvery, put, call } from "redux-saga/effects";
-import { getDataFromDB, getPhoto, setDataAtDB, setStorage } from "../API/API";
+import { getDataFromDB, getPhoto, setDataAtDB, setStorage } from "../../API/API";
 import { SET_ERROR, SET_LOADING, SET_SUCCESS } from "../store/formsReducer";
 import { SET_ERROR_PHOTO, SET_PHOTO_FROM_DB, SET_USER_INFO } from "../store/userReducer";
 
@@ -95,7 +95,7 @@ export function* getPhotoFromDBWatcher() {
 
 function* saveUserPhotoWorker(data) {
 	try {
-		if(data.payload.size < 1000000) {
+		if (data.payload.size < 1000000) {
 			yield put({ type: SET_LOADING, name: "photo", activity: true });
 			const photo = data.payload;
 			yield setStorage(photo);
@@ -103,7 +103,7 @@ function* saveUserPhotoWorker(data) {
 			yield put({ type: SET_PHOTO_FROM_DB, payload: newPhoto });
 			yield put({ type: SET_LOADING, name: "photo", activity: false });
 		} else {
-			yield put({ type: SET_ERROR, payload: 'Размер выбранного файла привышает 1MB ' });
+			yield put({ type: SET_ERROR, payload: "Размер выбранного файла привышает 1MB " });
 		}
 	} catch (err) {
 		const error = err["message"];

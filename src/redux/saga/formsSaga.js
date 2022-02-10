@@ -1,4 +1,4 @@
-import { getDataFromDB, setDataAtDB } from "../API/API";
+import { getDataFromDB, setDataAtDB } from "../../API/API";
 import { takeEvery, call, put, select } from "redux-saga/effects";
 
 import {

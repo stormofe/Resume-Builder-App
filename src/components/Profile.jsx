@@ -11,11 +11,12 @@ import LooksOneIcon from "@mui/icons-material/LooksOne";
 import LooksTwoIcon from "@mui/icons-material/LooksTwo";
 import TempFirst from "./profile/templates/temp1/TempFirst";
 import Forms from "./profile/Forms";
-import exampleBlur from "./../source/ExampleBlur.jpg";
-import exampleBlurTwo from "../source/temp2.jpg";
-import exampleBlurOne from "../source/temp1.jpg";
+import exampleBlur from "./../assets/images/ExampleBlur.jpg";
+import exampleBlurTwo from "./../assets/images/temp2.jpg";
+import exampleBlurOne from "./../assets/images/temp1.jpg";
 import TempTwo from "./profile/templates/temp2/TempTwo";
 import Temp from "./profile/templates/temp/Temp";
+import { getFullInfo } from "../redux/selectors";
 
 function TabPanel(props) {
 	const { children, value, index, ...other } = props;
@@ -48,7 +49,7 @@ function a11yProps(index) {
 
 function Profile() {
 	const dispatch = useDispatch();
-	const fullInfo = useSelector((state) => state.fullInfo);
+	const fullInfo = useSelector(getFullInfo);
 
 	const { mainInfo } = fullInfo;
 	useEffect(() => {

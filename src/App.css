@@ -382,6 +382,9 @@
 	background: radial-gradient(circle, rgba(66,72,158,1) 40%, rgba(234,231,231,1) 40%);
 	border-radius: 50%;
 }
+.templateTwo .not-after.block__date::after {
+	display: none;
+}
 .templateTwo .info__title {
 	font-size: 12px;
 	margin: 0px 0px 5px 0px;

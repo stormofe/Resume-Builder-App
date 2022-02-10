@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { Grid, Paper } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { ExpBlock, LinkRow, SidebarItem, Skill, Title } from "../../../styledComponents/ProfileComponents";
-import userIcon from "../../../../source/user.png";
+import userIcon from "../../../../assets/images/user.png";
 import { v4 as uuidv4 } from "uuid";
 import ReactToPrint from "react-to-print";
 import PrintIcon from "@mui/icons-material/Print";

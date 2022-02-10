@@ -1,6 +1,6 @@
 import { Box, Grid, Paper, Typography } from "@mui/material";
 import React from "react";
-import profile from "./../source/profile.jpg";
+import profile from "./../assets/images/profile.jpg";
 import LooksOneIcon from "@mui/icons-material/LooksOne";
 import LooksTwoIcon from "@mui/icons-material/LooksTwo";
 import Looks3Icon from "@mui/icons-material/Looks3";

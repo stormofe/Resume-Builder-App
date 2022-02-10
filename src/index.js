@@ -4,7 +4,7 @@ import './index.css';
 import App from "./App";
 import { AuthProvider } from "./components/auth/Auth";
 import { Provider } from "react-redux";
-import { store } from "./store";
+import { store } from "./redux/store/index";
 
 ReactDOM.render(
 	<Provider store={store}>

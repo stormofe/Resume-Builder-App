@@ -1,8 +1,8 @@
 import { put, takeEvery } from "redux-saga/effects";
-import { login, logOut } from "../API/API";
+import { login, logOut } from "../../API/API";
 import { SET_LOADING } from "../store/formsReducer";
 import { SET_USER_LOGIN, SUCCESS_REGISTER } from "../store/loginReducer";
-import { register } from "./../API/API";
+import { register } from "../../API/API";
 
 const delay = (time) => new Promise((resolve) => setTimeout(resolve, time));
 
