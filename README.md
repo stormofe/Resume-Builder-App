@@ -1,70 +1,41 @@
-# Getting Started with Create React App
+# Your perfect resume
+>  Create your resume in React-Resume-Builder
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Technologies used: <br />
+ [![](https://camo.githubusercontent.com/38b72f440cbf774558b9399b27bf659066e94b1eddc4510a9607ced1f028f6d0/68747470733a2f2f696d672e69636f6e73382e636f6d2f636f6c6f722f34382f3030303030302f72656163742d6e61746976652e706e67)](https://reactjs.org/) [![](https://camo.githubusercontent.com/d3d1874579d4c426185cc3f0b5819d05cad0e3cb0d62ce2b182daea2abab84b3/68747470733a2f2f696d672e69636f6e73382e636f6d2f636f6c6f722f34382f3030303030302f72656475782e706e67)](https://redux.js.org/) [  ![](https://camo.githubusercontent.com/da839b79b282a7658a172f07e13496fb18bcf9fa624d061def0e80f47a68ff1d/68747470733a2f2f696d672e69636f6e73382e636f6d2f636f6c6f722f34382f3030303030302f6a6176617363726970742e706e67)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)  [![](https://camo.githubusercontent.com/91624b4794cb98081ea55063865721be4b4399472c81e66b89b37fd07aad1d92/68747470733a2f2f696d672e69636f6e73382e636f6d2f636f6c6f722f34382f3030303030302f68746d6c2d352e706e67)](https://www.w3.org/html/)  [![](https://camo.githubusercontent.com/dc75aee770dff630309493116eeebd6a39c7042e4e94780a5e6c8f107bebe76f/68747470733a2f2f696d672e69636f6e73382e636f6d2f636f6c6f722f34382f3030303030302f637373332e706e67)](https://www.w3schools.com/css/)     [![](https://camo.githubusercontent.com/03899ca15bc7682cad570e2638be85926777122dce4b90151d5efc897660d5cd/68747470733a2f2f696d672e69636f6e73382e636f6d2f636f6c6f722f34382f3030303030302f6e6f64656a732e706e67)](https://nodejs.org/)   [![](https://camo.githubusercontent.com/04d74fa252ccfc767a20a5719365205c5251294b38c3d91d213491b24200e595/68747470733a2f2f696d672e69636f6e73382e636f6d2f636f6c6f722f34382f3030303030302f66697265626173652e706e67)](https://firebase.google.com/)  [![](https://camo.githubusercontent.com/bc60041f5ea7b022c6419b73a15aaac12a2ede682867ec0d3e3c9ec374dce54b/68747470733a2f2f696d672e69636f6e73382e636f6d2f636f6c6f722f34382f3030303030302f6769742e706e67)](https://git-scm.com/) [  <img src='https://mui.com/static/logo.png' width='50'/>](https://mui.com)
 
-## Available Scripts
+[Link to GHpages](https://stormofe.github.io/Resume-Builder-App/)
 
-In the project directory, you can run:
+<img src='https://github.com/stormofe/stormofe/blob/main/assets/main.jpg' width='100%' />
 
-### `npm start`
+### Instructions for use 
+ 1. Sign up with any email. There will be no email verification. Remember your email/password. They cannot be recovered.
+ 2. Fill in your profile by following the instructions on the "Главная".
+ 3. Сlick the "⎙" button at the top of any template you like
+ 4. Adjust the image proportions so that your resume looks good on A4
+ 5. Save to PDF or print the finished result <br />
+ **Done! You're ready to go job hunting!**
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+[You can see the finished result here](https://drive.google.com/file/d/1SefcuZwAjrEAzgWaxJUmH9sfb_84yzwZ/view?usp=sharing) 
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+# Твое идеальное резюме
+>  Создай свое резюме в приложении React-Resume-Builder
 
-### `npm test`
+Используемые технологии: <br />
+ [![](https://camo.githubusercontent.com/38b72f440cbf774558b9399b27bf659066e94b1eddc4510a9607ced1f028f6d0/68747470733a2f2f696d672e69636f6e73382e636f6d2f636f6c6f722f34382f3030303030302f72656163742d6e61746976652e706e67)](https://reactjs.org/) [![](https://camo.githubusercontent.com/d3d1874579d4c426185cc3f0b5819d05cad0e3cb0d62ce2b182daea2abab84b3/68747470733a2f2f696d672e69636f6e73382e636f6d2f636f6c6f722f34382f3030303030302f72656475782e706e67)](https://redux.js.org/) [  ![](https://camo.githubusercontent.com/da839b79b282a7658a172f07e13496fb18bcf9fa624d061def0e80f47a68ff1d/68747470733a2f2f696d672e69636f6e73382e636f6d2f636f6c6f722f34382f3030303030302f6a6176617363726970742e706e67)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)  [![](https://camo.githubusercontent.com/91624b4794cb98081ea55063865721be4b4399472c81e66b89b37fd07aad1d92/68747470733a2f2f696d672e69636f6e73382e636f6d2f636f6c6f722f34382f3030303030302f68746d6c2d352e706e67)](https://www.w3.org/html/)  [![](https://camo.githubusercontent.com/dc75aee770dff630309493116eeebd6a39c7042e4e94780a5e6c8f107bebe76f/68747470733a2f2f696d672e69636f6e73382e636f6d2f636f6c6f722f34382f3030303030302f637373332e706e67)](https://www.w3schools.com/css/)     [![](https://camo.githubusercontent.com/03899ca15bc7682cad570e2638be85926777122dce4b90151d5efc897660d5cd/68747470733a2f2f696d672e69636f6e73382e636f6d2f636f6c6f722f34382f3030303030302f6e6f64656a732e706e67)](https://nodejs.org/)   [![](https://camo.githubusercontent.com/04d74fa252ccfc767a20a5719365205c5251294b38c3d91d213491b24200e595/68747470733a2f2f696d672e69636f6e73382e636f6d2f636f6c6f722f34382f3030303030302f66697265626173652e706e67)](https://firebase.google.com/)  [![](https://camo.githubusercontent.com/bc60041f5ea7b022c6419b73a15aaac12a2ede682867ec0d3e3c9ec374dce54b/68747470733a2f2f696d672e69636f6e73382e636f6d2f636f6c6f722f34382f3030303030302f6769742e706e67)](https://git-scm.com/) [  <img src='https://mui.com/static/logo.png' width='50'/>](https://mui.com)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+[Ссылка на GHpages](https://stormofe.github.io/Resume-Builder-App/)
 
-### `npm run build`
+<img src='https://github.com/stormofe/stormofe/blob/main/assets/main.jpg' width='100%' />
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+[Готовый результат можно посмотреть тут](https://drive.google.com/file/d/1SefcuZwAjrEAzgWaxJUmH9sfb_84yzwZ/view?usp=sharing) 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Инструкция по использованию 
+ 1. Зарегистрируйся с любым email. Проверки на почту не будет. Запомни
+    свои email/пароль. Восстановить их нельзя
+ 2. Заполни профиль по инструкции на Главной
+ 3. Нажми на кнопку "⎙"  вверху любого понравившегося шаблона
+ 4. Настрой пропорции изображения, чтобы резюме смотрелось хорошо на А4
+ 5. Сохрани в PDF или распечатай готовый результат <br />
+ **Готово! Можно отправляться на поиски работы!**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
